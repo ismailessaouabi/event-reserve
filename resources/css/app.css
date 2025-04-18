@@ -8,3 +8,22 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+.swiper {
+    width: 100%;
+    height: 100%;
+  }
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .swiper-button-next, .swiper-button-prev {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 30px 15px;
+    border-radius: 5px;
+  }
+  .swiper-pagination-bullet-active {
+    background: #fff;
+  }

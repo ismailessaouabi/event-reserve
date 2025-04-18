@@ -58,66 +58,42 @@
             </div>
         </div>
     </header>
-
-    <!-- Contenu principal -->
-    <main class="container mx-auto px-4 py-8">
-        <style>
-            .swiper {
-                width: 600px;
-                height: 300px;
-            }
-        </style>
-        <!-- Slider main container -->
-        <div class="swiper">
-        <!-- Additional required wrapper -->
-        <div class="swiper-wrapper">
-            <!-- Slides -->
-            <div class="swiper-slide">Slide 1</div>
-            <div class="swiper-slide">Slide 2</div>
-            <div class="swiper-slide">Slide 3</div>
-            ...
-        </div>
-        <!-- If we need pagination -->
-        <div class="swiper-pagination"></div>
-
-        <!-- If we need navigation buttons -->
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-
-        <!-- If we need scrollbar -->
-        <div class="swiper-scrollbar"></div>
-        </div>
+    <style>
+        main {
+    background-image: url('../../public/assets/mariage-img.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition : background-image 0.5s ease-in-out;
+}
+    </style>
+    <main class="w-full h-screen " >
 
     </main>
-
     <!-- Script pour le menu mobile -->
     <script>
+        // Toggle mobile menu
         document.getElementById('menu-toggle').addEventListener('click', function() {
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenu.classList.toggle('hidden');
         });
-        const swiper = new Swiper('.swiper', {
-            // Optional parameters
-            direction: 'vertical',
-            loop: true,
+        let index = 0;
+        let images = [
+            './assets/mariage-img.jpg',
+            './assets/salle-concerne-img.jpg',
+            './assets/téléchargement.png',
 
-            // If we need pagination
-            pagination: {
-                el: '.swiper-pagination',
-            },
-
-            // Navigation arrows
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-
-            // And if we need scrollbar
-            scrollbar: {
-                el: '.swiper-scrollbar',
-            },
-
-        });
+            
+        ];
+        const main = document.querySelector('main');
+        setInterval(() => {
+            
+            main.style.backgroundImage = `url(${images[index]})`;
+            index++;
+            if (index >= images.length) {
+                index = 0;
+            }
+        }, 5000);
     </script>
 </body>
 </html>
