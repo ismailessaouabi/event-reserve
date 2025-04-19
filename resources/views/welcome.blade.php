@@ -61,7 +61,8 @@
                     <span class="text-xl font-bold text-white">MonLogo</span>
                 </a>
                 <!-- Boutons -->
-                <div class="hidden md:flex items-center space-x-4">
+                <div class=" md:flex items-center space-x-4">
+                    <x-eos-lightbulb-o  class="h-6 w-6 text-white" />
                     <a href="#" class="px-4 py-2 text-white font-medium hover:text-blue-600">Connexion</a>
                     <a href="#" class="px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition duration-300">Inscription</a>
                 </div>
@@ -95,6 +96,13 @@
             <img src="{{ asset('assets/g9.jpg') }}" alt="">
         </swiper-slide>
     </swiper-container>
+    <ul class="bg-[#011127] w-full flex justify-center gap-4 px-[60px] shadow-md sticky pt-5  top-0 z-50">
+        <li><a href="#" class="text-white text-[20px] border-b-2 font-semibold hover:text-blue-600 ">Festivals</a></li>
+        <li><a href="#" class="text-white text-[20px]  font-semibold hover:text-blue-600 ">Aujourd'hui</a></li>
+        <li><a href="#" class="text-white text-[20px]  font-semibold hover:text-blue-600 ">Cette semaine</a></li>
+        <li><a href="#" class="text-white text-[20px]  font-semibold hover:text-blue-600 ">Ce week-end</a></li>
+        <li><a href="#" class="text-white text-[20px]  font-semibold hover:text-blue-600 ">Ce mois-ci</a></li>
+    </ul>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
 
@@ -106,11 +114,7 @@
     
     <!-- Script pour le menu mobile -->
     <script>
-        // Toggle mobile menu
-        document.getElementById('menu-toggle').addEventListener('click', function() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenu.classList.toggle('hidden');
-        });
+        
     </script>
 </body>
 </html>
