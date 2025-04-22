@@ -6,7 +6,7 @@
     @vite('resources/css/app.css')
     <title>event-reserve</title>
 </head>
-<body>
+<body class="bg-[#011127]">
     <style>
             html,
             body {
@@ -60,6 +60,12 @@
                     </svg>
                     <span class="text-xl font-bold text-white">MonLogo</span>
                 </a>
+                <!-- Barre de recherche -->
+                <div class="relative  bg-[#011127]">
+                    <input type="text" placeholder="Rechercher un événement" class="px-4 py-2 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-600">
+                    <button class="px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition duration-300"> rechercher</button>
+                </div>
+
                 <!-- Boutons -->
                 <div class=" md:flex items-center space-x-4">
                     <x-eos-lightbulb-o  class="h-6 w-6 text-white" />
@@ -69,15 +75,17 @@
             </div>
         </div>
     </header>
-    <ul class="bg-[#011127] w-full flex justify-center gap-4 px-[60px] shadow-md sticky pt-5  top-0 z-50">
-        <li><a href="#" class="text-white text-[20px] border-b-2 font-semibold hover:text-blue-600 ">Festivals</a></li>
-        <li><a href="#" class="text-white text-[20px]  font-semibold hover:text-blue-600 ">Sports</a></li>
-        <li><a href="#" class="text-white text-[20px]  font-semibold hover:text-blue-600 ">Cenima</a></li>
-        <li><a href="#" class="text-white text-[20px]  font-semibold hover:text-blue-600 ">Concerts</a></li>
-        <li><a href="#" class="text-white text-[20px]  font-semibold hover:text-blue-600 ">Comedia</a></li>
-        <li><a href="#" class="text-white text-[20px]  font-semibold hover:text-blue-600 ">Théàtre</a></li>
+    <!-- Nav catégories -->
+    <ul class="bg-[#011127] w-full flex justify-start gap-4 px-[60px] shadow-md sticky pt-5  top-0 z-50">
+        <li><a href="#" class="text-white text-[20px] py-2 px-4 border-[#222f40] border-2 font-semibold hover:text-blue-600 ">Festivals</a></li>
+        <li><a href="#" class="text-white text-[20px] py-2 px-4 border-[#222f40] border-2 font-semibold hover:text-blue-600 ">Sports</a></li>
+        <li><a href="#" class="text-white text-[20px] py-2 px-4 border-[#222f40] border-2 font-semibold hover:text-blue-600 ">Cenima</a></li>
+        <li><a href="#" class="text-white text-[20px] py-2 px-4 border-[#222f40] border-2 font-semibold hover:text-blue-600 ">Concerts</a></li>
+        <li><a href="#" class="text-white text-[20px] py-2 px-4 border-[#222f40] border-2 font-semibold hover:text-blue-600 ">Comedia</a></li>
+        <li><a href="#" class="text-white text-[20px] py-2 px-4 border-[#222f40] border-2 font-semibold hover:text-blue-600 ">Théàtre</a></li>
 
     </ul>
+    <!-- Swiper slider -->
     <swiper-container class="mySwiper" loop="true" pagination="true" pagination-clickable="true" navigation="true" space-between="30"
         centered-slides="true" autoplay-delay="2500" autoplay-disable-on-interaction="false">
         <swiper-slide>
@@ -96,6 +104,7 @@
             <img src="{{ asset('assets/g9.jpg') }}" alt="">
         </swiper-slide>
     </swiper-container>
+    <!-- nav pour choisir la durée -->
     <ul class="bg-[#011127] w-full flex justify-center gap-4 px-[60px] shadow-md sticky pt-5  top-0 z-50">
         <li><a href="#" class="text-white text-[20px] border-b-2 font-semibold hover:text-blue-600 ">Festivals</a></li>
         <li><a href="#" class="text-white text-[20px]  font-semibold hover:text-blue-600 ">Aujourd'hui</a></li>
@@ -103,18 +112,60 @@
         <li><a href="#" class="text-white text-[20px]  font-semibold hover:text-blue-600 ">Ce week-end</a></li>
         <li><a href="#" class="text-white text-[20px]  font-semibold hover:text-blue-600 ">Ce mois-ci</a></li>
     </ul>
+    <!-- List events -->
+    <section class="w-full px-10 bg-[#011127] pt-9 flex justify-center gap-2 flex-wrap">
+        
+        <div class="w-[23%] hover:bg-[#122034] rounded-2xl cursor-pointer text-[#9ba5b7] p-5 items-start flex flex-col gap-2.5 ">
+            <h3 class="text-white text-2xl font-medium ">Noujoum Event</h3>
+            <div class="w-full flex justify-start "><img class="w-[90%] rounded-2xl" src="{{asset('assets/g8.jpg')}}"></div>
+            <h3 class="text-[18px] w-full">La Grande Soiree de Issawa à Casablanca</h3>
+            <p class="text-[18px]">Complexe El Hassani ELjadida</p>
+            <p class="text-[18px]">Du 20 Avril au 24 Avril</p>
+            <button class="text-[18px]">300 DH</button>
+        </div>
+        <div class="w-[23%] hover:bg-[#122034] rounded-2xl cursor-pointer text-[#9ba5b7] p-5 items-start flex flex-col gap-2.5 ">
+            <h3 class="text-white text-2xl font-medium ">Noujoum Event</h3>
+            <div class="w-full flex justify-start "><img class="w-[90%] rounded-2xl" src="{{asset('assets/g8.jpg')}}"></div>
+            <h3 class="text-[18px] w-full">La Grande Soiree de Issawa à Casablanca</h3>
+            <p class="text-[18px]">Complexe El Hassani ELjadida</p>
+            <p class="text-[18px]">Du 20 Avril au 24 Avril</p>
+            <button class="text-[18px]">300 DH</button>
+        </div>
+        <div class="w-[23%] hover:bg-[#122034] rounded-2xl cursor-pointer text-[#9ba5b7] p-5 items-start flex flex-col gap-2.5 ">
+            <h3 class="text-white text-2xl font-medium ">Noujoum Event</h3>
+            <div class="w-full flex justify-start "><img class="w-[90%] rounded-2xl" src="{{asset('assets/g8.jpg')}}"></div>
+            <h3 class="text-[18px] w-full">La Grande Soiree de Issawa à Casablanca</h3>
+            <p class="text-[18px]">Complexe El Hassani ELjadida</p>
+            <p class="text-[18px]">Du 20 Avril au 24 Avril</p>
+            <button class="text-[18px]">300 DH</button>
+        </div>
+        <div class="w-[23%] hover:bg-[#122034] rounded-2xl cursor-pointer text-[#9ba5b7] p-5 items-start flex flex-col gap-2.5 ">
+            <h3 class="text-white text-2xl font-medium ">Noujoum Event</h3>
+            <div class="w-full flex justify-start "><img class="w-[90%] rounded-2xl" src="{{asset('assets/g8.jpg')}}"></div>
+            <h3 class="text-[18px] w-full">La Grande Soiree de Issawa à Casablanca</h3>
+            <p class="text-[18px]">Complexe El Hassani ELjadida</p>
+            <p class="text-[18px]">Du 20 Avril au 24 Avril</p>
+            <button class="text-[18px]">300 DH</button>
+        </div>
+        <div class="w-[23%] hover:bg-[#122034] rounded-2xl cursor-pointer text-[#9ba5b7] p-5 items-start flex flex-col gap-2.5 ">
+            <h3 class="text-white text-2xl font-medium ">Noujoum Event</h3>
+            <div class="w-full flex justify-start "><img class="w-[90%] rounded-2xl" src="{{asset('assets/g8.jpg')}}"></div>
+            <h3 class="text-[18px] w-full">La Grande Soiree de Issawa à Casablanca</h3>
+            <p class="text-[18px]">Complexe El Hassani ELjadida</p>
+            <p class="text-[18px]">Du 20 Avril au 24 Avril</p>
+            <button class="text-[18px]">300 DH</button>
+        </div>
+        <div class="w-[23%] hover:bg-[#122034] rounded-2xl cursor-pointer text-[#9ba5b7] p-5 items-start flex flex-col gap-2.5 ">
+            <h3 class="text-white text-2xl font-medium ">Noujoum Event</h3>
+            <div class="w-full flex justify-start "><img class="w-[90%] rounded-2xl" src="{{asset('assets/g8.jpg')}}"></div>
+            <h3 class="text-[18px] w-full">La Grande Soiree de Issawa à Casablanca</h3>
+            <p class="text-[18px]">Complexe El Hassani ELjadida</p>
+            <p class="text-[18px]">Du 20 Avril au 24 Avril</p>
+            <button class="text-[18px]">300 DH</button>
+        </div>
+
+    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
-
-
-
-
-  
-   
-    
-    <!-- Script pour le menu mobile -->
-    <script>
-        
-    </script>
 </body>
 </html>
