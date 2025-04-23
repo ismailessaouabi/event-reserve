@@ -54,7 +54,7 @@
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
                 <!-- Logo -->
-                <a href="#" class="flex items-center space-x-2">
+                <a href='/' class="flex items-center space-x-2">
                     <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M10 0C4.477 0 0 4.477 0 10s4.477 10 10 10 10-4.477 10-10S15.523 0 10 0zm0 18a8 8 0 110-16 8 8 0 010 16zm1-11a1 1 0 10-2 0v3a1 1 0 00.293.707l2 2a1 1 0 101.414-1.414L11 9.586V7z"/>
                     </svg>
