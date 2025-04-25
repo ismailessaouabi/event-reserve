@@ -51,39 +51,71 @@
     </style>
     <!-- Header -->
     <header class="bg-[#011127] shadow-md sticky top-0 z-50 border-b-2 border-white">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex justify-between items-center">
-                <!-- Logo -->
-                <a href='/' class="flex items-center space-x-2">
-                    <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10 0C4.477 0 0 4.477 0 10s4.477 10 10 10 10-4.477 10-10S15.523 0 10 0zm0 18a8 8 0 110-16 8 8 0 010 16zm1-11a1 1 0 10-2 0v3a1 1 0 00.293.707l2 2a1 1 0 101.414-1.414L11 9.586V7z"/>
+    <div class="container mx-auto px-4 py-3">
+        <div class="flex justify-between items-center">
+            <!-- Logo -->
+            <a href='/' class="flex items-center space-x-2">
+                <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 0C4.477 0 0 4.477 0 10s4.477 10 10 10 10-4.477 10-10S15.523 0 10 0zm0 18a8 8 0 110-16 8 8 0 010 16zm1-11a1 1 0 10-2 0v3a1 1 0 00.293.707l2 2a1 1 0 101.414-1.414L11 9.586V7z"/>
+                </svg>
+                <span class="text-xl font-bold text-white">MonLogo</span>
+            </a>
+            
+            <!-- Hamburger menu pour mobile -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
-                    <span class="text-xl font-bold text-white">MonLogo</span>
-                </a>
-                <!-- Barre de recherche -->
-                <div class="relative  bg-[#011127]">
-                    <input type="text" placeholder="Rechercher un événement" class="px-4 py-2 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-600">
-                    <button class="px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition duration-300"> rechercher</button>
-                </div>
-
-                <!-- Boutons -->
-                <div class=" md:flex items-center space-x-4">
-                    <x-eos-lightbulb-o  class="h-6 w-6 text-white" />
-                    <a href="{{route('login')}}" class="px-4 py-2 text-white font-medium hover:text-blue-600">Connexion</a>
-                    <a href="{{route('register')}}" class="px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition duration-300">Inscription</a>
+                </button>
+            </div>
+            
+            <!-- Barre de recherche - cachée sur mobile -->
+            <div class="hidden md:block relative">
+                <div class="flex">
+                    <input type="text" placeholder="Rechercher un événement" class="px-4 py-2 rounded-l-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-600">
+                    <button class="px-4 py-2 bg-blue-600 text-white font-medium rounded-r-md hover:bg-blue-700 transition duration-300">Rechercher</button>
                 </div>
             </div>
+            
+            <!-- Boutons - cachés sur mobile -->
+            <div class="hidden md:flex items-center space-x-4">
+                <x-eos-lightbulb-o class="h-6 w-6 text-white" />
+                <a href="{{route('login')}}" class="px-4 py-2 text-white font-medium hover:text-blue-600">Connexion</a>
+                <a href="{{route('register')}}" class="px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition duration-300">Inscription</a>
+            </div>
         </div>
-    </header>
+        
+        <!-- Menu mobile - s'affiche seulement quand on clique sur le hamburger -->
+        <div id="mobile-menu" class="hidden md:hidden mt-4 pb-2">
+            <div class="mb-4">
+                <div class="flex">
+                    <input type="text" placeholder="Rechercher un événement" class="w-full px-4 py-2 rounded-l-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-600">
+                    <button class="px-2 py-2 bg-blue-600 text-white font-medium rounded-r-md hover:bg-blue-700 transition duration-300">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="flex flex-col space-y-2">
+                <div class="flex items-center space-x-2">
+                    <x-eos-lightbulb-o class="h-6 w-6 text-white" />
+                    <span class="text-white">Aide</span>
+                </div>
+                <a href="{{route('login')}}" class="px-4 py-2 text-white font-medium hover:text-blue-600">Connexion</a>
+                <a href="{{route('register')}}" class="px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition duration-300 text-center">Inscription</a>
+            </div>
+        </div>
+    </div>
+</header>
     <!-- Nav catégories -->
+    
     <ul class="bg-[#011127] w-full flex justify-start gap-4 px-[60px] shadow-md sticky pt-5  top-0 z-50">
-        <li><a href="#" class="text-white text-[20px] py-2 px-4 border-[#222f40] border-2 font-semibold hover:text-blue-600 ">Festivals</a></li>
-        <li><a href="#" class="text-white text-[20px] py-2 px-4 border-[#222f40] border-2 font-semibold hover:text-blue-600 ">Sports</a></li>
-        <li><a href="#" class="text-white text-[20px] py-2 px-4 border-[#222f40] border-2 font-semibold hover:text-blue-600 ">Cenima</a></li>
-        <li><a href="#" class="text-white text-[20px] py-2 px-4 border-[#222f40] border-2 font-semibold hover:text-blue-600 ">Concerts</a></li>
-        <li><a href="#" class="text-white text-[20px] py-2 px-4 border-[#222f40] border-2 font-semibold hover:text-blue-600 ">Comedia</a></li>
-        <li><a href="#" class="text-white text-[20px] py-2 px-4 border-[#222f40] border-2 font-semibold hover:text-blue-600 ">Théàtre</a></li>
-
+        
+    <li><a href="#" class="text-white text-[20px] border-b-2 font-semibold hover:text-blue-600">
+    {{ $testVar ?? 'Variable non définie' }}
+</a></li>
     </ul>
     <!-- Swiper slider -->
     <swiper-container class="mySwiper" loop="true" pagination="true" pagination-clickable="true" navigation="true" space-between="30"
@@ -167,5 +199,11 @@
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+    <script>
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+</script>
 </body>
 </html>
