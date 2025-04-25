@@ -42,7 +42,7 @@
             <div class="btns w-[70%] flex flex-col gap-2">
                 <button class="w-full px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition " type="submit">Login</button>
                 <div>
-                    Pas encore de compte ? <a href="{{route('category')}}" class="text-blue-700">Inscrivez-vous ici</a>
+                    Pas encore de compte ? <a href="{{route('register')}}" class="text-blue-700">Inscrivez-vous ici</a>
                 </div>
             </div>
             

@@ -111,11 +111,14 @@
 </header>
     <!-- Nav catégories -->
     
-    <ul class="bg-[#011127] w-full flex justify-start gap-4 px-[60px] shadow-md sticky pt-5  top-0 z-50">
-        
-    <li><a href="#" class="text-white text-[20px] border-b-2 font-semibold hover:text-blue-600">
-    {{ $testVar ?? 'Variable non définie' }}
-</a></li>
+    <ul class="bg-[#011127] w-full flex justify-start gap-4 px-[60px] shadow-md sticky pt-5  top-0 z-50">        
+        <li><a href="#" class="text-white text-[20px] border-2 px-3 py-1.5 border-[#122034] font-semibold hover:text-blue-600">Festivals</a></li>
+        <li><a href="#" class="text-white text-[20px] border-2 px-3 py-1.5 border-[#122034] font-semibold hover:text-blue-600">Festivals</a></li>
+        <li><a href="#" class="text-white text-[20px] border-2 px-3 py-1.5 border-[#122034] font-semibold hover:text-blue-600">Festivals</a></li>
+        <li><a href="#" class="text-white text-[20px] border-2 px-3 py-1.5 border-[#122034] font-semibold hover:text-blue-600">Festivals</a></li>
+        <li><a href="#" class="text-white text-[20px] border-2 px-3 py-1.5 border-[#122034] font-semibold hover:text-blue-600">Festivals</a></li>
+        <li><a href="#" class="text-white text-[20px] border-2 px-3 py-1.5 border-[#122034] font-semibold hover:text-blue-600">Festivals</a></li>
+        <li><a href="#" class="text-white text-[20px] border-2 px-3 py-1.5 border-[#122034] font-semibold hover:text-blue-600">Festivals</a></li>
     </ul>
     <!-- Swiper slider -->
     <swiper-container class="mySwiper" loop="true" pagination="true" pagination-clickable="true" navigation="true" space-between="30"

@@ -6,7 +6,7 @@ use App\Http\Controllers\EventsCategoryController;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('home');
+});
 Route::get('/login',[AuthController::class,'showLoginForm'])->name('login');
 Route::post('/login',[AuthController::class,'login'])->name('login.submit');
 Route::get('/register',[AuthController::class,'showRegisterForm'])->name('register');
