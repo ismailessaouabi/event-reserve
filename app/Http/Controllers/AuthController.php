@@ -18,21 +18,7 @@ class AuthController extends Controller
     }
     public function register(Request $request)
     {
-        // Validate the request
-        $request->validate([
-            'role' => 'required|in:organizateur,utilisateur',
-            'nom' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-            'password_confirmation' => 'required|string|min:8',
-            'telephone' => 'required|string|max:15',
-            'ville' => 'required|string|max:255',
-            'payes' => 'required|string|max:255',
-            'adresse' => 'required|string|max:255',
-            'payes' => 'required|string|max:255',
-            
-
-        ]);
+        
 
         // Create the user
         User::create([
@@ -42,11 +28,12 @@ class AuthController extends Controller
             'password' => $request->password,
             'phone' => $request->telephone,
             'city' => $request->ville,
-            'contry' => $request->payes,
-            'adress' => $request->adress,
+            'country' => $request->payes,
+            'address' => $request->adress,
         ]);
+       
 
-        redirect()->route('login')->with('success', 'Registration successful. Please log in.');
+
     }
     public function login(Request $request)
     {
@@ -58,10 +45,10 @@ class AuthController extends Controller
 
         // Attempt to log the user in
         if (auth()->attempt($request->only('email', 'password'))) {
-            return response()->json(['message' => 'Login successful'], 200);
+            return redirect()->route('/')->with('success', 'Login successful');
         }
 
-        return response()->json(['message' => 'Invalid credentials'], 401);
+        
     }
 
     public function logout()
