@@ -6,8 +6,8 @@
     @vite('resources/css/app.css')
     <title>Document</title>
 </head>
-<body  >
-<header class="bg-[#011127] shadow-md  top-0 z-50 border-b-2 border-white">
+<body class="bg-[#011127]" >
+<header class="bg-[#011127] shadow-md relative  border-b-2 border-white">
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
                 <!-- Logo -->
@@ -33,18 +33,22 @@
         </div>
     </header>
 
-    <div class="bg-[#011127] w-full h-screen flex flex-col justify-center items-center text-white" >
+    <div class="bg-[#011127] pt-36 w-full h-screen flex flex-col justify-center items-center text-white" >
         <h1 class="font-semibold text-3xl w-[40%] m-4 text-center">Bienvenue sur notre plateforme ! Nous sommes ravis de vous retrouver.</h1>
-        <form class="w-[40%] h-fit py-10 flex flex-col gap-6 justify-center items-center border border-[#222f40] rounded-3xl" action="{{ route('register.submit') }}" method="POST">
+        <form class="w-[40%] h-fit py-10 flex flex-col gap-6 justify-center items-center border border-[#222f40] rounded-3xl" action="{{ route('register.post') }}" method="POST">
             @csrf
             <select class="w-[70%] bg-[#011127]  border border-[#222f40]  p-2.5" name="role" id="">
                 <option class="w-[100%] bg-[#011127]  border border-[#222f40] p-2.5" value="Admin">--selectionnez--</option>
                 <option class="w-[100%]  bg-[#011127] border border-[#222f40] p-2.5" value="Organizateur">Organizateur</option>
-                <option class="w-[100%]  bg-[#011127] border border-[#222f40] p-2.5" value="Client">Client</option>
+                <option class="w-[100%]  bg-[#011127] border border-[#222f40] p-2.5" value="Client">Utilisateur</option>
             </select>
             <input class="w-[70%] border border-[#222f40] p-2.5" type="text" name="email" placeholder="Email" required>
             <input class="w-[70%] border border-[#222f40] p-2.5" type="password" name="password" placeholder="Password" required>
-            <input class="w-[70%] border border-[#222f40] p-2.5" type="number" name="password" placeholder="Téléphone" required>
+            <input class="w-[70%] border border-[#222f40] p-2.5" type="number" name="telephone" placeholder="Téléphone" required>
+            <input class="w-[70%] border border-[#222f40] p-2.5" type="text" name="ville" placeholder="ville" required>
+            <input class="w-[70%] border border-[#222f40] p-2.5" type="text" name="payes" placeholder="payes" required>
+            <input class="w-[70%] border border-[#222f40] p-2.5" type="text" name="address" placeholder="address" required>
+
 
             <div class="btns w-[70%] flex flex-col gap-2">
                 <button class="w-full px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition " type="submit">Inscription</button>
