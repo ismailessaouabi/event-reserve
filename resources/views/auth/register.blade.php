@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body class="bg-[#011127]" >
-<header class="bg-[#011127] shadow-md relative  border-b-2 border-white">
+<header class="bg-[#011127] shadow-md  relative  border-b-2 border-white">
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
                 <!-- Logo -->

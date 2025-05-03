@@ -39,11 +39,11 @@ class AuthController extends Controller
             'role' => $request->role,
             'name' => $request->nom,
             'email' => $request->email,
-            'password' => bcrypt($request->password),
+            'password' => $request->password,
             'phone' => $request->telephone,
             'city' => $request->ville,
-            'contry' => $request->pays,
-            'adress' => $request->adresse,
+            'contry' => $request->payes,
+            'adress' => $request->adress,
         ]);
 
         redirect()->route('login')->with('success', 'Registration successful. Please log in.');
