@@ -39,11 +39,13 @@
             @csrf
             <select onchange="selectrole()" class="w-[70%] bg-[#011127]  border border-[#222f40]  p-2.5" name="role" id="">
                 <option class="w-[100%] bg-[#011127]  border border-[#222f40] p-2.5" value="Admin">--selectionnez--</option>
-                <option class="w-[100%]  bg-[#011127] border border-[#222f40] p-2.5" value="Organizateur">Organizateur</option>
-                <option class="w-[100%]  bg-[#011127] border border-[#222f40] p-2.5" value="Client">Utilisateur</option>
+                <option class="w-[100%]  bg-[#011127] border border-[#222f40] p-2.5" value="organizateur">Organizateur</option>
+                <option class="w-[100%]  bg-[#011127] border border-[#222f40] p-2.5" value="utilisateur">Utilisateur</option>
             </select>
+            <input class="w-[70%] border border-[#222f40] p-2.5" type="text" name="nom" placeholder="votre nom" required>
             <input class="w-[70%] border border-[#222f40] p-2.5" type="text" name="email" placeholder="Email" required>
             <input class="w-[70%] border border-[#222f40] p-2.5" type="password" name="password" placeholder="Password" required>
+            <input class="w-[70%] border border-[#222f40] p-2.5" type="password" name="password_confirmation" placeholder="confirm votre password" required>
             <input class="w-[70%] border border-[#222f40] p-2.5" type="number" name="telephone" placeholder="Téléphone" required>
             <input class="w-[70%] border border-[#222f40] p-2.5" type="text" name="ville" placeholder="ville" required>
             <input class="w-[70%] border border-[#222f40] p-2.5" type="text" name="payes" placeholder="payes" required>
@@ -51,7 +53,7 @@
 
 
             <div class="btns w-[70%] flex flex-col gap-2">
-                <button class="w-full px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition " type="submit">Inscription</button>
+                <button type="submit" class="w-full px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition " type="submit">Inscription</button>
                 
             </div>
             
@@ -66,7 +68,7 @@
         const email = document.querySelector('input[name="email"]');
 
         function selectrole() {
-            if (selectElement.value === 'Organizateur') {
+            if (selectElement.value === 'organizateur') {
                 email.style.display = 'none';
             } else {
                 email.style.display = 'block';

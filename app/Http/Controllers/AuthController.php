@@ -20,20 +20,33 @@ class AuthController extends Controller
     {
         // Validate the request
         $request->validate([
-            'name' => 'required|string|max:255',
+            'role' => 'required|in:organizateur,utilisateur',
+            'nom' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'password_confirmation' => 'required|string|min:8',
+            'telephone' => 'required|string|max:15',
+            'ville' => 'required|string|max:255',
+            'payes' => 'required|string|max:255',
+            'adresse' => 'required|string|max:255',
+            'payes' => 'required|string|max:255',
             
 
         ]);
 
         // Create the user
         User::create([
-            'name' => $request->name,
+            'role' => $request->role,
+            'name' => $request->nom,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'phone' => $request->telephone,
+            'city' => $request->ville,
+            'contry' => $request->pays,
+            'adress' => $request->adresse,
         ]);
 
-        return response()->json(['message' => 'User registered successfully'], 201);
+        redirect()->route('login')->with('success', 'Registration successful. Please log in.');
     }
     public function login(Request $request)
     {
