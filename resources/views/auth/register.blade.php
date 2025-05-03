@@ -37,7 +37,7 @@
         <h1 class="font-semibold text-3xl w-[40%] m-4 text-center">Bienvenue sur notre plateforme ! Nous sommes ravis de vous retrouver.</h1>
         <form class="w-[40%] h-fit py-10 flex flex-col gap-6 justify-center items-center border border-[#222f40] rounded-3xl" action="{{ route('register.post') }}" method="POST">
             @csrf
-            <select class="w-[70%] bg-[#011127]  border border-[#222f40]  p-2.5" name="role" id="">
+            <select onchange="selectrole()" class="w-[70%] bg-[#011127]  border border-[#222f40]  p-2.5" name="role" id="">
                 <option class="w-[100%] bg-[#011127]  border border-[#222f40] p-2.5" value="Admin">--selectionnez--</option>
                 <option class="w-[100%]  bg-[#011127] border border-[#222f40] p-2.5" value="Organizateur">Organizateur</option>
                 <option class="w-[100%]  bg-[#011127] border border-[#222f40] p-2.5" value="Client">Utilisateur</option>
@@ -61,5 +61,17 @@
             <p style="color: red;">{{ session('error') }}</p>
         @endif
     </div>
+    <script>
+        const selectElement = document.querySelector('select[name="role"]');
+        const email = document.querySelector('input[name="email"]');
+
+        function selectrole() {
+            if (selectElement.value === 'Organizateur') {
+                email.style.display = 'none';
+            } else {
+                email.style.display = 'block';
+            }
+        };
+    </script>
 </body>
 </html>

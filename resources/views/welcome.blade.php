@@ -103,8 +103,8 @@
                     <x-eos-lightbulb-o class="h-6 w-6 text-white" />
                     <span class="text-white">Aide</span>
                 </div>
-                <a href="#" class="px-4 py-2 text-white font-medium hover:text-blue-600">Connexion</a>
-                <a href="#" class="px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition duration-300 text-center">Inscription</a>
+                <a href="{{route('login')}}" class="px-4 py-2 text-white font-medium hover:text-blue-600">Connexion</a>
+                <a href="{{route('register')}}" class="px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition duration-300 text-center">Inscription</a>
             </div>
         </div>
     </div>
