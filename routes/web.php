@@ -5,7 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EventController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home.home');
 });
 Route::get('/register', [AuthController::class, 'showformregister'])->name('register');
 Route::get('/login', [AuthController::class, 'showformlogin'])->name('login');
