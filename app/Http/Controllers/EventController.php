@@ -32,9 +32,11 @@ class EventController extends Controller
     {
         // Fetch all events from the database
         $events = Event::all();
+        // Fetch all categories from the database
+        $categories = Category::all();
 
         // Return the view with the events data
-        return view('home.list', compact('events'));
+        return view('home.list', compact('events', 'categories'));
     }
 
     /**
