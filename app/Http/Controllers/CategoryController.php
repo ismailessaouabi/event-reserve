@@ -18,6 +18,10 @@ class CategoryController extends Controller
         // Return the view with the categories data
         return view('categories.index', compact('categories'));
     }
+    /**
+     * displiy categories dans view event.create
+     */
+   
 
     /**
      * Show the form for creating a new resource.

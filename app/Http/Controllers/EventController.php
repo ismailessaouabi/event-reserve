@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Models\Category;
 
 class EventController extends Controller
 {
@@ -14,9 +15,15 @@ class EventController extends Controller
     {
         // Fetch all events from the database
         $events = Event::all();
+        // Fetch all categories from the database
+        $categories = Category::all();
+        
+        // Return the view with the events and categories data
+        return view('events.index', compact('events', 'categories'));
 
-        // Return the view with the events data
-        return view('events.index', compact('events'));
+
+
+        
     }
     /**
      * display events dans view home
@@ -27,16 +34,21 @@ class EventController extends Controller
         $events = Event::all();
 
         // Return the view with the events data
-        return view('home.home', compact('events'));
+        return view('home.list', compact('events'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
+
     {
-        // Return the view to create a new event
-        return view('events.create');
+        // Fetch all categories from the database
+        $categories = Category::all();
+        // Pass the categories to the view
+        
+        return view('events.create', compact('categories'));
+        
     }
 
     /**
