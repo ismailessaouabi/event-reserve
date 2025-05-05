@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Event;
 
 class EventController extends Controller
 {
@@ -16,6 +17,17 @@ class EventController extends Controller
 
         // Return the view with the events data
         return view('events.index', compact('events'));
+    }
+    /**
+     * display events dans view home
+     */
+    public function home()
+    {
+        // Fetch all events from the database
+        $events = Event::all();
+
+        // Return the view with the events data
+        return view('home.home', compact('events'));
     }
 
     /**

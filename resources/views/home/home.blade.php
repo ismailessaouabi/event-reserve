@@ -145,8 +145,16 @@
         <li><a href="#" class="text-white text-[20px]  font-semibold hover:text-blue-600 ">Aujourd'hui</a></li>
         <li><a href="#" class="text-white text-[20px]  font-semibold hover:text-blue-600 ">Cette semaine</a></li>
         <li><a href="#" class="text-white text-[20px]  font-semibold hover:text-blue-600 ">Ce week-end</a></li>
-        <li><a href="#" class="text-white text-[20px]  font-semibold hover:text-blue-600 ">Ce mois-ci</a></li>
+        <li><a href="#" class="
+        text-white text-[20px]  font-semibold hover:text-blue-600 ">Ce mois-ci</a></li>
     </ul>
+    <div>
+        @if($events->count() > 0)
+            <h2 class="text-white text-3xl font-bold text-center mt-10">Événements à venir</h2>
+        @else
+            <h2 class="text-white text-3xl font-bold text-center mt-10">Aucun événement à venir</h2>
+        @endif
+    </div>
     <!-- List events -->
     <section class="w-full px-10 bg-[#011127] pt-9 flex justify-center gap-2 flex-wrap">
         

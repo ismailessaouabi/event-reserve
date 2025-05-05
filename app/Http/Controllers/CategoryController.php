@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class CategoryController extends Controller
 {
@@ -32,17 +33,37 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        
+        
+        
+         
         // Validate the request data
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string|max:1000',
         ]);
-
+        // Handle file upload if a file is provided
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $imagePath = $file->store('images', 'public'); // Store the file in the 'public' disk
+        } else {
+            $imagePath = 'aucune'; // Set to null if no file is uploaded
+        }
         // Create a new category
-        Category::create($request->all());
-
-        // Redirect to the categories index with a success message
+        Category::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'image_path' => $imagePath,
+        ]);
         return redirect()->route('categories.index')->with('success', 'Category created successfully.');
+        
+        
+      
+        
+       
+        
+
+
     }
 
     /**
