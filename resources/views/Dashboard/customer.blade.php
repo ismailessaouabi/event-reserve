@@ -98,12 +98,12 @@
             </nav>
             
             <!-- Logout Button -->
-            <div class="mt-auto">
+            <a href="{{route('logout')}}" class="mt-auto">
                 <div class="nav-item cursor-pointer">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Se déconnecter</span>
                 </div>
-            </div>
+            </a>
         </div>
         
         <!-- Main Content -->

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -25,35 +27,56 @@ class AuthController extends Controller
             'role' => $request->role,
             'name' => $request->nom,
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => Hash::make($request->password),
             'phone' => $request->telephone,
             'city' => $request->ville,
             'country' => $request->payes,
             'address' => $request->adress,
         ]);
+        // Redirect to the login page with a success message
+        return redirect()->route('login')->with('success', 'Registration successful');
        
 
 
     }
+    
     public function login(Request $request)
     {
-        // Validate the request
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        // Attempt to log the user in
-        if (auth()->attempt($request->only('email', 'password'))) {
-            return redirect()->route('/')->with('success', 'Login successful');
+        $email = $request->email;
+        $password = $request->password;
+        $values = [
+            'email' => $email,
+            'password' =>  $password,
+        ];
+        if (Auth::attempt($values)) {
+            // Authentication passed...
+            $request->session()->regenerate();
+            return redirect()->route('dashboard')->with('success', 'Login successful');
+        } else {
+            return redirect()->back()->with('error', 'email or password incorrect');
         }
+
+        
+        
+
+        
+
+        
+        
 
         
     }
 
     public function logout()
     {
-        auth()->logout();
-        return response()->json(['message' => 'Logout successful'], 200);
-    }
+        Auth::logout();
+        // Invalidate the session
+        request()->session()->invalidate();
+        // Regenerate the CSRF token
+        request()->session()->regenerateToken();
+        // Redirect to the login page with a success message
+    
+        return redirect()->route('login')->with('success', 'Logout successful');
+    }  
+    
 }

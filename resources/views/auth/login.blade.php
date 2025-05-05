@@ -36,7 +36,10 @@
     <div class="bg-[#011127] w-full h-screen flex flex-col justify-center items-center text-white" >
         <h1 class="font-semibold text-3xl w-[40%] m-4 text-center">Bienvenue sur notre plateforme ! Nous sommes ravis de vous retrouver.</h1>
         @if (session('success'))
-            <p style="color: green;">{{ session('success') }}</p>
+            <p class="text-green-800 bg-green-400 px-10 py-5">{{ session('success') }}</p>
+        @endif
+        @if (session('error'))
+            <p class="text-red-800 bg-red-400 px-10 py-5">{{ session('error') }}</p>
         @endif
         <form class="w-[40%] h-[70%] flex flex-col gap-6 justify-center items-center border border-[#222f40] rounded-3xl" action="{{ route('login.post') }}" method="POST">
             @csrf

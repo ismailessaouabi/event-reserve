@@ -11,7 +11,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        // Fetch all categories from the database
+        $categories = Category::all();
+
+        // Return the view with the categories data
+        return view('categories.index', compact('categories'));
     }
 
     /**
@@ -19,7 +23,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        // Return the view to create a new category
+        return view('categories.create');
     }
 
     /**
@@ -27,7 +32,17 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the request data
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string|max:1000',
+        ]);
+
+        // Create a new category
+        Category::create($request->all());
+
+        // Redirect to the categories index with a success message
+        return redirect()->route('categories.index')->with('success', 'Category created successfully.');
     }
 
     /**
@@ -35,7 +50,11 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // Find the category by ID
+        $category = Category::findOrFail($id);
+
+        // Return the view with the category data
+        return view('categories.show', compact('category'));
     }
 
     /**
@@ -43,7 +62,11 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // Find the category by ID
+        $category = Category::findOrFail($id);
+
+        // Return the view to edit the category
+        return view('categories.edit', compact('category'));
     }
 
     /**
@@ -51,7 +74,18 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Validate the request data
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string|max:1000',
+        ]);
+
+        // Find the category by ID and update it
+        $category = Category::findOrFail($id);
+        $category->update($request->all());
+
+        // Redirect to the categories index with a success message
+        return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
     }
 
     /**
@@ -59,6 +93,13 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Find the category by ID
+        $category = Category::findOrFail($id);
+
+        // Delete the category
+        $category->delete();
+
+        // Redirect to the categories index with a success message
+        return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
     }
 }
