@@ -1,7 +1,7 @@
 @extends('admin.layouts')
 @section('content')
     <div class="container">
-        <h1>Categories</h1>
+        <h1>Teckets</h1>
         <table class="table">
             <thead>
                 <tr>
@@ -11,13 +11,13 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($categories as $category)
+                @foreach($teckets as $tecket)
                     <tr>
-                        <td>{{ $category->id }}</td>
-                        <td>{{ $category->name }}</td>
+                        <td>{{ $tecket->id }}</td>
+                        <td>{{ $tecket->name }}</td>
                         <td>
-                            <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-primary">Edit</a>
-                            <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST" style="display:inline;">
+                            <a href="{{ route('admin.teckets.edit', $category->id) }}" class="btn btn-primary">Edit</a>
+                            <form action="{{ route('admin.teckets.destroy', $category->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
