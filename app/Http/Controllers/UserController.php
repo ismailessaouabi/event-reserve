@@ -11,7 +11,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        // Fetch all users from the database
+        $users = User::all();
+
+        // Return a view with the users data
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -19,7 +23,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        // Return a view to create a new user
+        return view('users.create');
     }
 
     /**
@@ -27,7 +32,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the request data
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        // Create a new user
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+
+        // Redirect to the users index page with a success message
+        return redirect()->route('users.index')->with('success', 'User created successfully.');
     }
 
     /**
@@ -35,7 +55,11 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // Fetch the user by ID
+        $user = User::findOrFail($id);
+
+        // Return a view with the user data
+        return view('users.show', compact('user'));
     }
 
     /**
@@ -43,7 +67,11 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // Fetch the user by ID
+        $user = User::findOrFail($id);
+
+        // Return a view with the user data
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -51,7 +79,23 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Validate the request data
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+            'password' => 'nullable|string|min:8|confirmed',
+        ]);
+
+        // Update the user
+        User::findOrFail($id)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ])
+        ->save();
+
+        // Redirect to the users index page with a success message
+        return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
 
     /**
@@ -59,6 +103,11 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Find the user by ID and delete it
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        // Redirect to the users index page with a success message
+        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
     }
 }
