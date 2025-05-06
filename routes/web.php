@@ -17,8 +17,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/dashboard', function () {
     return view('dashboard.customer');
 })->name('dashboard');
-Route::resource('events', EventController::class);
-Route::resource('categories', CategoryController::class);
+
 
 Route::get('/admin',function () {
     return view('admin.layouts');
@@ -38,9 +37,9 @@ Route::put('/admin/categories/{id}', [AdminController::class, 'updatecategory'])
 Route::delete('/admin/users/{id}', [AdminController::class, 'destroyuser'])->name('admin.users.destroy');
 Route::delete('/admin/events/{id}', [AdminController::class, 'destroyevent'])->name('admin.events.destroy');
 Route::delete('/admin/categories/{id}', [AdminController::class, 'destroycategory'])->name('admin.categories.destroy');
-Route::get('/admin/users/create', [AdminController::class, 'createuser'])->name('users.create');
+Route::get('/admin/users/create', [AdminController::class, 'createuser'])->name('admin.users.create');
 Route::get('/admin/events/create', [AdminController::class, 'createevent'])->name('admin.events.create');
-Route::get('/admin/categories/create', [AdminController::class, 'createcategory'])->name('categories.create');
+Route::get('/admin/categories/create', [AdminController::class, 'createcategory'])->name('admin.categories.create');
 Route::post('/admin/users', [AdminController::class, 'storeuser'])->name('admin.users.store');
 Route::post('/admin/events', [AdminController::class, 'storeevent'])->name('admin.events.store');
 Route::post('/admin/categories', [AdminController::class, 'storecategory'])->name('admin.categories.store');
