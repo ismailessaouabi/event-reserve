@@ -19,7 +19,7 @@ class EventController extends Controller
         $categories = Category::all();
         
         // Return the view with the events and categories data
-        return view('events.index', compact('events', 'categories'));
+        return view('admin.events.index', compact('events', 'categories'));
 
 
 
@@ -36,7 +36,7 @@ class EventController extends Controller
         $categories = Category::all();
 
         // Return the view with the events data
-        return view('home.list', compact('events', 'categories'));
+        return view('pages.accuiell', compact('events', 'categories'));
     }
 
     /**
@@ -49,7 +49,7 @@ class EventController extends Controller
         $categories = Category::all();
         // Pass the categories to the view
         
-        return view('events.create', compact('categories'));
+        return view('admin.events.create', compact('categories'));
         
     }
 
@@ -102,7 +102,7 @@ class EventController extends Controller
         $event = Event::findOrFail($id);
 
         // Return the view with the event data
-        return view('events.show', compact('event'));
+        return view('admin.events.show', compact('event'));
     }
 
     /**
@@ -114,7 +114,7 @@ class EventController extends Controller
         $event = Event::findOrFail($id);
 
         // Return the view to edit the event
-        return view('events.edit', compact('event'));
+        return view('admin.events.edit', compact('event'));
     }
 
     /**

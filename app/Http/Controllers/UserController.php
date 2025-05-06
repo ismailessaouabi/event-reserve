@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -15,7 +16,7 @@ class UserController extends Controller
         $users = User::all();
 
         // Return a view with the users data
-        return view('users.index', compact('users'));
+        return view('admin.users.index', compact('users'));
     }
 
     /**
@@ -24,7 +25,7 @@ class UserController extends Controller
     public function create()
     {
         // Return a view to create a new user
-        return view('users.create');
+        return view('admin.users.create');
     }
 
     /**
@@ -36,7 +37,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:8',
         ]);
 
         // Create a new user
@@ -71,7 +72,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         // Return a view with the user data
-        return view('users.edit', compact('user'));
+        return view('admin.users.edit', compact('user'));
     }
 
     /**

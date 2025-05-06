@@ -6,8 +6,18 @@
         <button class="mb-4 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded">
             Ajouter un utilisateur
         </button>
+        @if(session('success'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                <span class="block sm:inline">{{ session('success') }}</span>
+            </div>
+        @endif
+        @if(session('error'))
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <span class="block sm:inline">{{ session('error') }}</span>
+            </div>
+        @endif
         
-        <form action="{{ route('admin.users.store') }}" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-6">
+        <form action="{{ route('users.store') }}" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-6">
             @csrf
             <div class="flex flex-wrap -mx-3 mb-4">
                 <div class="w-full md:w-1/3 px-3 mb-4 md:mb-0">
@@ -45,10 +55,10 @@
                             <td class="py-4 px-6 text-left">{{ $user->email }}</td>
                             <td class="py-4 px-6 text-right">
                                 <div class="flex item-center justify-end">
-                                    <a href="{{ route('admin.users.edit', $user->id) }}" class="mr-2 transform hover:scale-110 text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md">
+                                    <a href="{{ route('users.edit', $user->id) }}" class="mr-2 transform hover:scale-110 text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md">
                                         Edit
                                     </a>
-                                    <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="inline-block">
+                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="inline-block">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="transform hover:scale-110 text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md">

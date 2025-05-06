@@ -16,8 +16,8 @@
                         <td>{{ $tecket->id }}</td>
                         <td>{{ $tecket->name }}</td>
                         <td>
-                            <a href="{{ route('admin.teckets.edit', $category->id) }}" class="btn btn-primary">Edit</a>
-                            <form action="{{ route('admin.teckets.destroy', $category->id) }}" method="POST" style="display:inline;">
+                            <a href="{{ route('teckets.edit', $category->id) }}" class="btn btn-primary">Edit</a>
+                            <form action="{{ route('ateckets.destroy', $category->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>

@@ -7,9 +7,9 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\CategoryController;
 
     
-Route::resource('users', UserController::class);
-Route::resource('events', EventController::class);
-Route::resource('categories', CategoryController::class);
+Route::resource('admin/users', UserController::class);
+Route::resource('admin/events', EventController::class);
+Route::resource('admin/categories', CategoryController::class);
 Route::get('/', function () { return view('pages.accuiell');});
 Route::get('/register', [AuthController::class, 'showformregister'])->name('register');
 Route::get('/login', [AuthController::class, 'showformlogin'])->name('login');
