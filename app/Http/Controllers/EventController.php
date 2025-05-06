@@ -58,15 +58,36 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate the request data
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'date' => 'required|date',
-            'location' => 'required|string|max:255',
-        ]);
+        
+        // Handle file upload
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('images'), $filename);
+            $imagePath = 'images/' . $filename; // Store the path to the image
+        } elseif ($request->input('image_path') !== null) {
+            $imagePath = $request->input('image_path'); // Use the existing image path
+        } else {
+            $imagePath = 'aucune'; // Set to null if no file is uploaded
+        }
+
+
+        
+
 
         // Create a new event
-        Event::create($request->all());
+        $event = Event::create([
+            'name' => $request->input('name'),
+            'image_path' => $imagePath,
+            'description' => $request->input('description'),
+            'category_id' => $request->input('category_id'),
+            'start_time' => $request->input('start_time'),
+            'end_time' => $request->input('end_time'),
+        ]);
+        // Check if the event was created successfully
+        if (!$event) {
+            return redirect()->back()->with('error', 'Failed to create event.');
+        }
 
         // Redirect to the events index with a success message
         return redirect()->route('events.index')->with('success', 'Event created successfully.');

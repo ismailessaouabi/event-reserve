@@ -8,10 +8,11 @@ class Event extends Model
 {
     protected $fillable = [
         'name',
-        'description',
-        'date',
-        'location',
         'image_path',
+        'description',    
+        'category_id',        
+        'start_time',
+        'end_time',
     ];
 
     public function category()
