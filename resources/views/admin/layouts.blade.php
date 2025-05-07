@@ -16,11 +16,11 @@
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="#" class="px-3 py-2 rounded-md text-sm font-medium bg-gray-200 text-gray-900">Dashboard</a>
+                        <a href="#" class="px-3 py-2 rounded-md text-sm font-medium bg-gray-200 text-gray-900">Accueil</a>
                         <a href="{{route('users.index')}}" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 hover:text-gray-900">Users</a>
                         <a href="{{route('events.index')}}" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 hover:text-gray-900">Events</a>
                         <a href="{{route('categories.index')}}" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 hover:text-gray-900">Categories</a>
-                        <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 hover:text-gray-900">Settings</a>
+                        <a href="{{route('logout')}}" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 hover:text-gray-900">logout</a>
                     </div>
                 </div>
                 <div class="md:hidden">
@@ -42,14 +42,14 @@
         <!-- Mobile menu, show/hide based on menu state -->
         <div class="md:hidden hidden" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#" class="block px-3 py-2 rounded-md text-sm font-medium bg-gray-200 text-gray-900">Dashboard</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-sm font-medium bg-gray-200 text-gray-900">Accueil</a>
                 <a href="{{route('users.index')}}" class="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 hover:text-gray-900">Users</a>
                 <a href="{{route('events.index')}}" class="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 hover:text-gray-900">Events</a>
                 <a href="{{route('categories.index')}}" class="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 hover:text-gray-900">Categories</a>
-                <a href="#" class="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 hover:text-gray-900">Settings</a>
+
             </div>
         </div>
-        <a href="{{route('logout')}}" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 hover:text-gray-900">Logout</a>
+        
     </nav>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -69,6 +69,7 @@
             const icons = this.querySelectorAll('svg');
             icons.forEach(icon => icon.classList.toggle('hidden'));
         });
+        
     </script>
 </body>
 </html>

@@ -6,7 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\CategoryController;
 
-    
+Route::get('/', function () { return view('pages.accuiell');});   
 Route::resource('admin/users', UserController::class);
 Route::resource('admin/events', EventController::class);
 Route::resource('admin/categories', CategoryController::class);

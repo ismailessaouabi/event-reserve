@@ -3,196 +3,455 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guichet.com - Billetterie en ligne</title>
+    <title>Guichet - Billetterie d'événements</title>
     @vite('resources/css/app.css')
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: #051529;
+            color: white;
+        }
+        
+        .event-card {
+            transition: transform 0.3s ease;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .truncate-2-lines {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
     </style>
 </head>
-<body class="bg-gray-100">
+<body class="min-h-screen">
     <!-- Header -->
-    <header class="bg-white shadow-md">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <span class="text-2xl font-bold text-blue-600">Guichet</span>
-                <span class="text-gray-500">@ store | Jb Voyage</span>
+    <header class="bg-[#051529] border-b border-gray-700">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <a href="#" class="text-white font-bold text-2xl">
+                        <img src="/api/placeholder/120/40" alt="Guichet Logo" class="h-8">
+                    </a>
+                </div>
+                
+                <div class="hidden md:flex space-x-4 mx-auto">
+                    <button class="bg-white text-blue-900 px-3 py-1 rounded-full text-sm font-medium">FR</button>
+                    <button class="text-white px-2 py-1 rounded-full text-sm font-medium">EN</button>
+                    <div class="px-4">|</div>
+                    <div class="relative">
+                        <input type="text" placeholder="Rechercher" class="bg-gray-800 text-white rounded-full py-1 px-4 text-sm pr-8">
+                        <i class="fas fa-search absolute right-3 top-2 text-gray-400"></i>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <div class="hidden md:flex space-x-4">
+                        <a href="#" class="text-white">Store</a>
+                        <a href="#" class="text-white">Voyage</a>
+                        <a href="#" class="text-white">Cinéma</a>
+                        <a href="#" class="text-white">Sport</a>
+                    </div>
+                    <div class="flex items-center">
+                        <a href="#" class="bg-red-600 text-white px-4 py-2 rounded-full text-sm">Se connecter</a>
+                        <div class="ml-4 relative">
+                            <button class="flex items-center justify-center w-8 h-8 bg-gray-700 rounded-full">
+                                <i class="fas fa-user text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="hidden md:flex space-x-6">
-                <a href="#" class="font-medium text-gray-700 hover:text-blue-600">Billetterie</a>
-                <a href="#" class="font-medium text-gray-700 hover:text-blue-600">Cinéma</a>
-                <a href="#" class="font-medium text-gray-700 hover:text-blue-600">Voyage</a>
-                <a href="#" class="font-medium text-gray-700 hover:text-blue-600">Sport</a>
-            </div>
-            <div class="flex items-center space-x-4">
-                <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Connexion</button>
-            </div>
+            
+            <!-- Navigation secondaire -->
+            <nav class="overflow-x-auto whitespace-nowrap py-2 -mx-4 px-4 hidden md:block">
+                <div class="flex space-x-6">
+                    <a href="#" class="text-white font-medium">Accueil Events Pro</a>
+                    <a href="#" class="text-white">Festivals</a>
+                    <a href="#" class="text-white">Jeunes Public</a>
+                    <a href="#" class="text-white">Soirée & Spectacles</a>
+                    <a href="#" class="text-white">Conférences</a>
+                    <div class="ml-auto flex items-center space-x-4">
+                        <a href="#" class="text-gray-300 text-sm">Aide & Contact</a>
+                    </div>
+                </div>
+            </nav>
         </div>
     </header>
 
-    <!-- Categories Navigation -->
-    <div class="bg-white shadow-sm">
-        <div class="container mx-auto px-4 py-3 overflow-x-auto">
-            <div class="flex space-x-6 whitespace-nowrap">
-                <a href="#" class="font-medium text-blue-600">+ Nostalgia Lovers Fest</a>
-                <a href="#" class="font-medium text-gray-700">Cinéma</a>
-                <a href="#" class="font-medium text-gray-700">® Sport</a>
-                <a href="#" class="font-medium text-gray-700">* Concerts</a>
-                <a href="#" class="font-medium text-gray-700">+ Théatre & Humour</a>
-                <a href="#" class="font-medium text-gray-700">+ Festivals</a>
-                <a href="#" class="font-medium text-gray-700">* Jeune Public</a>
-                <a href="#" class="font-medium text-gray-700">* Salon & formation</a>
-                <a href="#" class="font-medium text-gray-700">* Comediablanca</a>
-                <a href="#" class="font-medium text-gray-700">* Sport</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Hero Banner -->
-    <div class="bg-blue-800 text-white py-8">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-6 md:mb-0">
-                    <h1 class="text-3xl md:text-4xl font-bold mb-4">COMEDIABLANCA</h1>
-                    <p class="text-xl mb-4">MOROCCO MALL - CASABLANCA</p>
-                    <p class="mb-4">(2% MOROCCO MALL</p>
-                    <p class="mb-4">CASABLANCA</p>
-                    <p class="mb-6">MOROCCO MALL</p>
-                    <button class="bg-yellow-400 text-blue-900 px-6 py-3 rounded-md font-bold hover:bg-yellow-300">Acheter maintenant</button>
+    <!-- Featured Events Banner Section -->
+    <section class="container mx-auto px-4 py-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Featured Event 1 -->
+            <div class="relative rounded-lg overflow-hidden h-64">
+                <img src="/api/placeholder/400/320" alt="Festival" class="w-full h-full object-cover">
+                <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
+                    <span class="bg-yellow-500 text-black px-2 py-1 rounded text-xs font-bold">FESTIVAL</span>
+                    <h3 class="text-white font-bold mt-2">Festival de la Comédie Arabe</h3>
+                    <p class="text-gray-200 text-sm">15-26 Jun 2023</p>
                 </div>
-                <div class="md:w-1/2 flex justify-center">
-                    <div class="bg-gray-300 h-64 w-full max-w-md rounded-lg flex items-center justify-center">
-                        <span class="text-gray-500">Image du concert</span>
-                    </div>
+            </div>
+            
+            <!-- Featured Event 2 -->
+            <div class="relative rounded-lg overflow-hidden h-64">
+                <img src="/api/placeholder/400/320" alt="REDMA Concert" class="w-full h-full object-cover">
+                <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
+                    <span class="bg-red-600 text-white px-2 py-1 rounded text-xs font-bold">CONCERT</span>
+                    <h3 class="text-white font-bold mt-2">REDMA</h3>
+                    <p class="text-gray-200 text-sm">15.06.2023 • Morocco Mall</p>
+                </div>
+            </div>
+            
+            <!-- Featured Event 3 -->
+            <div class="relative rounded-lg overflow-hidden h-64">
+                <img src="/api/placeholder/400/320" alt="Stand-up Show" class="w-full h-full object-cover">
+                <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
+                    <span class="bg-blue-500 text-white px-2 py-1 rounded text-xs font-bold">STAND-UP</span>
+                    <h3 class="text-white font-bold mt-2">L'Irresistible Show de Oualas</h3>
+                    <p class="text-gray-200 text-sm">07.06.2023 • Megarama</p>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Date Filters -->
-    <div class="bg-white py-4 shadow-sm">
-        <div class="container mx-auto px-4">
-            <div class="flex space-x-4 overflow-x-auto pb-2">
-                <button class="bg-blue-600 text-white px-4 py-2 rounded-md whitespace-nowrap">Aujourd'hui</button>
-                <button class="bg-white border border-gray-300 px-4 py-2 rounded-md whitespace-nowrap">Cette semaine</button>
-                <button class="bg-white border border-gray-300 px-4 py-2 rounded-md whitespace-nowrap">Ce weekend</button>
-                <button class="bg-white border border-gray-300 px-4 py-2 rounded-md whitespace-nowrap">Ce mois-ci</button>
+    <!-- Categories Section -->
+    <section class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center mb-4">
+            <div class="flex space-x-2">
+                <button class="bg-blue-900 px-3 py-1 rounded text-xs font-medium">Aujourd'hui</button>
+                <button class="bg-gray-800 px-3 py-1 rounded text-xs font-medium">Cette semaine</button>
+                <button class="bg-gray-800 px-3 py-1 rounded text-xs font-medium">Ce weekend</button>
+                <button class="bg-gray-800 px-3 py-1 rounded text-xs font-medium">Ce mois-ci</button>
             </div>
         </div>
-    </div>
-
-    <!-- Events Grid -->
-    <div class="container mx-auto px-4 py-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Events Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
             <!-- Event Card 1 -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <div class="bg-gray-300 h-48 flex items-center justify-center">
-                    <span class="text-gray-500">Image événement</span>
+            <div class="bg-gray-900 rounded-lg overflow-hidden event-card">
+                <div class="relative">
+                    <img src="/api/placeholder/300/180" alt="Comedy Festival" class="w-full h-40 object-cover">
+                    <span class="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded text-xs">Comédie Français</span>
                 </div>
-                <div class="p-4">
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="font-bold text-lg">Du Tag a Bansky</h3>
-                        <span class="bg-red-500 text-white text-xs px-2 py-1 rounded">SOLD OUT</span>
+                <div class="p-3">
+                    <h3 class="text-white font-medium text-sm truncate-2-lines">Juste pour rire</h3>
+                    <p class="text-gray-400 text-xs mt-1">26 Juin 2023 à 20:30</p>
+                    <div class="flex items-center mt-2">
+                        <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
+                        <span class="text-gray-400 text-xs ml-1">Théâtre Français de Casablanca</span>
                     </div>
-                    <p class="text-gray-600 mb-2">@ Institut francais de Casablanca</p>
-                    <p class="text-gray-600 mb-2">19 Apr 2025 à 19:30</p>
-                    <p class="font-bold text-blue-600 mb-4">90,00 MAD</p>
-                    <button class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">Voir détails</button>
+                    <div class="mt-3 flex justify-between items-center">
+                        <span class="text-white font-bold text-sm">70,00 MAD</span>
+                    </div>
                 </div>
             </div>
-
+            
             <!-- Event Card 2 -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <div class="bg-gray-300 h-48 flex items-center justify-center">
-                    <span class="text-gray-500">Image événement</span>
+            <div class="bg-gray-900 rounded-lg overflow-hidden event-card">
+                <div class="relative">
+                    <img src="/api/placeholder/300/180" alt="Comedy Show" class="w-full h-40 object-cover">
+                    <span class="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded text-xs">Comédie Show</span>
                 </div>
-                <div class="p-4">
-                    <h3 class="font-bold text-lg mb-2">Gravity Comedy Show</h3>
-                    <p class="text-gray-600 mb-2">@ Gravity park - Marrakech</p>
-                    <p class="text-gray-600 mb-2">19 Apr 2025 à 20:00</p>
-                    <p class="font-bold text-blue-600 mb-4">170,00 MAD</p>
-                    <button class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">Acheter</button>
+                <div class="p-3">
+                    <h3 class="text-white font-medium text-sm truncate-2-lines">Grande Comédie Show - Le plus fou des soirées comiques</h3>
+                    <p class="text-gray-400 text-xs mt-1">15 Juin 2023 à 20:00</p>
+                    <div class="flex items-center mt-2">
+                        <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
+                        <span class="text-gray-400 text-xs ml-1">Complexe Culturel ESPACE ROUDANI</span>
+                    </div>
+                    <div class="mt-3 flex justify-between items-center">
+                        <span class="text-white font-bold text-sm">150,00 MAD</span>
+                    </div>
                 </div>
             </div>
-
+            
             <!-- Event Card 3 -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <div class="bg-gray-300 h-48 flex items-center justify-center">
-                    <span class="text-gray-500">Image événement</span>
+            <div class="bg-gray-900 rounded-lg overflow-hidden event-card">
+                <div class="relative">
+                    <img src="/api/placeholder/300/180" alt="Music Event" class="w-full h-40 object-cover">
+                    <span class="absolute top-2 left-2 bg-yellow-500 text-black px-2 py-1 rounded text-xs">MUSIC EVENT</span>
                 </div>
-                <div class="p-4">
-                    <h3 class="font-bold text-lg mb-2">Atelier de Danse Indienne</h3>
-                    <p class="text-gray-600 mb-2">@ Tempsdanse Schools</p>
-                    <p class="text-gray-600 mb-2">20 avr. 2025 à 12:00</p>
-                    <p class="font-bold text-blue-600 mb-4">100,00 MAD</p>
-                    <button class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">Acheter</button>
+                <div class="p-3">
+                    <h3 class="text-white font-medium text-sm truncate-2-lines">Soirée Red & Conditions</h3>
+                    <p class="text-gray-400 text-xs mt-1">17 Juin 2023 à 22:00</p>
+                    <div class="flex items-center mt-2">
+                        <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
+                        <span class="text-gray-400 text-xs ml-1">Complexe Événementiel BOULTEK</span>
+                    </div>
+                    <div class="mt-3 flex justify-between items-center">
+                        <span class="text-white font-bold text-sm">200,00 MAD</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event Card 4 - Sold Out -->
+            <div class="bg-gray-900 rounded-lg overflow-hidden event-card">
+                <div class="relative">
+                    <img src="/api/placeholder/300/180" alt="Rappers Night" class="w-full h-40 object-cover">
+                    <span class="absolute top-2 left-2 bg-purple-500 text-white px-2 py-1 rounded text-xs">Rap & Pop</span>
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                        <span class="bg-red-600 text-white px-4 py-2 rounded-lg font-bold">SOLD OUT</span>
+                    </div>
+                </div>
+                <div class="p-3">
+                    <h3 class="text-white font-medium text-sm truncate-2-lines">Rappers Delight: Al Hoceima</h3>
+                    <p class="text-gray-400 text-xs mt-1">12 Juin 2023 à 23:00</p>
+                    <div class="flex items-center mt-2">
+                        <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
+                        <span class="text-gray-400 text-xs ml-1">Quartier Mirador, Al Hoceima</span>
+                    </div>
+                    <div class="mt-3 flex justify-between items-center">
+                        <span class="text-white font-bold text-sm">250,00 MAD</span>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="mt-8 text-center">
-            <button class="bg-white border border-blue-600 text-blue-600 px-6 py-2 rounded-md hover:bg-blue-50">Plus d'événements</button>
-        </div>
-    </div>
-
-    <!-- Newsletter -->
-    <div class="bg-gray-800 text-white py-12">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-2xl font-bold mb-4">RESTEZ INFORMÉS!</h2>
-            <p class="mb-6 max-w-2xl mx-auto">Soyez le premier à profiter d'offres exclusives et à être informé des dernières nouveautés sur nos produits, le tout directement dans votre boite de réception.</p>
-            <div class="max-w-md mx-auto flex">
-                <input type="email" placeholder="Entrer votre adresse email" class="flex-grow px-4 py-2 rounded-l-md text-gray-900">
-                <button class="bg-blue-600 px-6 py-2 rounded-r-md hover:bg-blue-700">S'inscrire</button>
+    </section>
+    
+    <!-- All Events Section -->
+    <section class="container mx-auto px-4 py-4">
+        <h2 class="text-xl font-bold text-white mb-6">Tous les événements</h2>
+        
+        <!-- Events Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
+            <!-- Event Card 1 -->
+            <div class="bg-gray-900 rounded-lg overflow-hidden event-card">
+                <div class="relative">
+                    <img src="/api/placeholder/300/180" alt="Comedy Festival" class="w-full h-40 object-cover">
+                    <span class="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded text-xs">Comédie Français</span>
+                </div>
+                <div class="p-3">
+                    <h3 class="text-white font-medium text-sm truncate-2-lines">Juste pour rire</h3>
+                    <p class="text-gray-400 text-xs mt-1">26 Juin 2023 à 20:30</p>
+                    <div class="flex items-center mt-2">
+                        <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
+                        <span class="text-gray-400 text-xs ml-1">Théâtre Français de Casablanca</span>
+                    </div>
+                    <div class="mt-3 flex justify-between items-center">
+                        <span class="text-white font-bold text-sm">70,00 MAD</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event Card 2 -->
+            <div class="bg-gray-900 rounded-lg overflow-hidden event-card">
+                <div class="relative">
+                    <img src="/api/placeholder/300/180" alt="Comedy Show" class="w-full h-40 object-cover">
+                    <span class="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded text-xs">Comédie Show</span>
+                </div>
+                <div class="p-3">
+                    <h3 class="text-white font-medium text-sm truncate-2-lines">Grande Comédie Show</h3>
+                    <p class="text-gray-400 text-xs mt-1">15 Juin 2023 à 20:00</p>
+                    <div class="flex items-center mt-2">
+                        <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
+                        <span class="text-gray-400 text-xs ml-1">Complexe Culturel ESPACE ROUDANI</span>
+                    </div>
+                    <div class="mt-3 flex justify-between items-center">
+                        <span class="text-white font-bold text-sm">150,00 MAD</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event Card 3 -->
+            <div class="bg-gray-900 rounded-lg overflow-hidden event-card">
+                <div class="relative">
+                    <img src="/api/placeholder/300/180" alt="Music Event" class="w-full h-40 object-cover">
+                    <span class="absolute top-2 left-2 bg-yellow-500 text-black px-2 py-1 rounded text-xs">MUSIC EVENT</span>
+                </div>
+                <div class="p-3">
+                    <h3 class="text-white font-medium text-sm truncate-2-lines">Soirée Red & Conditions</h3>
+                    <p class="text-gray-400 text-xs mt-1">17 Juin 2023 à 22:00</p>
+                    <div class="flex items-center mt-2">
+                        <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
+                        <span class="text-gray-400 text-xs ml-1">Complexe Événementiel BOULTEK</span>
+                    </div>
+                    <div class="mt-3 flex justify-between items-center">
+                        <span class="text-white font-bold text-sm">200,00 MAD</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event Card 4 - Sold Out -->
+            <div class="bg-gray-900 rounded-lg overflow-hidden event-card">
+                <div class="relative">
+                    <img src="/api/placeholder/300/180" alt="Rap Event" class="w-full h-40 object-cover">
+                    <span class="absolute top-2 left-2 bg-purple-500 text-white px-2 py-1 rounded text-xs">Soirée punk à franges</span>
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                        <span class="bg-red-600 text-white px-4 py-2 rounded-lg font-bold">SOLD OUT</span>
+                    </div>
+                </div>
+                <div class="p-3">
+                    <h3 class="text-white font-medium text-sm truncate-2-lines">Soirée & Night</h3>
+                    <p class="text-gray-400 text-xs mt-1">22 Juin 2023 à 23:00</p>
+                    <div class="flex items-center mt-2">
+                        <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
+                        <span class="text-gray-400 text-xs ml-1">Théâtre de Rabat, Agdal</span>
+                    </div>
+                    <div class="mt-3 flex justify-between items-center">
+                        <span class="text-white font-bold text-sm">220,00 MAD</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event Card 5 - Sold Out -->
+            <div class="bg-gray-900 rounded-lg overflow-hidden event-card">
+                <div class="relative">
+                    <img src="/api/placeholder/300/180" alt="Chef Event" class="w-full h-40 object-cover">
+                    <span class="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded text-xs">FOOD FESTIVAL</span>
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                        <span class="bg-red-600 text-white px-4 py-2 rounded-lg font-bold">SOLD OUT</span>
+                    </div>
+                </div>
+                <div class="p-3">
+                    <h3 class="text-white font-medium text-sm truncate-2-lines">CHEF SHOW SPECIALE</h3>
+                    <p class="text-gray-400 text-xs mt-1">28 Juin 2023 à 19:00</p>
+                    <div class="flex items-center mt-2">
+                        <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
+                        <span class="text-gray-400 text-xs ml-1">Restaurant Le Montana, Marrakech</span>
+                    </div>
+                    <div class="mt-3 flex justify-between items-center">
+                        <span class="text-white font-bold text-sm">400,00 MAD</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- More event cards... -->
+            <div class="bg-gray-900 rounded-lg overflow-hidden event-card">
+                <div class="relative">
+                    <img src="/api/placeholder/300/180" alt="Festival" class="w-full h-40 object-cover">
+                    <span class="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded text-xs">CASE SPECIAL</span>
+                </div>
+                <div class="p-3">
+                    <h3 class="text-white font-medium text-sm truncate-2-lines">GRANDE SPECTACLE CIRKA MOROCCO</h3>
+                    <p class="text-gray-400 text-xs mt-1">30 Juin 2023 à 16:00</p>
+                    <div class="flex items-center mt-2">
+                        <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
+                        <span class="text-gray-400 text-xs ml-1">Complexe City Arena, Rabat</span>
+                    </div>
+                    <div class="mt-3 flex justify-between items-center">
+                        <span class="text-white font-bold text-sm">300,00 MAD</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-gray-900 rounded-lg overflow-hidden event-card">
+                <div class="relative">
+                    <img src="/api/placeholder/300/180" alt="Concert Jazz" class="w-full h-40 object-cover">
+                    <span class="absolute top-2 left-2 bg-yellow-500 text-black px-2 py-1 rounded text-xs">JAZZ EVENT</span>
+                </div>
+                <div class="p-3">
+                    <h3 class="text-white font-medium text-sm truncate-2-lines">Jazz Night avec Mehram & Orquesta</h3>
+                    <p class="text-gray-400 text-xs mt-1">22 Juin 2023 à 21:00</p>
+                    <div class="flex items-center mt-2">
+                        <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
+                        <span class="text-gray-400 text-xs ml-1">Théâtre National Mohammed V</span>
+                    </div>
+                    <div class="mt-3 flex justify-between items-center">
+                        <span class="text-white font-bold text-sm">180,00 MAD</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-gray-900 rounded-lg overflow-hidden event-card">
+                <div class="relative">
+                    <img src="/api/placeholder/300/180" alt="Festival" class="w-full h-40 object-cover">
+                    <span class="absolute top-2 left-2 bg-teal-500 text-white px-2 py-1 rounded text-xs">TEX Production</span>
+                </div>
+                <div class="p-3">
+                    <h3 class="text-white font-medium text-sm truncate-2-lines">MALI 2 SHOW - CASABLANCA</h3>
+                    <p class="text-gray-400 text-xs mt-1">05 Jul 2023 à 20:30</p>
+                    <div class="flex items-center mt-2">
+                        <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
+                        <span class="text-gray-400 text-xs ml-1">Complexe Sportif Anfa, Casablanca</span>
+                    </div>
+                    <div class="mt-3 flex justify-between items-center">
+                        <span class="text-white font-bold text-sm">250,00 MAD</span>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+        
+        <!-- Load More Button -->
+        <div class="text-center mb-10">
+            <button class="bg-gray-800 text-white px-6 py-2 rounded-full hover:bg-gray-700 transition">Plus d'événements</button>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="bg-gray-900 py-8">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <h2 class="text-xl font-bold text-white mb-4">RESTEZ INFORMÉ!</h2>
+                <p class="text-gray-300 mb-6 max-w-lg mx-auto text-sm">Inscrivez-vous à notre newsletter et soyez le premier à être informé des nouvelles actualités et des nouvelles sorties de billets!</p>
+                
+                <div class="max-w-md mx-auto flex">
+                    <input type="email" placeholder="Votre adresse email" class="bg-gray-800 text-white px-4 py-2 rounded-l-lg flex-grow">
+                    <button class="bg-red-600 text-white px-4 py-2 rounded-r-lg font-medium">S'inscrire</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-8">
+    <footer class="bg-[#051529] py-10 border-t border-gray-700">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
                 <div>
-                    <h3 class="font-bold text-lg mb-4">Guichet</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Billetterie</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Qui sommes-nous ?</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Mentions légales</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="font-bold text-lg mb-4">Store</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Cinéma</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Voyage</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Sport</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="font-bold text-lg mb-4">Contactez nous</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">FAQ</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="font-bold text-lg mb-4">Téléchargez l'application</h3>
-                    <div class="flex space-x-2">
-                        <button class="bg-black text-white px-3 py-2 rounded flex items-center">
-                            <span class="mr-2">App Store</span>
-                        </button>
-                        <button class="bg-black text-white px-3 py-2 rounded flex items-center">
-                            <span class="mr-2">Google Play</span>
-                        </button>
+                    <img src="/api/placeholder/120/40" alt="Guichet Logo" class="h-8 mb-4">
+                    <p class="text-gray-400 text-xs mb-4">Guichet est une plateforme de billetterie innovante qui offre une expérience utilisateur optimale pour acheter des billets d'événements au Maroc.</p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
-            </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>Guichet.com ! la plateforme numéro 1 de la billetterie digitalisée en Afrique. Elle met à la disposition des amoureux de la culture les meilleurs événements ! Entre des pièces théâtrales, des concerts, des festivals, ou même des matchs de Foot, Guichet.com transporte ses clients vers un univers révolutionnaire, ou divers événements leur sont proposés !</p>
-                <p class="mt-4">© Copyright 2018 - 2025 Guichet.com - Tous droits réservés</p>
-            </div>
-        </div>
-    </footer>
-</body>
-</html>
+                
+                <div>
+                    <h3 class="text-white font-medium mb-4">Explorer</h3>
+                    <ul class="text-gray-400 text-sm space-y-2">
+                        <li><a href="#" class="hover:text-white">Événements</a></li>
+                        <li><a href="#" class="hover:text-white">Théâtre</a></li>
+                        <li><a href="#" class="hover:text-white">Concerts</a></li>
+                        <li><a href="#" class="hover:text-white">Festivals</a></li>
+                        <li><a href="#" class="hover:text-white">Sport</a></li>
+                        <li><a href="#" class="hover:text-white">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-medium mb-4">Service client</h3>
+                    <ul class="text-gray-400 text-sm space-y-2">
+                        <li><a href="#" class="hover:text-white">Mon compte</a></li>
+                        <li><a href="#" class="hover:text-white">FAQ</a></li>
+                        <li><a href="#" class="hover:text-white">Comment ça marche</a></li>
+                        <li><a href="#" class="hover:text-white">Politiques de remboursement</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-medium mb-4">Termes & Conditions</h3>
+                    <ul class="text-gray-400 text-sm space-y-2">
+                        <li><a href="#" class="hover:text-white">Politique de confidentialité</a></li>
+                        <li><a href="#" class="hover:text-white">Termes d'utilisation</a></li>
+                        <li><a href="#" class="hover:text-white">Conditions générales de vente</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-medium mb-4">Téléchargez l'application</h3>
+                    <div class="flex flex-col space-y-2">
+                        <a href="#" class="block">
+                            <img src="/api/placeholder/120/40" alt="App Store" class="h-10">
+                        </a>
+                        <a href="#" class="block">
+                            <img src="/api/placeholder/120/40" alt="Google Play" class="h-10">
+                        </a>
+                    </div>

@@ -93,7 +93,7 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ])
-        ->save();
+        ;
 
         // Redirect to the users index page with a success message
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
