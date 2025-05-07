@@ -60,7 +60,9 @@
                         <a href="#" class="text-white">Sport</a>
                     </div>
                     <div class="flex items-center">
-                        <a href="#" class="bg-red-600 text-white px-4 py-2 rounded-full text-sm">Se connecter</a>
+                        <a href="{{ route('login') }}" class="bg-red-600 text-white px-4 py-2 rounded-full text-sm">Se connecter</a>
+                        <a href="{{ route('register') }}" class="bg-red-600 text-white px-4 py-2 rounded-full text-sm">S'inscrire</a>
+
                         <div class="ml-4 relative">
                             <button class="flex items-center justify-center w-8 h-8 bg-gray-700 rounded-full">
                                 <i class="fas fa-user text-white"></i>

@@ -22,7 +22,7 @@
         <!-- Formulaire -->
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md animate__animated animate__fadeInUp">
             <div class="bg-white py-8 px-6 shadow-lg rounded-lg sm:px-10 border-t-4 border-indigo-500">
-                <form id="loginForm" class="mb-0 space-y-6" action="{{ route('dashboard') }}" method="POST">
+                <form id="loginForm" class="mb-0 space-y-6" action="#" method="POST">
                     <!-- Champ Email -->
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700">

@@ -51,7 +51,7 @@ class AuthController extends Controller
         if (Auth::attempt($values)) {
             // Authentication passed...
             $request->session()->regenerate();
-            return redirect()->route('dashboard')->with('success', 'Login successful');
+            return redirect()->route('customer')->with('success', 'Login successful');
         } else {
             return redirect()->back()->with('error', 'email or password incorrect');
         }
