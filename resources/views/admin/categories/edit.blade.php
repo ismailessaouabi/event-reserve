@@ -40,7 +40,7 @@
                                 id="name" 
                                 name="name" 
                                 value="{{ old('name', $category->name) }}" 
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm @error('name') border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 @enderror" 
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 sm:text-sm @error('name') text-red-900 placeholder-red-300 focus:outline-none  focus:border-red-500 @enderror" 
                                 placeholder="Entrez le nom de la catégorie"
                                 required
                                 autofocus
