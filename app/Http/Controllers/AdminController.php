@@ -20,13 +20,20 @@ class AdminController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
+        
+        if (auth()->user()->role !== 'admin') {
+            return redirect()->route('accueill')->with('error', 'You are not authorized to access this page.');
+        }
+        
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->intended(route('admin.layout'))->with('success', 'Login successful');
+            return redirect()->route('admin.users.index')->with('success', 'Login successful');
+        }else{
+            if (!Auth::check()) {
+                return redirect('/');
+            }
         }
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
+        
     }
 
 }

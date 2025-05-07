@@ -48,12 +48,15 @@ class AuthController extends Controller
             'email' => $email,
             'password' =>  $password,
         ];
+        
         if (Auth::attempt($values)) {
             // Authentication passed...
             $request->session()->regenerate();
             return redirect()->route('customer')->with('success', 'Login successful');
         } else {
-            return redirect()->back()->with('error', 'email or password incorrect');
+            if (!Auth::check()) {
+                return redirect('/');
+            }
         }
 
         
