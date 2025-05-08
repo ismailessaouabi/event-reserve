@@ -36,7 +36,7 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'Registration successful');
     }
     
-    public function loginCustomer(Request $request)
+    public function login(Request $request)
     {
         $email = $request->email;
         $password = $request->password;
@@ -45,58 +45,28 @@ class AuthController extends Controller
             'password' =>  $password,
         ];
 
+        $user = User::where('email', $email)->first();
         if(Auth::attempt($values))
         {
-            // Check if the user is an admin
-            if(Auth::user()->role == 'customer')
-
-            {
-                $request->session()->regenerate();
-                // Redirect to the admin dashboard
-                return redirect()->route('')->with('success', 'Login successful');
+            if ($user->role == 'admin') {
+                $request->session()->regenerateToken();
+                $response = redirect()->route('admin')->with('success', 'Login successful');
+                
+            } else {
+                $request->session()->regenerateToken();
+                $response =  redirect()->route('organizer')->with('success', 'Login successful');
             }
-            else
-            {
-                return redirect()->route('login')->with('error', 'Login failed');
-            }
-           
-        }
-        else
-            {
-                return redirect()->route('login')->with('error', 'Login failed');
-            }
-    }
-
-    public function loginAdmin(Request $request)
-    {
-        $email = $request->email;
-        $password = $request->password;
-        $values = [
-            'email' => $email,
-            'password' =>  $password,
-        ];
-
-        if(Auth::attempt($values))
-        {
-            // Check if the user is an admin
-            if(Auth::user()->role == 'admin')
-
-            {
-                $request->session()->regenerate();
-                // Redirect to the admin dashboard
-                return redirect()->route('admin')->with('success', 'Login successful');
-            }
-            else
-            {
-                return redirect()->route('login')->with('error', 'Login failed');
-            }
-           
+            
         }
         else
         {
-            return redirect()->route('login')->with('error', 'Login failed');
+            $request = redirect()->route('login')->with('error', 'Login failed');
         }
+        
+        return $response;
     }
+
+   
 
 
     
