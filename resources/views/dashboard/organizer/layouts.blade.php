@@ -70,10 +70,10 @@
                     <i class="fas fa-chart-line"></i>
                     <span>Tableau de bord</span>
                 </div>
-                <div class="nav-item">
+                <a href="{{ route('organizer.information') }}" class="nav-item">
                     <i class="fas fa-user"></i>
                     <span>Mes informations</span>
-                </div>
+                </a>
                 <div class="nav-item">
                     <i class="fas fa-calendar-check"></i>
                     <span>Mes réservations</span>

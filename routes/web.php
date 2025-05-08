@@ -15,13 +15,20 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/admin', function () {
     return view('dashboard.admin.layouts');
-})->name('admin')->middleware('is-admin');
+})->name('admin');
 Route::get('/payement', function () {
     return view('pages.payement');
 })->name('payement');
 Route::get('/organizer', function () {
-    return view('dashboard.organizer.organizer');
+    return view('dashboard.organizer.layouts');
 })->name('organizer');
+Route::get('/organizerinfo', function () {
+    return view('dashboard.organizer.organizer');
+})->name('organizer.information');
+Route::get('/events',function () {
+    return view('dashboard.admin.events');
+})->name('events.index');
+
 
 
 
