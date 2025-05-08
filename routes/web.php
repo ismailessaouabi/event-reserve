@@ -16,6 +16,13 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/admin', function () {
     return view('dashboard.admin.layouts');
 })->name('admin')->middleware('is-admin');
+Route::get('/payement', function () {
+    return view('pages.payement');
+})->name('payement');
+Route::get('/organizer', function () {
+    return view('dashboard.organizer.organizer');
+})->name('organizer');
+
 
 
    

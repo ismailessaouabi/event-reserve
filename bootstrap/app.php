@@ -17,7 +17,9 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        $exceptions->reportable([
-            \Throwable::class,
-        ]);
+        // Vous pouvez configurer le traitement des exceptions ici
+        // Par exemple :
+        // $exceptions->reportable(function (Throwable $e) {
+        //     // ...
+        // });
     })->create();

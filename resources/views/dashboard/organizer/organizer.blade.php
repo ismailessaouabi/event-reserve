@@ -1,4 +1,3 @@
-<!-- resources/views/dashboard.blade.php -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -54,9 +53,9 @@
     </style>
 </head>
 <body>
-    <div class="flex">
-        <!-- Sidebar -->
-        <div class="sidebar w-80 p-4 flex flex-col">
+    <div class="flex flex-col md:flex-row">
+        <!-- Sidebar - Mobile first hidden, visible on md and up -->
+        <div class="sidebar w-full md:w-72 p-4 flex flex-col fixed md:static inset-y-0 left-0 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out z-50" id="sidebar">
             <!-- User Profile -->
             <div class="flex items-center mb-8 p-2">
                 <div class="w-12 h-12 bg-gray-300 rounded-full mr-3 overflow-hidden">
@@ -106,11 +105,16 @@
             </div>
         </div>
         
+        <!-- Mobile menu button -->
+        <button class="md:hidden fixed top-4 left-4 z-50 p-2 rounded-md bg-indigo-600 text-white" id="menuButton">
+            <i class="fas fa-bars"></i>
+        </button>
+        
         <!-- Main Content -->
-        <div class="flex-1 p-8">
+        <div class="flex-1 p-4 md:p-8 mt-16 md:mt-0">
             <!-- Header -->
-            <div class="mb-8">
-                <h1 class="text-2xl font-bold flex items-center">
+            <div class="mb-6 md:mb-8">
+                <h1 class="text-xl md:text-2xl font-bold flex items-center">
                     <i class="fas fa-chart-line text-orange-500 mr-2"></i>
                     Tableau de bord
                 </h1>
@@ -118,17 +122,17 @@
             </div>
             
             <!-- Stats Cards -->
-            <div class="grid grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 <!-- Commandes validées -->
                 <div class="card stat-card">
                     <div class="flex justify-between items-start">
                         <div>
-                            <h3 class="text-4xl font-bold">0</h3>
-                            <h2 class="text-xl mt-6 mb-3">Commandes validées</h2>
+                            <h3 class="text-3xl md:text-4xl font-bold">0</h3>
+                            <h2 class="text-lg md:text-xl mt-4 md:mt-6 mb-2 md:mb-3">Commandes validées</h2>
                             <div class="divider"></div>
-                            <div class="flex items-center mt-3 text-sm">
+                            <div class="flex items-center mt-2 md:mt-3 text-xs md:text-sm">
                                 <span>Historique des commandes</span>
-                                <i class="fas fa-arrow-right ml-2 text-orange-500"></i>
+                                <i class="fas fa-arrow-right ml-1 md:ml-2 text-orange-500"></i>
                             </div>
                         </div>
                         <div class="icon-circle">
@@ -141,12 +145,12 @@
                 <div class="card stat-card">
                     <div class="flex justify-between items-start">
                         <div>
-                            <h3 class="text-4xl font-bold text-orange-500">0,00 MAD</h3>
-                            <h2 class="text-xl mt-6 mb-3">Total dépensé</h2>
+                            <h3 class="text-3xl md:text-4xl font-bold text-orange-500">0,00 MAD</h3>
+                            <h2 class="text-lg md:text-xl mt-4 md:mt-6 mb-2 md:mb-3">Total dépensé</h2>
                             <div class="divider"></div>
-                            <div class="flex items-center mt-3 text-sm">
+                            <div class="flex items-center mt-2 md:mt-3 text-xs md:text-sm">
                                 <span>Historique des commandes</span>
-                                <i class="fas fa-arrow-right ml-2 text-orange-500"></i>
+                                <i class="fas fa-arrow-right ml-1 md:ml-2 text-orange-500"></i>
                             </div>
                         </div>
                         <div class="icon-circle">
@@ -159,12 +163,12 @@
                 <div class="card stat-card">
                     <div class="flex justify-between items-start">
                         <div>
-                            <h3 class="text-4xl font-bold text-orange-500">0,00 MAD</h3>
-                            <h2 class="text-xl mt-6 mb-3">Solde actuel</h2>
+                            <h3 class="text-3xl md:text-4xl font-bold text-orange-500">0,00 MAD</h3>
+                            <h2 class="text-lg md:text-xl mt-4 md:mt-6 mb-2 md:mb-3">Solde actuel</h2>
                             <div class="divider"></div>
-                            <div class="flex items-center mt-3 text-sm">
+                            <div class="flex items-center mt-2 md:mt-3 text-xs md:text-sm">
                                 <span>Historique des transactions</span>
-                                <i class="fas fa-arrow-right ml-2 text-orange-500"></i>
+                                <i class="fas fa-arrow-right ml-1 md:ml-2 text-orange-500"></i>
                             </div>
                         </div>
                         <div class="icon-circle">
@@ -175,5 +179,13 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Toggle sidebar on mobile
+        document.getElementById('menuButton').addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('-translate-x-full');
+        });
+    </script>
 </body>
 </html>
