@@ -19,8 +19,7 @@ class AuthController extends Controller
         return view('pages.login');
     }
     public function register(Request $request)
-    {
-        
+    {   
 
         // Create the user
         User::create([
@@ -35,12 +34,9 @@ class AuthController extends Controller
         ]);
         // Redirect to the login page with a success message
         return redirect()->route('login')->with('success', 'Registration successful');
-       
-
-
     }
     
-    public function login(Request $request)
+    public function loginCustomer(Request $request)
     {
         $email = $request->email;
         $password = $request->password;
@@ -48,27 +44,62 @@ class AuthController extends Controller
             'email' => $email,
             'password' =>  $password,
         ];
-        
-        if (Auth::attempt($values)) {
-            // Authentication passed...
-            $request->session()->regenerate();
-            return redirect()->route('customer')->with('success', 'Login successful');
-        } else {
-            if (!Auth::check()) {
-                return redirect('/');
+
+        if(Auth::attempt($values))
+        {
+            // Check if the user is an admin
+            if(Auth::user()->role == 'customer')
+
+            {
+                $request->session()->regenerate();
+                // Redirect to the admin dashboard
+                return redirect()->route('')->with('success', 'Login successful');
             }
+            else
+            {
+                return redirect()->route('login')->with('error', 'Login failed');
+            }
+           
         }
-
-        
-        
-
-        
-
-        
-        
-
-        
+        else
+            {
+                return redirect()->route('login')->with('error', 'Login failed');
+            }
     }
+
+    public function loginAdmin(Request $request)
+    {
+        $email = $request->email;
+        $password = $request->password;
+        $values = [
+            'email' => $email,
+            'password' =>  $password,
+        ];
+
+        if(Auth::attempt($values))
+        {
+            // Check if the user is an admin
+            if(Auth::user()->role == 'admin')
+
+            {
+                $request->session()->regenerate();
+                // Redirect to the admin dashboard
+                return redirect()->route('admin')->with('success', 'Login successful');
+            }
+            else
+            {
+                return redirect()->route('login')->with('error', 'Login failed');
+            }
+           
+        }
+        else
+        {
+            return redirect()->route('login')->with('error', 'Login failed');
+        }
+    }
+
+
+    
 
     public function logout()
     {
