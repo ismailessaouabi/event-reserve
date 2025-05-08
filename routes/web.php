@@ -13,9 +13,9 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.po
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/admin', function () { return view('dashboard.admin.layouts');})->name('admin');
-Route::get('/organizer', function () { return view('dashboard.organizer.layouts');})->name('organizer');
-Route::get('/user', function () { return view('dashboard.customer.layouts');})->name('customer');
+Route::get('/admin', function () { return view('dashboard.admin.layouts');})->name('admin')->middleware('auth');
+Route::get('/organizer', function () { return view('dashboard.organizer.layouts');})->name('organizer')->middleware('auth');
+Route::get('/customer', function () { return view('dashboard.customer.layouts');})->name('customer')->middleware('auth');
 
 
    

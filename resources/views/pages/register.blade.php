@@ -38,9 +38,9 @@
         <form class="w-[40%] h-fit py-10 flex flex-col gap-6 justify-center items-center border border-[#222f40] rounded-3xl" action="{{ route('register.post') }}" method="POST">
             @csrf
             <select onchange="selectrole()" class="w-[70%] bg-[#011127]  border border-[#222f40]  p-2.5" name="role" id="">
-                <option class="w-[100%] bg-[#011127]  border border-[#222f40] p-2.5" value="Admin">--selectionnez--</option>
-                <option class="w-[100%]  bg-[#011127] border border-[#222f40] p-2.5" value="organizateur">Organizateur</option>
-                <option class="w-[100%]  bg-[#011127] border border-[#222f40] p-2.5" value="utilisateur">Utilisateur</option>
+                <option class="w-[100%] bg-[#011127]  border border-[#222f40] p-2.5" value="">--selectionnez--</option>
+                <option class="w-[100%]  bg-[#011127] border border-[#222f40] p-2.5" value="organizer">Organizateur</option>
+                <option class="w-[100%]  bg-[#011127] border border-[#222f40] p-2.5" value="customer">Utilisateur</option>
             </select>
             <input class="w-[70%] border border-[#222f40] p-2.5" type="text" name="nom" placeholder="votre nom" required>
             <input class="w-[70%] border border-[#222f40] p-2.5" type="text" name="email" placeholder="Email" required>

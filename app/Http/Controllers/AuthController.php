@@ -22,16 +22,18 @@ class AuthController extends Controller
     {   
 
         // Create the user
-        User::create([
-            'role' => $request->role,
-            'name' => $request->nom,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'phone' => $request->telephone,
-            'city' => $request->ville,
-            'country' => $request->payes,
-            'address' => $request->adress,
-        ]);
+        if($request->role != 'admin')
+        {
+            $user = User::create([
+                'name' => $request->nom,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => $request->role,
+                'telephone' => $request->telephone,
+                'ville' => $request->ville,
+                'payes' => $request->payes,
+            ]);
+        }
         // Redirect to the login page with a success message
         return redirect()->route('login')->with('success', 'Registration successful');
     }
@@ -60,7 +62,7 @@ class AuthController extends Controller
         }
         else
         {
-            $request = redirect()->route('login')->with('error', 'Login failed');
+            $response = redirect()->route('login')->with('error', 'Login failed');
         }
         
         return $response;
