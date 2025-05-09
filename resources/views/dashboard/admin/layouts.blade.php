@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="bg-gray-100 font-sans">
+    <style>
+        .active {
+            background-color: #3b82f6;
+            color: #fff;
+        }
+        
+    </style>
     <!-- Sidebar Mobile Toggle -->
     <button id="sidebarToggle" class="md:hidden fixed top-4 left-4 z-50 p-2 bg-indigo-600 text-white rounded-lg shadow-lg">
         <i class="fas fa-bars"></i>
@@ -27,27 +34,27 @@
                     <i class="fas fa-tachometer-alt mr-3"></i>
                     Tableau de bord
                 </a>
-                <a href="{{ route('events.index') }}" class="flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
+                <a href="{{ route('events.index') }}" class="active menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
                     <i class="fas fa-calendar-alt mr-3"></i>
                     Événements
                 </a>
-                <a href="#" class="flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
+                <a href="{{ route('categories.index') }}" class=" menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
                     <i class="fas fa-calendar-alt mr-3"></i>
                     Catégories
                 </a>
-                <a href="#" class="flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
+                <a href="#" class="  menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
                     <i class="fas fa-ticket-alt mr-3"></i>
                     Réservations
                 </a>
-                <a href="#" class="flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
+                <a href="#" class="  menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
                     <i class="fas fa-users mr-3"></i>
                     Utilisateurs
                 </a>
-                <a href="#" class="flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
+                <a href="#" class=" menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
                     <i class="fas fa-chart-bar mr-3"></i>
                     Statistiques
                 </a>
-                <a href="#" class="flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
+                <a href="#" class=" menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
                     <i class="fas fa-cog mr-3"></i>
                     Paramètres
                 </a>
@@ -319,11 +326,23 @@
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('hidden');
         });
-
-        // Initialize tooltips (si vous en ajoutez)
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialisation des tooltips ou autres scripts ici
+        //active menu item
+        const menuItems = document.querySelectorAll('.menu-item');
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                menuItems.forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                });
+                item.classList.add('active');
+            });
         });
+
+        
+        
+
+        
+       
     </script>
+    
 </body>
 </html>

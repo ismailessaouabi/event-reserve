@@ -13,6 +13,7 @@ Route::get('/login', [AuthController::class, 'showformlogin'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/admin', function () {
     return view('dashboard.admin.layouts');
 })->name('admin');
