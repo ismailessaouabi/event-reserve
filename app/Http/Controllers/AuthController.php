@@ -52,11 +52,11 @@ class AuthController extends Controller
         {
             if ($user->role == 'admin') {
                 $request->session()->regenerateToken();
-                $response = redirect()->route('admin')->with('success', 'Login successful');
+                $response = redirect()->route('admin', ['id' => $user->id])->with('success', 'Login successful');
                 
             } else {
                 $request->session()->regenerateToken();
-                $response =  redirect()->route('organizer')->with('success', 'Login successful');
+                $response =  redirect()->route('organizer', ['id' => $user->id])->with('success', 'Login successful');
             }
             
         }

@@ -3,15 +3,37 @@
 @section('content')
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-3xl font-bold text-gray-800 mb-8">Gestion des Catégories</h1>
-        /// Formulaire d'ajout de catégorie
-        <form action="#" method="POST">
+        
+        <form action="{{ route('categories.store') }}" class="mb-8 bg-white p-6 rounded-lg shadow-md" method="POST">
             @csrf
-            <input type="text" name="name" placeholder="Nom de la catégorie">
-            <button type="submit">Ajouter</button>
+            <div class="flex gap-4">
+                <input 
+                    type="text" 
+                    name="name" 
+                    placeholder="Nom de la catégorie"
+                    class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                >
+                <button 
+                    type="submit" 
+                    class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors"
+                >
+                    Ajouter
+                </button>
+            </div>
         </form>
         
 
         <div class="flex flex-col">
+            @if(session('success'))
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <span class="block sm:inline">{{ session('success') }}</span>
+                </div>
+            @endif
+            @if(session('error'))
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <span class="block sm:inline">{{ session('error') }}</span>
+                </div>
+            @endif
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -41,7 +63,14 @@
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Modifier</a>
+                                        <div class="flex space-x-4 justify-end">
+                                            <a href="{{ route('categories.edit', $category->id) }}" class="text-indigo-600 hover:text-indigo-900">Modifier</a>
+                                            <form action="{{ route('categories.destroy', $category->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="text-red-600 hover:text-red-900">Supprimer</button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -53,4 +82,3 @@
         </div>
     </div>
 @endsection
-    

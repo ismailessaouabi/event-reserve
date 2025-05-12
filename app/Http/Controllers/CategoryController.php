@@ -18,27 +18,21 @@ class CategoryController extends Controller
         // Return the view with the categories data
         return view('dashboard.admin.categories', compact('categories'));
     }
-    
-   
-
     /**
-     * Show the form for creating a new resource.
+     * desplay events dans view home.
      */
-    public function create()
+    public function showcategories()
     {
-        // Return the view to create a new category
-        return view('admin.categories.create');
+        $categories = Category::all();
+        return view('pages.accuiell', compact('categories'));
     }
+    
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        
-        
-        
-         
+    {   
         // Validate the request data
         $request->validate([
             'name' => 'required|string|max:255',
@@ -58,26 +52,18 @@ class CategoryController extends Controller
             'image_path' => $imagePath,
         ]);
         return redirect()->route('categories.index')->with('success', 'Category created successfully.');
-        
-        
-      
-        
-       
-        
-
-
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function showonhomepage(string $id)
     {
         // Find the category by ID
         $category = Category::findOrFail($id);
 
         // Return the view with the category data
-        return view('admin.categories.show', compact('category'));
+        return view('dashboard.admin.categories.show', compact('category'));
     }
 
     /**
@@ -89,7 +75,7 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
 
         // Return the view to edit the category
-        return view('admin.categories.edit', compact('category'));
+        return view('dashboard.admin.editcategorie', compact('category'));
     }
 
     /**

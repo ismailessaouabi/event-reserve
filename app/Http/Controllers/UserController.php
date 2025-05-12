@@ -16,17 +16,10 @@ class UserController extends Controller
         $users = User::all();
 
         // Return a view with the users data
-        return view('admin.users.index', compact('users'));
+        return view('dashboard.admin.users', compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        // Return a view to create a new user
-        return view('admin.users.create');
-    }
+   
 
     /**
      * Store a newly created resource in storage.
@@ -37,8 +30,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-        ]);
+            'password' => 'required|string|min:8',]);
 
         // Create a new user
         User::create([
@@ -72,7 +64,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         // Return a view with the user data
-        return view('admin.users.edit', compact('user'));
+        return view('dashboard.admin.edituser', compact('user'));
     }
 
     /**
@@ -84,14 +76,12 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
-            'password' => 'nullable|string|min:8|confirmed',
         ]);
 
         // Update the user
         User::findOrFail($id)->update([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password),
         ])
         ;
 

@@ -34,9 +34,13 @@
                     <i class="fas fa-tachometer-alt mr-3"></i>
                     Tableau de bord
                 </a>
-                <a href="{{ route('events.index') }}" class="active menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
+                <a href="{{ route('events.index') }}" class=" menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
                     <i class="fas fa-calendar-alt mr-3"></i>
                     Événements
+                </a>
+                <a href="{{ route('events.index') }}" class=" menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
+                    <i class="fas fa-calendar-alt mr-3"></i>
+                    Teckets
                 </a>
                 <a href="{{ route('categories.index') }}" class=" menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
                     <i class="fas fa-calendar-alt mr-3"></i>
@@ -46,7 +50,7 @@
                     <i class="fas fa-ticket-alt mr-3"></i>
                     Réservations
                 </a>
-                <a href="#" class="  menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
+                <a href="{{ route('users.index') }}" class="  menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
                     <i class="fas fa-users mr-3"></i>
                     Utilisateurs
                 </a>
@@ -69,9 +73,9 @@
                         <p class="text-xs text-indigo-200">admin@event.com</p>
                     </div>
                 </div>
-                <button class="mt-3 w-full text-left text-xs text-indigo-200 hover:text-white">
+                <a href="#" class="mt-3 w-full text-left text-xs text-indigo-200 hover:text-white">
                     <i class="fas fa-sign-out-alt mr-1"></i> Déconnexion
-                </button>
+                </a>
             </div>
         </div>
 

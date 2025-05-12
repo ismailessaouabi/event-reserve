@@ -75,11 +75,10 @@
             <!-- Navigation secondaire -->
             <nav class="overflow-x-auto whitespace-nowrap py-2 -mx-4 px-4 hidden md:block">
                 <div class="flex space-x-6">
-                    <a href="#" class="text-white font-medium">Accueil Events Pro</a>
-                    <a href="#" class="text-white">Festivals</a>
-                    <a href="#" class="text-white">Jeunes Public</a>
-                    <a href="#" class="text-white">Soirée & Spectacles</a>
-                    <a href="#" class="text-white">Conférences</a>
+                    @foreach ($categories as $category)
+                        <a href="#" class="text-white font-medium">{{ $category->name }}</a>
+                    @endforeach
+                    
                     <div class="ml-auto flex items-center space-x-4">
                         <a href="#" class="text-gray-300 text-sm">Aide & Contact</a>
                     </div>
