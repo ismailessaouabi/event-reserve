@@ -14,7 +14,8 @@ class EventController extends Controller
     public function index()
     {
         // Fetch all events from the database
-        $events = Event::all();
+        $events = Event::with(['category','place'])->get();
+
         // Fetch all categories from the database
         $categories = Category::all();
         
@@ -31,7 +32,8 @@ class EventController extends Controller
     public function home()
     {
         // Fetch all events from the database
-        $events = Event::all();
+        $events = Event::with('place')->get();
+
         // Fetch all categories from the database
         $categories = Category::all();
 
@@ -39,58 +41,59 @@ class EventController extends Controller
         return view('pages.accuiell', compact('events', 'categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-
-    {
-        // Fetch all categories from the database
-        $categories = Category::all();
-        // Pass the categories to the view
-        
-        return view('admin.events.create', compact('categories'));
-        
-    }
-
+    
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
         
-        // Handle file upload
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('images'), $filename);
-            $imagePath = 'images/' . $filename; // Store the path to the image
-        } elseif ($request->input('image_path') !== null) {
-            $imagePath = $request->input('image_path'); // Use the existing image path
-        } else {
-            $imagePath = 'aucune'; // Set to null if no file is uploaded
-        }
+
+    // Début de la transaction
+    DB::beginTransaction();
+
+    try {
+        // Créer ou récupérer le lieu
+        $place = Place::firstOrCreate(
+            [
+                'name' => $request->input('location')
+            ]
+        );
+
+        // Créer l'événement
+        $event = Event::create([
+            'name' => $request->input('title'),
+            'start_date' => $request->input('date'),
+            'place_id' => $place->id,
+        ]);
+
+        
+
+        // Commit de la transaction
+        DB::commit();
+
+        // Redirection avec message de succès
+        return redirect()
+            ->route('events.show', $event->id)
+            ->with('success', 'Événement créé avec succès');
+
+    } catch (\Exception $e) {
+        // Rollback en cas d'erreur
+        DB::rollBack();
+
+        // Redirection avec message d'erreur
+        return redirect()
+            ->back()
+            ->with('error', 'Erreur lors de la création de l\'événement: ' . $e->getMessage())
+            ->withInput();
+    }
+
+        
 
 
         
 
 
-        // Create a new event
-        $event = Event::create([
-            'name' => $request->input('name'),
-            'image_path' => $imagePath,
-            'description' => $request->input('description'),
-            'category_id' => $request->input('category_id'),
-            'start_time' => $request->input('start_time'),
-            'end_time' => $request->input('end_time'),
-        ]);
-        // Check if the event was created successfully
-        if (!$event) {
-            return redirect()->back()->with('error', 'Failed to create event.');
-        }
-
-        // Redirect to the events index with a success message
-        return redirect()->route('events.index')->with('success', 'Event created successfully.');
     }
 
     /**
