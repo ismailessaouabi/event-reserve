@@ -19,4 +19,8 @@ class Event extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function places()
+    {
+        return $this->belongsTo(Place::class);
+    }
 }

@@ -19,7 +19,14 @@ class User extends Model
         
     ];
 
+public function teckets()
+{
+    return $this->hasMany(Tecket::class);
 
 
-
+}
+public function events()
+{
+    return $this->hasMany(Event::class);
+}
 }
