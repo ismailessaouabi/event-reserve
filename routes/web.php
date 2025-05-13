@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PlaceController;
 use APP\Http\Middleware\RedirectIfNotAuthenticated;
 
 Route::get('/', [CategoryController::class, 'showcategories'])->name('accueill');   
@@ -26,15 +27,17 @@ Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update
 Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 
 
-Route::get('/events', [UserController::class, 'index'])->name('events.index');
 Route::post('/events', [UserController::class, 'store'])->name('events.store');
-
-
-
-
-
-
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
+Route::get('/events/edit/{id}', [EventController::class, 'edit'])->name('events.edit');
+Route::put('/events/{id}', [EventController::class, 'update'])->name('events.update');
+Route::delete('/events/{id}', [EventController::class, 'destroy'])->name('events.destroy');
+
+Route::get('/places', [PlaceController::class, 'index'])->name('places.index');
+Route::post('/places', [PlaceController::class, 'store'])->name('places.store');
+Route::get('/places/edit/{id}', [PlaceController::class, 'edit'])->name('places.edit');
+Route::put('/places/{id}', [PlaceController::class, 'update'])->name('places.update');
+Route::delete('/places/{id}', [PlaceController::class, 'destroy'])->name('places.destroy');
 
 
 

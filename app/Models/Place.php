@@ -8,9 +8,8 @@ class Place extends Model
 {
     protected $fillable = [
         'name',
-        'description',
-        'location',
-        'image_path',
+        'ville',
+        'capacity',
     ];
 
     public function events()

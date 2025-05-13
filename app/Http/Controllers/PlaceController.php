@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Place;
 
 class PlaceController extends Controller
 {
@@ -11,15 +12,9 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        // This method should return a view with a list of places
+        $places = Place::all();
+        return view('dashboard.admin.places', compact('places'));
     }
 
     /**
@@ -27,7 +22,29 @@ class PlaceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the request data
+        $request->validate([
+            'lieu' => 'required|string|max:255',
+            'ville' => 'required|string|max:255',
+            'capacity' => 'required|integer',
+            
+        ]);
+       
+        // Check if the place already exists
+        $place = Place::where('name', $request->lieu)->first();
+        if ($place) {
+            return redirect()->route('places.index')->with('error', 'Le lieu existe deja');
+        }
+
+        // Create a new place
+        Place::create([
+            'name' => $request->lieu,
+            'ville' => $request->ville,
+            'capacity' => $request->capacity,
+        ]);
+
+        // Redirect to the index page
+        return redirect()->route('places.index');
     }
 
     /**
@@ -43,7 +60,11 @@ class PlaceController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // Find the place by ID
+        $place = Place::findOrFail($id);
+
+        // Return the edit view with the place data
+        return view('dashboard.admin.editplace', compact('place'));
     }
 
     /**
@@ -51,7 +72,25 @@ class PlaceController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Validate the request data
+        $request->validate([
+            'lieu' => 'required|string|max:255',
+            'ville' => 'required|string|max:255',
+            'capacity' => 'required|integer',
+        ]);
+
+        // Find the place by ID
+        $place = Place::findOrFail($id);
+
+        // Update the place
+        $place->update([
+            'name' => $request->lieu,
+            'ville' => $request->ville,
+            'capacity' => $request->capacity,
+        ]);
+
+        // Redirect to the index page
+        return redirect()->route('places.index');
     }
 
     /**
@@ -59,6 +98,11 @@ class PlaceController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Find the place by ID and delete it
+        $place = Place::findOrFail($id);
+        $place->delete();
+
+        // Redirect to the index page
+        return redirect()->route('places.index');
     }
 }

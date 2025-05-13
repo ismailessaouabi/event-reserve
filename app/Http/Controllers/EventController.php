@@ -74,7 +74,7 @@ class EventController extends Controller
 
         // Redirection avec message de succès
         return redirect()
-            ->route('events.show', $event->id)
+            ->route('dashboard.admin.events')
             ->with('success', 'Événement créé avec succès');
 
     } catch (\Exception $e) {
