@@ -14,7 +14,8 @@ class EventController extends Controller
 {
     
     public function index(){
-        
+        $categories = Category::all();
+        return view('dashboard.admin.events', compact( 'categories'));
     }
     
 
@@ -29,11 +30,18 @@ class EventController extends Controller
             'name' => $request->lieu,
             'capacity' => $request->capacity,
         ]);
+        $categorie = Category::find($request->category_id);
+        if (!$categorie) {
+            return redirect()->back()->with('error', 'Category not found.');
+        }
+        
+
 
         $event = Event::create([
             'name' => $request->name,
             'start_time' => $request->date,
             'place_id' => $place->id,
+            'category_id' => $categorie->id
         ]);
         return redirect()->route('events.index')->with('success', 'Event created successfully.');
     }

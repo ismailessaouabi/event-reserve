@@ -60,9 +60,7 @@ Route::get('/organizer', function () {
 Route::get('/organizerinfo', function () {
     return view('dashboard.organizer.organizer');
 })->name('organizer.information');
-Route::get('/events',function () {
-    return view('dashboard.admin.events');
-})->name('events.index');
+
 
 
 
