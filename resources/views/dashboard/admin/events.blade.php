@@ -10,22 +10,28 @@
                 <span class="block sm:inline">{{ session('success') }}</span>
             </div>  
         @endif
-        @if (session('error'))
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                <span class="block sm:inline">{{ session('error') }}</span>
-            </div>  
-        @endif
+        
         <!-- Formulaire d'ajout -->
         <div class="w-full lg:w-1/3">
             <div class="bg-white rounded-lg shadow-md p-6">
                 <h2 class="text-xl font-semibold text-gray-700 mb-4">Ajouter un Événement</h2>
                 
+                @if ($errors->any())
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                
                 <form action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     
     <div class="mb-4">
-        <label for="title" class="block text-sm font-medium text-gray-700 mb-1">Titre</label>
-        <input type="text" id="title" name="title" 
+        <label for="title" class="block text-sm font-medium text-gray-700 mb-1">name</label>
+        <input type="text" id="title" name="name" 
                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                required>
         @error('title')
@@ -33,15 +39,7 @@
         @enderror
     </div>
     
-    <div class="mb-4">
-        <label for="image" class="block text-sm font-medium text-gray-700 mb-1">Image</label>
-        <input type="file" id="image" name="image" 
-               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-               accept="image/*">
-        @error('image')
-            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-        @enderror
-    </div>
+    
     
     <div class="mb-4">
         <label for="location" class="block text-sm font-medium text-gray-700 mb-1">Lieu</label>
