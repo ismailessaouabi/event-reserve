@@ -5,16 +5,17 @@
     <h1 class="text-3xl font-bold text-gray-800 mb-8">Gestion des Événements</h1>
 
     <div class="flex flex-col lg:flex-row gap-8">
-        @if (session('success'))
-            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-                <span class="block sm:inline">{{ session('success') }}</span>
-            </div>  
-        @endif
+        
         
         <!-- Formulaire d'ajout -->
         <div class="w-full lg:w-1/3">
             <div class="bg-white rounded-lg shadow-md p-6">
                 <h2 class="text-xl font-semibold text-gray-700 mb-4">Ajouter un Événement</h2>
+                @if (session('success'))
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                        <span class="block sm:inline">{{ session('success') }}</span>
+                    </div>  
+                @endif
                 
                 @if ($errors->any())
                     <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
@@ -27,49 +28,56 @@
                 @endif
                 
                 <form action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    
-    <div class="mb-4">
-        <label for="title" class="block text-sm font-medium text-gray-700 mb-1">name</label>
-        <input type="text" id="title" name="name" 
-               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-               required>
-        @error('title')
-            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-        @enderror
-    </div>
-    
-    
-    
-    <div class="mb-4">
-        <label for="location" class="block text-sm font-medium text-gray-700 mb-1">Lieu</label>
-        <input type="text" id="location" name="location" 
-               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-               required>
-    </div>
-    
-    <div class="mb-4">
-        <label for="date" class="block text-sm font-medium text-gray-700 mb-1">Date</label>
-        <input type="datetime-local" id="date" name="date" 
-               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-               required>
-    </div>
-    
-    <div class="mb-4">
-        <label for="price" class="block text-sm font-medium text-gray-700 mb-1">Prix</label>
-        <input type="number" id="price" name="price" min="0" step="0.01"
-               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-               required>
-        @error('price')
-            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-        @enderror
-    </div>
-    
-    <button type="submit" 
-            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-300">
-        Ajouter l'événement
-    </button>
-</form>
+                    @csrf
+                    
+                    <div class="mb-4">
+                        <label for="title" class="block text-sm font-medium text-gray-700 mb-1">name</label>
+                        <input type="text" id="title" name="name" 
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required>
+                        @error('title')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <label for="category" class="block text-sm font-medium text-gray-700 mb-1">categorie</label>
+                    <select name="category" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="category">
+                        @foreach ($category as $categor)
+                            <option value="{{ $categor->id }}">{{ $categor->name }}</option>
+                        @endforeach
+                    </select>
+                    
+                    
+                    
+                    <div class="mb-4">
+                        <label for="lieu" class="block text-sm font-medium text-gray-700 mb-1">Lieu</label>
+                        <input type="text" id="lieu" name="lieu" 
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="date" class="block text-sm font-medium text-gray-700 mb-1">Date</label>
+                        <input type="datetime-local" id="date" name="date" 
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="capacity" class="block text-sm font-medium text-gray-700 mb-1">Capacité</label>
+                        <input type="number" id="capacity" name="capacity" min="0" step="1"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required>
+                        @error('price')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    
+                    <button type="submit" 
+                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-300">
+                        Ajouter l'événement
+                    </button>
+                </form>
             </div>
         </div>
         

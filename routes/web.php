@@ -20,6 +20,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('categories.edit');
     Route::put('/categories/{id}', [CategoryController::class, 'update'])->name('categories.update');
     Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+Route::get('events', [CategoryController::class, 'categoryonevents'])->name('categories.events');
 
 
 

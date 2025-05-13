@@ -18,6 +18,10 @@ class CategoryController extends Controller
         // Return the view with the categories data
         return view('dashboard.admin.categories', compact('categories'));
     }
+    public function categoryonevents() {
+        $category = Category::all();
+        return view('dashboard.admin.events', compact('category'));
+    }
     /**
      * desplay events dans view home.
      */

@@ -14,9 +14,7 @@ class EventController extends Controller
 {
     
     public function index(){
-        $events = Event::with(['category','place'])->get();
-        $categories = Category::all();
-        return view('admin.events.index', compact('events', 'categories'));   
+        
     }
     
 
@@ -27,7 +25,17 @@ class EventController extends Controller
     }
 
     public function store(Request $request){
-        return view('admin.events.create');
+        $place = Place::create([
+            'name' => $request->lieu,
+            'capacity' => $request->capacity,
+        ]);
+
+        $event = Event::create([
+            'name' => $request->name,
+            'start_time' => $request->date,
+            'place_id' => $place->id,
+        ]);
+        return redirect()->route('events.index')->with('success', 'Event created successfully.');
     }
 
     public function show(string $id){
