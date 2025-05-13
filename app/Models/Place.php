@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use app\Models\Event;
 class Place extends Model
 {
     protected $fillable = [

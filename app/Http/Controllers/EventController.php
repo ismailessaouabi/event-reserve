@@ -10,12 +10,14 @@ use App\Models\Category;
 use App\Models\Place;
 
 
+
 class EventController extends Controller
 {
     
     public function index(){
         $categories = Category::all();
-        return view('dashboard.admin.events', compact( 'categories'));
+        $events = Event::all();
+        return view('dashboard.admin.events', compact( 'categories', 'events'));
     }
     
 
@@ -30,18 +32,17 @@ class EventController extends Controller
             'name' => $request->lieu,
             'capacity' => $request->capacity,
         ]);
-        $categorie = Category::find($request->category_id);
-        if (!$categorie) {
-            return redirect()->back()->with('error', 'Category not found.');
-        }
-        
 
+        $path = $request->file('image')->store('public/images');
+    
 
         $event = Event::create([
             'name' => $request->name,
-            'start_time' => $request->date,
+            'image_path' => $path,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
             'place_id' => $place->id,
-            'category_id' => $categorie->id
+            'category_id' => $request->category
         ]);
         return redirect()->route('events.index')->with('success', 'Event created successfully.');
     }

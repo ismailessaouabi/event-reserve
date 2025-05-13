@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use app\Models\Event;
+
 
 class Category extends Model
 {
