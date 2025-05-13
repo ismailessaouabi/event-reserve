@@ -134,7 +134,7 @@
                                     <div class="flex gap-4">
                                         <!-- Image de l'événement -->
                                         <div class="w-24 h-24 flex-shrink-0">
-                                            <img  src="{{ asset('storage/'.'app/'. $event->image_path) }}  "
+                                            <img  src="{{ Storage::url($event->image_path) }}  "
                                                 class="w-full h-full object-cover rounded-md">
                                         </div>
                                         
@@ -142,22 +142,22 @@
                                             <h3 class="text-lg font-medium text-gray-900">{{ $event->name }}</h3>
                                             <div class="flex items-center text-sm text-gray-500 mt-1">
                                                 <i class="far fa-calendar-alt mr-2"></i>
-                                                {{ \Carbon\Carbon::parse($event->start_time)->format('d/m/Y H:i') }}
+                                                date de début: {{ \Carbon\Carbon::parse($event->start_time)->format('d/m/Y H:i') }}
                                             </div>
                                             
                                             <div class="flex items-center text-sm text-gray-500 mt-1">
-                                                <i class="fas fa-map-marker-alt mr-2"></i> 
-                                                {{ isset($event->end_time) ? \Carbon\Carbon::parse($event->end_time)->format('d/m/Y H:i') : 'N/A' }}
+                                            <i class="far fa-calendar-alt mr-2"></i>
+                                               date de fin: {{ isset($event->end_time) ? \Carbon\Carbon::parse($event->end_time)->format('d/m/Y H:i') : 'N/A' }}
                                             </div>
 
                                             <div class="flex items-center text-sm text-gray-500 mt-1">
                                                 <i class="fas fa-map-marker-alt mr-2"></i> 
-                                                {{ isset($event->place) ? $event->place->name : 'N/A' }}
+                                                {{ isset($event->place) ? $event->place->name : 'Complexe mahammed 5' }}
                                             </div>
                                             
                                             <div class="mt-2">
                                                 <span class="inline-block bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded">
-                                                    Capacité: {{ $event->place->capacity ?? 'N/A' }}
+                                                    Capacité: {{ $event->place->capacity ?? 'Agadir' }}
                                                 </span>
                                             </div>
                                         </div>

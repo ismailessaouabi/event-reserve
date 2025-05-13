@@ -33,7 +33,7 @@ class EventController extends Controller
             'capacity' => $request->capacity,
         ]);
 
-        $path = $request->file('image')->store('public/images');
+        $path = $request->file('image')->store('images', 'public');
     
 
         $event = Event::create([
@@ -54,7 +54,7 @@ class EventController extends Controller
 
     public function edit(string $id){
         $event = Event::findOrFail($id);
-        return view('admin.events.edit', compact('event'));
+        return view('dashboard.admin.editevent', compact('event'));
     }
 
     

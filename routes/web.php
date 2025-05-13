@@ -32,11 +32,11 @@ Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update
 Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 
 
-Route::post('/events', [EventController::class, 'store'])->name('events.store');
-Route::get('/events', [EventController::class, 'index'])->name('events.index');
-Route::get('/events/edit/{id}', [EventController::class, 'edit'])->name('events.edit');
-Route::put('/events/{id}', [EventController::class, 'update'])->name('events.update');
-Route::delete('/events/{id}', [EventController::class, 'destroy'])->name('events.destroy');
+Route::post('/admin/events', [EventController::class, 'store'])->name('events.store');
+Route::get('/admin/events', [EventController::class, 'index'])->name('events.index');
+Route::get('/admin/events/edit/{id}', [EventController::class, 'edit'])->name('events.edit');
+Route::put('/admin/events/{id}', [EventController::class, 'update'])->name('events.update');
+Route::delete('/admin/events/{id}', [EventController::class, 'destroy'])->name('events.destroy');
 
 Route::get('/places', [PlaceController::class, 'index'])->name('places.index');
 Route::post('/places', [PlaceController::class, 'store'])->name('places.store');
