@@ -34,6 +34,7 @@ Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.de
 
 Route::post('/admin/events', [EventController::class, 'store'])->name('events.store');
 Route::get('/admin/events', [EventController::class, 'index'])->name('events.index');
+Route::get('/', [EventController::class, 'home'])->name('events.home');
 Route::get('/admin/events/edit/{id}', [EventController::class, 'edit'])->name('events.edit');
 Route::put('/admin/events/{id}', [EventController::class, 'update'])->name('events.update');
 Route::delete('/admin/events/{id}', [EventController::class, 'destroy'])->name('events.destroy');

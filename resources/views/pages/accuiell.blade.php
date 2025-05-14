@@ -134,26 +134,7 @@
         </div>
         
         <!-- Events Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
-            <!-- Event Card 1 -->
-            <div class="bg-gray-900 rounded-lg overflow-hidden event-card">
-                <div class="relative">
-                    <img src="/api/placeholder/300/180" alt="Comedy Festival" class="w-full h-40 object-cover">
-                    <span class="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded text-xs">Comédie Français</span>
-                </div>
-                <div class="p-3">
-                    <h3 class="text-white font-medium text-sm truncate-2-lines">Juste pour rire</h3>
-                    <p class="text-gray-400 text-xs mt-1">26 Juin 2023 à 20:30</p>
-                    <div class="flex items-center mt-2">
-                        <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
-                        <span class="text-gray-400 text-xs ml-1">Théâtre Français de Casablanca</span>
-                    </div>
-                    <div class="mt-3 flex justify-between items-center">
-                        <span class="text-white font-bold text-sm">70,00 MAD</span>
-                    </div>
-                </div>
-            </div>
-            
+        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">           
             <!-- Event Card 2 -->
             <div class="bg-gray-900 rounded-lg overflow-hidden event-card">
                 <div class="relative">
@@ -220,20 +201,23 @@
     <section class="container mx-auto px-4 py-4">
         <h2 class="text-xl font-bold text-white mb-6">Tous les événements</h2>
         
+        
         <!-- Events Grid -->
         <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
-            <!-- Event Card 1 -->
+        @foreach ($events as $event)
             <div class="bg-gray-900 rounded-lg overflow-hidden event-card">
                 <div class="relative">
-                    <img src="/api/placeholder/300/180" alt="Comedy Festival" class="w-full h-40 object-cover">
+                    <img src="{{ Storage::url($event->image_path) }}" alt="Comedy Festival" class="w-full h-40 object-cover">
                     <span class="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded text-xs">Comédie Français</span>
                 </div>
                 <div class="p-3">
-                    <h3 class="text-white font-medium text-sm truncate-2-lines">Juste pour rire</h3>
-                    <p class="text-gray-400 text-xs mt-1">26 Juin 2023 à 20:30</p>
+                    <h3 class="text-white font-medium text-sm truncate-2-lines">{{ $event->name }}</h3>
+                    <p class="text-gray-400 text-xs mt-1">{{ $event->start_time }}</p>
+                    <p class="text-gray-400 text-xs mt-1">{{ $event->_time }}</p>
+
                     <div class="flex items-center mt-2">
                         <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
-                        <span class="text-gray-400 text-xs ml-1">Théâtre Français de Casablanca</span>
+                        <span class="text-gray-400 text-xs ml-1">{{ $event->place->name }}</span>
                     </div>
                     <div class="mt-3 flex justify-between items-center">
                         <span class="text-white font-bold text-sm">70,00 MAD</span>
@@ -241,142 +225,7 @@
                 </div>
             </div>
             
-            <!-- Event Card 2 -->
-            <div class="bg-gray-900 rounded-lg overflow-hidden event-card">
-                <div class="relative">
-                    <img src="/api/placeholder/300/180" alt="Comedy Show" class="w-full h-40 object-cover">
-                    <span class="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded text-xs">Comédie Show</span>
-                </div>
-                <div class="p-3">
-                    <h3 class="text-white font-medium text-sm truncate-2-lines">Grande Comédie Show</h3>
-                    <p class="text-gray-400 text-xs mt-1">15 Juin 2023 à 20:00</p>
-                    <div class="flex items-center mt-2">
-                        <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
-                        <span class="text-gray-400 text-xs ml-1">Complexe Culturel ESPACE ROUDANI</span>
-                    </div>
-                    <div class="mt-3 flex justify-between items-center">
-                        <span class="text-white font-bold text-sm">150,00 MAD</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Event Card 3 -->
-            <div class="bg-gray-900 rounded-lg overflow-hidden event-card">
-                <div class="relative">
-                    <img src="/api/placeholder/300/180" alt="Music Event" class="w-full h-40 object-cover">
-                    <span class="absolute top-2 left-2 bg-yellow-500 text-black px-2 py-1 rounded text-xs">MUSIC EVENT</span>
-                </div>
-                <div class="p-3">
-                    <h3 class="text-white font-medium text-sm truncate-2-lines">Soirée Red & Conditions</h3>
-                    <p class="text-gray-400 text-xs mt-1">17 Juin 2023 à 22:00</p>
-                    <div class="flex items-center mt-2">
-                        <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
-                        <span class="text-gray-400 text-xs ml-1">Complexe Événementiel BOULTEK</span>
-                    </div>
-                    <div class="mt-3 flex justify-between items-center">
-                        <span class="text-white font-bold text-sm">200,00 MAD</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Event Card 4 - Sold Out -->
-            <div class="bg-gray-900 rounded-lg overflow-hidden event-card">
-                <div class="relative">
-                    <img src="/api/placeholder/300/180" alt="Rap Event" class="w-full h-40 object-cover">
-                    <span class="absolute top-2 left-2 bg-purple-500 text-white px-2 py-1 rounded text-xs">Soirée punk à franges</span>
-                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                        <span class="bg-red-600 text-white px-4 py-2 rounded-lg font-bold">SOLD OUT</span>
-                    </div>
-                </div>
-                <div class="p-3">
-                    <h3 class="text-white font-medium text-sm truncate-2-lines">Soirée & Night</h3>
-                    <p class="text-gray-400 text-xs mt-1">22 Juin 2023 à 23:00</p>
-                    <div class="flex items-center mt-2">
-                        <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
-                        <span class="text-gray-400 text-xs ml-1">Théâtre de Rabat, Agdal</span>
-                    </div>
-                    <div class="mt-3 flex justify-between items-center">
-                        <span class="text-white font-bold text-sm">220,00 MAD</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Event Card 5 - Sold Out -->
-            <div class="bg-gray-900 rounded-lg overflow-hidden event-card">
-                <div class="relative">
-                    <img src="/api/placeholder/300/180" alt="Chef Event" class="w-full h-40 object-cover">
-                    <span class="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded text-xs">FOOD FESTIVAL</span>
-                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                        <span class="bg-red-600 text-white px-4 py-2 rounded-lg font-bold">SOLD OUT</span>
-                    </div>
-                </div>
-                <div class="p-3">
-                    <h3 class="text-white font-medium text-sm truncate-2-lines">CHEF SHOW SPECIALE</h3>
-                    <p class="text-gray-400 text-xs mt-1">28 Juin 2023 à 19:00</p>
-                    <div class="flex items-center mt-2">
-                        <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
-                        <span class="text-gray-400 text-xs ml-1">Restaurant Le Montana, Marrakech</span>
-                    </div>
-                    <div class="mt-3 flex justify-between items-center">
-                        <span class="text-white font-bold text-sm">400,00 MAD</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- More event cards... -->
-            <div class="bg-gray-900 rounded-lg overflow-hidden event-card">
-                <div class="relative">
-                    <img src="/api/placeholder/300/180" alt="Festival" class="w-full h-40 object-cover">
-                    <span class="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded text-xs">CASE SPECIAL</span>
-                </div>
-                <div class="p-3">
-                    <h3 class="text-white font-medium text-sm truncate-2-lines">GRANDE SPECTACLE CIRKA MOROCCO</h3>
-                    <p class="text-gray-400 text-xs mt-1">30 Juin 2023 à 16:00</p>
-                    <div class="flex items-center mt-2">
-                        <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
-                        <span class="text-gray-400 text-xs ml-1">Complexe City Arena, Rabat</span>
-                    </div>
-                    <div class="mt-3 flex justify-between items-center">
-                        <span class="text-white font-bold text-sm">300,00 MAD</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="bg-gray-900 rounded-lg overflow-hidden event-card">
-                <div class="relative">
-                    <img src="/api/placeholder/300/180" alt="Concert Jazz" class="w-full h-40 object-cover">
-                    <span class="absolute top-2 left-2 bg-yellow-500 text-black px-2 py-1 rounded text-xs">JAZZ EVENT</span>
-                </div>
-                <div class="p-3">
-                    <h3 class="text-white font-medium text-sm truncate-2-lines">Jazz Night avec Mehram & Orquesta</h3>
-                    <p class="text-gray-400 text-xs mt-1">22 Juin 2023 à 21:00</p>
-                    <div class="flex items-center mt-2">
-                        <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
-                        <span class="text-gray-400 text-xs ml-1">Théâtre National Mohammed V</span>
-                    </div>
-                    <div class="mt-3 flex justify-between items-center">
-                        <span class="text-white font-bold text-sm">180,00 MAD</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="bg-gray-900 rounded-lg overflow-hidden event-card">
-                <div class="relative">
-                    <img src="/api/placeholder/300/180" alt="Festival" class="w-full h-40 object-cover">
-                    <span class="absolute top-2 left-2 bg-teal-500 text-white px-2 py-1 rounded text-xs">TEX Production</span>
-                </div>
-                <div class="p-3">
-                    <h3 class="text-white font-medium text-sm truncate-2-lines">MALI 2 SHOW - CASABLANCA</h3>
-                    <p class="text-gray-400 text-xs mt-1">05 Jul 2023 à 20:30</p>
-                    <div class="flex items-center mt-2">
-                        <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
-                        <span class="text-gray-400 text-xs ml-1">Complexe Sportif Anfa, Casablanca</span>
-                    </div>
-                    <div class="mt-3 flex justify-between items-center">
-                        <span class="text-white font-bold text-sm">250,00 MAD</span>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
         
         <!-- Load More Button -->
