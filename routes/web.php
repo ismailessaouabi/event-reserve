@@ -61,9 +61,7 @@ Route::get('/organizer', function () {
 Route::get('/organizerinfo', function () {
     return view('dashboard.organizer.organizer');
 })->name('organizer.information');
-Route::get('/organizerevent', function () {
-    return view('dashboard.organizer.mesevents');
-})->name('organizer.mesevents');
+Route::get('/organizerevent', [EventController::class, 'organiserevents'])->name('organizer.mesevents');
 
 
 

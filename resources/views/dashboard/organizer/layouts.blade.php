@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="bg-gray-900 text-white ">
-    <div class="flex flex-col lg:flex-row ">
+    <div class="flex flex-col h-screen overflow-hidden lg:flex-row ">
         <!-- Mobile Header -->
         <div class="lg:hidden flex items-center justify-between p-4 bg-gray-800">
             <button id="menuToggle" class="text-white focus:outline-none">
@@ -18,7 +18,7 @@
             </button>
             <div class="flex items-center">
                 <div class="w-10 h-10 bg-gray-300 rounded-full mr-3 overflow-hidden">
-                    <img src="{{ Auth::user()->profile_picture }}" alt="Profile" class="w-full h-full object-cover">
+                    <img src="" alt="Profile" class="w-full h-full object-cover">
                 </div>
                 <span class="text-lg font-semibold">{{ Auth::user()->name }}</span>
             </div>
@@ -29,7 +29,7 @@
             <!-- User Profile -->
             <div class="flex items-center mb-8 p-2">
                 <div class="w-12 h-12 bg-gray-300 rounded-full mr-3 overflow-hidden">
-                    <img src="{{ Auth::user()->profile_picture }}" alt="Profile" class="w-full h-full object-cover">
+                    <img src="" alt="Profile" class="w-full h-full object-cover">
                 </div>
                 <span class="text-lg font-semibold">{{ Auth::user()->name }}</span>
             </div>

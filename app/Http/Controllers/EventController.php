@@ -19,6 +19,12 @@ class EventController extends Controller
         $events = Event::all();
         return view('dashboard.admin.events', compact( 'categories', 'events'));
     }
+    public function organiserevents(){
+        $categories = Category::all();
+        $events = Event::all();
+        return view('dashboard.organizer.mesevents', compact( 'categories', 'events'));
+        
+    }
     
 
     public function home(){
