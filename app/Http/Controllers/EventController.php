@@ -31,6 +31,7 @@ class EventController extends Controller
         $place = Place::create([
             'name' => $request->lieu,
             'capacity' => $request->capacity,
+            'ville' => $request->ville
         ]);
 
         $path = $request->file('image')->store('images', 'public');
@@ -59,9 +60,36 @@ class EventController extends Controller
     }
 
     
-    public function update(Request $request, string $id){
+    public function update(Request $request, string $id)
+    {
         $event = Event::findOrFail($id);
-        $event->update($request->all());
+        
+        // Pour le modèle Place, il faut d'abord trouver l'instance ou en créer une nouvelle
+        // Si place_id existe dans event, mettre à jour cette place
+        if ($event->place_id) {
+            $place = Place::findOrFail($event->place_id);
+            $place->update([
+                'name' => $request->lieu,
+            ]);
+        } else {
+            // Sinon, créer une nouvelle place
+            $place = Place::create([
+                'name' => $request->lieu,
+            ]);
+            // Associer la place à l'événement
+            $event->place_id = $place->id;
+        }
+        
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('images', 'public');
+        }
+        
+        $event->update([
+            'name' => $request->name,
+            'category_id' => $request->category,
+            'image_path' => $path ?? $event->image_path,
+        ]);
+        
         return redirect()->route('events.index')->with('success', 'Event updated successfully.');
     }
 

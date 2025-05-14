@@ -80,6 +80,15 @@
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
                     </div>
+                    <div class="mb-4">
+                        <label for="ville" class="block text-sm font-medium text-gray-700 mb-1">Ville</label>
+                        <input type="text" id="ville" name="ville" 
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required>
+                        @error('lieu')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
                     
                     <div class="mb-4">
                         <label for="start_time" class="block text-sm font-medium text-gray-700 mb-1">Date et heure de début</label>
