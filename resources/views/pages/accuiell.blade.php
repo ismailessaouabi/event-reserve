@@ -205,7 +205,7 @@
         <!-- Events Grid -->
         <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
         @foreach ($events as $event)
-            <div class="bg-gray-900 rounded-lg overflow-hidden event-card">
+            <a href="#" class="bg-gray-900 rounded-lg overflow-hidden event-card">
                 <div class="relative">
                     <img src="{{ Storage::url($event->image_path) }}" alt="Comedy Festival" class="w-full h-40 object-cover">
                     <span class="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded text-xs">Comédie Français</span>
@@ -223,7 +223,7 @@
                         <span class="text-white font-bold text-sm">70,00 MAD</span>
                     </div>
                 </div>
-            </div>
+            </a>
             
             @endforeach
         </div>
