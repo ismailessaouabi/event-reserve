@@ -48,26 +48,23 @@
                     <i class="fas fa-calendar-check w-6 text-center mr-3"></i>
                     <span>Mes événements</span>
                 </a>
-                <a href="#" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
+                <a href="{{ route('organizer.billets') }}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
                     <i class="fas fa-ticket-alt w-6 text-center mr-3"></i>
                     <span>Billets vendus</span>
                 </a>
-                <a href="#" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
+                <a href="{{ route('organizer.statistiques') }}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
                     <i class="fas fa-chart-pie w-6 text-center mr-3"></i>
                     <span>Statistiques</span>
                 </a>
-                <a href="#" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
+                <a href="{{ route('organizer.payements') }}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
                     <i class="fas fa-wallet w-6 text-center mr-3"></i>
                     <span>Paiements</span>
                 </a>
-                <a href="#" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
+                <a href="{{ route('organizer.participants') }}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
                     <i class="fas fa-users w-6 text-center mr-3"></i>
                     <span>Participants</span>
                 </a>
-                <a href="#" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
-                    <i class="fas fa-cog w-6 text-center mr-3"></i>
-                    <span>Paramètres</span>
-                </a>
+                
                 <a href="{{ route('logout') }}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
                     <i class="fas fa-sign-out-alt w-6 text-center mr-3"></i>
                     <span>Se déconnecter</span>

@@ -62,6 +62,14 @@ Route::get('/organizerinfo', function () {
     return view('dashboard.organizer.organizer');
 })->name('organizer.information');
 Route::get('/organizerevent', [EventController::class, 'organiserevents'])->name('organizer.mesevents');
+Route::get('/billes', function () {return view('dashboard.organizer.billets-vendus');})->name('organizer.billets');
+Route::get('/statistiques', function () {return view('dashboard.organizer.statistiques');})->name('organizer.statistiques');
+Route::get('/payements', function () {return view('dashboard.organizer.payements');})->name('organizer.payements');
+Route::get('/participants', function () {return view('dashboard.organizer.participants');})->name('organizer.participants');
+
+
+
+
 
 
 
