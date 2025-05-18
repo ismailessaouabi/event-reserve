@@ -52,7 +52,7 @@ class AuthController extends Controller
         {
             if ($user->role == 'admin') {
                 $request->session()->regenerateToken();
-                $response = view('dashboard.organizer.layouts' , compact('user'));
+                $response = view('dashboard.admin.layouts' , compact('user'));
                 
             } else {
                 $request->session()->regenerateToken();

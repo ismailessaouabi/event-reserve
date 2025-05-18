@@ -114,7 +114,7 @@
                                 <h2 class="text-lg sm:text-xl mt-4 sm:mt-6 mb-2 sm:mb-3">Participants</h2>
                                 <div class="border-b border-orange-500/20"></div>
                                 <div class="flex items-center mt-2 sm:mt-3 text-xs sm:text-sm hover:text-orange-500 transition-colors duration-200 cursor-pointer">
-                                    <a href="{{ route('organizer.participants') }}">Gérer les participants</a>
+                                    <a href="#">Gérer les participants</a>
                                     <i class="fas fa-arrow-right ml-2 text-orange-500"></i>
                                 </div>
                             </div>

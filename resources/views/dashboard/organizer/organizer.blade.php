@@ -184,12 +184,72 @@
                                 https://
                             </span>
                             <input type="text" id="facebook" name="facebook" 
-                                   value="facebook.com"
+                                    value="{{ $socialmedia ? $socialmedia->facebook : '' }}"
                                    placeholder="votre-lien.com"
                                    class="flex-1 bg-gray-700 border border-gray-600 rounded-r-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
                         </div>
                         
-                    </div>              
+                    </div>  
+                    <div>
+                        <label for="facebook" class="block text-sm font-medium mb-1">
+                            <i class="fab fa-instagram mr-1"></i>
+                        </label>
+                        <div class="flex">
+                            <span class="inline-flex items-center px-3 rounded-l-lg bg-gray-700 border border-r-0 border-gray-600 text-gray-300">
+                                https://
+                            </span>
+                            <input type="text" id="facebook" name="facebook" 
+                                    value="{{ $socialmedia ? $socialmedia->instagram : '' }}"
+                                   placeholder="votre-lien.com"
+                                   class="flex-1 bg-gray-700 border border-gray-600 rounded-r-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
+                        </div>
+                        
+                    </div>
+                    <div>
+                        <label for="facebook" class="block text-sm font-medium mb-1">
+                            <i class="fab fa-twitter mr-1"></i>
+                        </label>
+                        <div class="flex">
+                            <span class="inline-flex items-center px-3 rounded-l-lg bg-gray-700 border border-r-0 border-gray-600 text-gray-300">
+                                https://
+                            </span>
+                            <input type="text" id="facebook" name="facebook" 
+                                    value="{{ $socialmedia ? $socialmedia->twitter : '' }}"
+                                   placeholder="votre-lien.com"
+                                   class="flex-1 bg-gray-700 border border-gray-600 rounded-r-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
+                        </div>
+                        
+                    </div>
+                    <div>
+                        <label for="facebook" class="block text-sm font-medium mb-1">
+                            <i class="fab fa-linkedin mr-1"></i>
+                        </label>
+                        <div class="flex">
+                            <span class="inline-flex items-center px-3 rounded-l-lg bg-gray-700 border border-r-0 border-gray-600 text-gray-300">
+                                https://
+                            </span>
+                            <input type="text" id="facebook" name="facebook" 
+                                    value="{{ $socialmedia ? $socialmedia->linkedin : '' }}"
+                                   placeholder="votre-lien.com"
+                                   class="flex-1 bg-gray-700 border border-gray-600 rounded-r-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
+                        </div>
+                        
+                    </div>
+                    <div>
+                        <label for="facebook" class="block text-sm font-medium mb-1">
+                            <i class="fab fa-site-web mr-1"></i>
+                        </label>
+                        <div class="flex">
+                            <span class="inline-flex items-center px-3 rounded-l-lg bg-gray-700 border border-r-0 border-gray-600 text-gray-300">
+                                https://
+                            </span>
+                            <input type="text" id="facebook" name="facebook" 
+                                    value="{{ $socialmedia ? $socialmedia->website : '' }}"
+                                   placeholder="votre-lien.com"
+                                   class="flex-1 bg-gray-700 border border-gray-600 rounded-r-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
+                        </div>
+                        
+                    </div>            
             </div>
 
             <div class="mt-6 flex justify-end">

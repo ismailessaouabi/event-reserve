@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Socialmedia;
 
 class UserController extends Controller
 {
@@ -19,14 +20,14 @@ class UserController extends Controller
         return view('dashboard.admin.users', compact('users'));
     }
 
-    public function mesinformation()
-    {
-        // Fetch all users from the database
-        $user = User::all()->where('id', auth()->user()->id);
 
-        // Return a view with the users data
-        return view('dashboard.organizer.organizer', compact('user'));
-    }
+    public function mesinformation()
+{
+    $user = User::where('id', auth()->user()->id)->first();
+    $socialmedia = Socialmedia::where('user_id', auth()->user()->id)->first();
+            
+    return view('dashboard.organizer.organizer', compact('user', 'socialmedia'));
+}
 
     public function updateinfo(Request $request, string $id)
     {

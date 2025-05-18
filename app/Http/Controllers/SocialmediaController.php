@@ -7,14 +7,7 @@ use App\Models\Socialmedia;
 
 class SocialmediaController extends Controller
 {
-    public function index()
-    {
-        // Fetch all social media links for the authenticated user
-        $sociallinks = Socialmedia::where('user_id', auth()->user()->id)->first();
-
-        // Return a view with the social media data
-        return view('dashboard.organizer.organizer', compact('sociallinks'));
-    }
+    
 
   
     
