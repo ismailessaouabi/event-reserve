@@ -170,31 +170,26 @@
             Réseaux sociaux
         </h2>
 
-        <form action="{{ route('social.store' , auth()->user()->id)  }}" method="POST">
+        <form action="" method="POST">
             @csrf
-            @method('PUT')
+           
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                @foreach(['facebook', 'twitter', 'instagram', 'linkedin', 'website'] as $social)
-                <div>
-                    <label for="{{ $social }}" class="block text-sm font-medium mb-1">
-                        <i class="fab fa-{{ $social }} mr-1"></i>
-                        {{ ucfirst($social) }}
-                    </label>
-                    <div class="flex">
-                        <span class="inline-flex items-center px-3 rounded-l-lg bg-gray-700 border border-r-0 border-gray-600 text-gray-300">
-                            https://
-                        </span>
-                        <input type="text" id="{{ $social }}" name="{{ $social }}" 
-                               value="{{ old($social, auth()->user()->socialLinks->$social ?? '') }}"
-                               placeholder="votre-lien.{{ $social == 'website' ? 'com' : $social }}"
-                               class="flex-1 bg-gray-700 border border-gray-600 rounded-r-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
-                    </div>
-                    @error($social)
-                        <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
-                    @enderror
-                </div>
-                @endforeach
+                    <div>
+                        <label for="facebook" class="block text-sm font-medium mb-1">
+                            <i class="fab fa-facebook mr-1"></i>
+                        </label>
+                        <div class="flex">
+                            <span class="inline-flex items-center px-3 rounded-l-lg bg-gray-700 border border-r-0 border-gray-600 text-gray-300">
+                                https://
+                            </span>
+                            <input type="text" id="facebook" name="facebook" 
+                                   value="facebook.com"
+                                   placeholder="votre-lien.com"
+                                   class="flex-1 bg-gray-700 border border-gray-600 rounded-r-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
+                        </div>
+                        
+                    </div>              
             </div>
 
             <div class="mt-6 flex justify-end">

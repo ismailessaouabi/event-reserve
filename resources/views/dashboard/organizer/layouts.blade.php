@@ -60,7 +60,7 @@
                     <i class="fas fa-wallet w-6 text-center mr-3"></i>
                     <span>Paiements</span>
                 </a>
-                <a href="{{ route('organizer.participants') }}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
+                <a href="#" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
                     <i class="fas fa-users w-6 text-center mr-3"></i>
                     <span>Participants</span>
                 </a>

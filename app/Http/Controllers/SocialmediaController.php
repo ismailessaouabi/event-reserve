@@ -3,32 +3,33 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Socialmedia;
 
 class SocialmediaController extends Controller
 {
     public function index()
     {
         // Fetch all social media links for the authenticated user
-        $socialmedias = auth()->user()->socialmedias;
+        $sociallinks = Socialmedia::where('user_id', auth()->user()->id)->first();
 
         // Return a view with the social media data
-        return view('dashboard.organizer.socialmedia', compact('socialmedias'));
+        return view('dashboard.organizer.organizer', compact('sociallinks'));
     }
+
+  
+    
     public function store(Request $request)
     {
-        // Validate the request data
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'url' => 'required|url|max:255',
-        ]);
-
-        // Create a new social media link
-        foreach ($request->name as $index => $name) {
-            auth()->user()->socialmedias()->create([
-                'name' => $name,
-                'url' => $request->url[$index],
-            ]);
-        }
+        
+       Socialmedia::updateOrCreate([
+           'user_id' => auth()->user()->id,
+           'facebook' => $request->facebook,
+           'twitter' => $request->twitter,
+           'instagram' => $request->instagram,
+           'linkedin' => $request->linkedin,
+           'website' => $request->website
+           
+       ]);
         
 
         // Redirect back with a success message
