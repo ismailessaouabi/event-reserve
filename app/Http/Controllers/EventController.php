@@ -56,7 +56,7 @@ class EventController extends Controller
 
     public function show(string $id){
         $event = Event::findOrFail($id);
-        return view('admin.events.show', compact('event'));
+        return view('pages.showEvent', compact('event'));
     }
 
     public function edit(string $id){

@@ -51,7 +51,7 @@ Route::delete('/places/{id}', [PlaceController::class, 'destroy'])->name('places
 
 Route::get('/admin', function () {
     return view('dashboard.admin.layouts');
-})->name('admin');
+})->name('admin')->middleware('auth');
 Route::get('/payement', function () {
     return view('pages.payement');
 })->name('payement');
