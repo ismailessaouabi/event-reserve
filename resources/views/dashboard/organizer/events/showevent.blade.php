@@ -71,9 +71,7 @@
                 <p class="text-sm text-gray-300">À la suite de l'installation de Paul Bowles et de son épouse en 1947, les fondateurs de la Beat Generation...</p>
             </div>
             
-            <button class="w-full bg-white text-black py-4 px-6 rounded-full font-bold hover:bg-gray-200 transition">
-                Acheter maintenant
-            </button>
+            
         </div>
     </div>
 </div>

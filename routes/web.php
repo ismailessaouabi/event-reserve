@@ -60,12 +60,18 @@ Route::put('/organizerinfo/{id}', [UserController::class, 'updateinfo'])->name('
 
 
 Route::get('/organizer', [EventController::class, 'countevents'])->name('organizer');
-Route::get('/organizerevent', [EventController::class, 'organiserevents'])->name('organizer.mesevents');
 Route::get('/billes', function () {return view('dashboard.organizer.billets-vendus');})->name('organizer.billets');
 Route::get('/statistiques', function () {return view('dashboard.organizer.statistiques');})->name('organizer.statistiques');
 Route::get('/payements', function () {return view('dashboard.organizer.payements');})->name('organizer.payements');
 
-
+//Routes pour evenements dans dashboard organisateur
+Route::get('/organizer/events', [EventController::class, 'list_events_organizer'])->name('organizer.events.index');
+Route::get('/organizer/events/create', [EventController::class, 'create_event_organizer'])->name('organizer.events.create');
+Route::post('/organizer/events', [EventController::class, 'store_event_organizer'])->name('organizer.events.store');
+Route::get('/organizer/events/{id}', [EventController::class, 'show_event_organizer'])->name('organizer.events.show');
+Route::get('/organizer/events/edit/{id}', [EventController::class, 'edit_event_organizer'])->name('organizer.events.edit');
+Route::put('/organizer/events/{id}', [EventController::class, 'update_event_organizer'])->name('organizer.events.update');
+Route::delete('/organizer/events/{id}', [EventController::class, 'destroy_event_organizer'])->name('organizer.events.destroy');
 
 
 

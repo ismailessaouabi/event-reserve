@@ -44,7 +44,7 @@
                     <i class="fas fa-user w-6 text-center mr-3"></i>
                     <span>Mes informations</span>
                 </a>
-                <a href="{{ route('organizer.mesevents') }}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
+                <a href="{{ route('organizer.events.index') }}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
                     <i class="fas fa-calendar-check w-6 text-center mr-3"></i>
                     <span>Mes événements</span>
                 </a>
@@ -92,11 +92,11 @@
                     <div class="bg-gray-800 p-4 sm:p-6 rounded-lg">
                         <div class="flex justify-between items-start">
                             <div>
-                                <h3 class="text-3xl sm:text-4xl font-bold">{{$eventsCount}}</h3>
+                                <h3 class="text-3xl sm:text-4xl font-bold">{{$eventsCount ? $eventsCount : 0}}</h3>
                                 <h2 class="text-lg sm:text-xl mt-4 sm:mt-6 mb-2 sm:mb-3">Événements créés</h2>
                                 <div class="border-b border-orange-500/20"></div>
                                 <div class="flex items-center mt-2 sm:mt-3 text-xs sm:text-sm hover:text-orange-500 transition-colors duration-200 cursor-pointer">
-                                    <a href="{{ route('organizer.mesevents') }}">Voir tous les événements</a>
+                                    <a href="{{ route('organizer.events.index') }}">Voir tous les événements</a>
                                     <i class="fas fa-arrow-right ml-2 text-orange-500"></i>
                                 </div>
                             </div>

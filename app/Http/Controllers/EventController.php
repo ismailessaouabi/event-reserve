@@ -25,12 +25,55 @@ class EventController extends Controller
         $participantsCount = User::all()->count();//->whire(auth()->user()->id,'organizer_id' );
         return view('dashboard.organizer.layouts', compact('eventsCount', 'participantsCount'));
     }
-    public function organiserevents(){
+    public function list_events_organizer(){
         $categories = Category::all();
         $events = Event::all();
-        return view('dashboard.organizer.mesevents', compact( 'categories', 'events'));
+        return view('dashboard.organizer.events.mesevents', compact( 'categories', 'events'));
         
     }
+    public function create_event_organizer(){
+        $categories = Category::all();
+        return view('dashboard.organizer.events.ajoutevent', compact('categories'));
+    }
+    public function store_event_organizer(Request $request){
+        $path = $request->file('image')->store('images', 'public');
+        $place = Place::create([
+            'name' => $request->location,
+            'capacity' => $request->capacity,
+            'ville' => $request->city
+        ]);
+        $event = Event::create([
+            'name' => $request->title,
+            'image_path' => $path,
+            'start_time' => $request->start_date,
+            'end_time' => $request->end_date,
+            'place_id' => $place->id,
+            'category_id' => $request->category_id,
+            'organizer_id' => auth()->user()->id
+        ]);
+        return redirect()->route('organizer.events.index')->with('success', 'Event created successfully.');
+    }
+    public function show_event_organizer($id){
+        $event = Event::findOrFail($id);
+        return view('dashboard.organizer.events.showevent', compact('event'));
+    }
+    public function edit_event_organizer($id){
+        $event = Event::findOrFail($id);
+        $categories = Category::all();
+        return view('dashboard.organizer.events.editevent', compact('event', 'categories'));
+    }
+    public function update_event_organizer(Request $request, $id){
+        $event = Event::findOrFail($id);
+        $event->update($request->all());
+        return redirect()->route('organizer.events.index')->with('success', 'Event updated successfully.');
+    }
+    public function destroy_event_organizer($id){
+        $event = Event::findOrFail($id);
+        $event->delete();
+        return redirect()->route('organizer.events.index')->with('success', 'Event deleted successfully.');
+    }
+
+    
     
 
     public function home(){
