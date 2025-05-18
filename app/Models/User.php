@@ -13,8 +13,12 @@ class User extends Model
         'password',
         'phone',
         'city',
-        'contry',
-        'adress',
+        'country',
+        'address',
+        'postal_code',
+        'nom_entreprise',
+        'profile_picture',
+
         
         
     ];
@@ -29,4 +33,9 @@ public function events()
 {
     return $this->hasMany(Event::class);
 }
+public function socialmedias()
+{
+    return $this->hasMany(Socialmedia::class);
+}
+
 }

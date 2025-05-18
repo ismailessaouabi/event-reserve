@@ -16,41 +16,39 @@
     <!-- Profile Section -->
     <div class="bg-gray-800 rounded-lg p-6">
         <div class="flex flex-col md:flex-row gap-6">
-            <!-- Avatar -->
-            <div class="flex flex-col items-center">
-                <div class="w-32 h-32 bg-gray-700 rounded-full overflow-hidden mb-4">
-                    <img src="{{ auth()->user()->avatar_url ?? asset('images/default-avatar.jpg') }}" 
-                         alt="Photo de profil" 
-                         class="w-full h-full object-cover">
-                </div>
-                <button class="text-orange-500 hover:text-orange-400 text-sm font-medium transition-colors">
-                    <i class="fas fa-camera mr-1"></i> Changer la photo
-                </button>
-            </div>
-
+            
             <!-- Form -->
             <div class="flex-1">
-                <form action="#" method="POST">
+                <form action="{{ route('organizer.update' , auth()->user()->id)  }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <!-- Nom -->
-                        <div>
-                            <label for="last_name" class="block text-sm font-medium mb-1">Nom</label>
-                            <input type="text" id="last_name" name="last_name" 
-                                   value="ismail"
-                                   class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
-                            @error('last_name')
+                        <!-- profil image -->
+                        <div class="md:col-span-2">
+                            <label for="profil_image" class="block text-sm font-medium mb-1">Image de profil</label>
+                            <div class="mb-2">
+                                @if (auth()->user()->profile_picture)
+                                    <img src="{{ asset('storage/' . auth()->user()->profile_picture) }}" alt="Profile Picture" class="w-24 h-24 obfject-cover rounded-full">
+                                @else
+                                    <img src="{{ asset('images/default-profile.png') }}" alt="Default Profile Picture" class="w-24 h-24 rounded-full">
+                                @endif
+                            </div>
+                            <label for="profil_image" class="block text-sm font-medium mb-1">
+                                <span class="text-gray-400">Sélectionner une nouvelle image</span>
+                                <input type="file" id="profil_image" name="profile_picture" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
+                            </label>
+                            @error('profile_picture')
                                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                             @enderror
                         </div>
+                       
 
-                        <!-- Prénom -->
+                        <!-- nom -->
                         <div>
                             <label for="first_name" class="block text-sm font-medium mb-1">Prénom</label>
-                            <input type="text" id="first_name" name="first_name" 
-                                   value="essaouabi"
+                            <input type="text" id="first_name" name="name" 
+                                   value="{{ old('name', auth()->user()->name) }}"
                                    class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
                             @error('first_name')
                                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
@@ -83,7 +81,7 @@
                         <div>
                             <label for="company" class="block text-sm font-medium mb-1">Société (optionnel)</label>
                             <input type="text" id="company" name="company" 
-                                   value="maroc"
+                                   value="{{ old('company', auth()->user()->nom_entreprise) }}"
                                    class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
                             @error('company')
                                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
@@ -94,7 +92,7 @@
                         <div class="md:col-span-2">
                             <label for="address" class="block text-sm font-medium mb-1">Adresse</label>
                             <input type="text" id="address" name="address" 
-                                   value="{{ old('address', auth()->user()->address) }}"
+                                   value="{{ auth()->user()->address }}"
                                    class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
                             @error('address')
                                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
@@ -105,7 +103,7 @@
                         <div>
                             <label for="city" class="block text-sm font-medium mb-1">Ville</label>
                             <input type="text" id="city" name="city" 
-                                   value="{{ old('city', auth()->user()->city) }}"
+                                   value="{{ auth()->user()->city }}"
                                    class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
                             @error('city')
                                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
@@ -113,9 +111,9 @@
                         </div>
 
                         <div>
-                            <label for="zip_code" class="block text-sm font-medium mb-1">Code postal</label>
-                            <input type="text" id="zip_code" name="zip_code" 
-                                   value="zip_code"
+                            <label for="postal_code" class="block text-sm font-medium mb-1">Code postal</label>
+                            <input type="text" id="postal_code" name="postal_code" 
+                                   value="{{  auth()->user()->postal_code }}"
                                    class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
                             @error('zip_code')
                                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
@@ -128,9 +126,21 @@
                             <select id="country" name="country" 
                                     class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
                                 <option value="">Sélectionnez un pays</option>
-                                    <option value=" 1">
-                                       maroc
+                                    <option value=" {{ old('country', auth()->user()->country) }}">
+                                        {{ old('country', auth()->user()->country) }}
                                     </option>
+                                    <option value="Afghanistan">Afghanistan</option>
+                                    <option value="Africana">Africana</option>
+                                    <option value="Albania">Albania</option>
+                                    <option value="Algeria">Algeria</option>
+                                    <option value="American Samoa">American Samoa</option>
+                                    <option value="Andorra">Andorra</option>
+                                    <option value="Angola">Angola</option>
+                                    <option value="Anguilla">Anguilla</option>
+                                    <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                                    <option value="Argentina">Argentina</option>
+                                    <option value="Armenia">Armenia</option>
+                                    <option value="Australia">Australia</option>
                                 
                             </select>
                             @error('country')
@@ -138,15 +148,7 @@
                             @enderror
                         </div>
 
-                        <!-- Bio -->
-                        <div class="md:col-span-2">
-                            <label for="bio" class="block text-sm font-medium mb-1">Description (optionnel)</label>
-                            <textarea id="bio" name="bio" rows="3"
-                                      class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint, molestiae?</textarea>
-                            @error('bio')
-                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
-                            @enderror
-                        </div>
+                        
                     </div>
 
                     <!-- Submit Button -->
@@ -168,7 +170,7 @@
             Réseaux sociaux
         </h2>
 
-        <form action="#" method="POST">
+        <form action="{{ route('social.store' , auth()->user()->id)  }}" method="POST">
             @csrf
             @method('PUT')
 

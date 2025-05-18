@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Models\Category;
 use App\Models\Place;
+use App\Models\User;
 
 
 
@@ -18,6 +19,11 @@ class EventController extends Controller
         $categories = Category::all();
         $events = Event::all();
         return view('dashboard.admin.events', compact( 'categories', 'events'));
+    }
+    public function countevents(){
+        $eventsCount = Event::all()->count();//->whire('organizer_id', auth()->user()->id);
+        $participantsCount = User::all()->count();//->whire(auth()->user()->id,'organizer_id' );
+        return view('dashboard.organizer.layouts', compact('eventsCount', 'participantsCount'));
     }
     public function organiserevents(){
         $categories = Category::all();

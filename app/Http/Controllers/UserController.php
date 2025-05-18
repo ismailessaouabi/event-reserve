@@ -19,6 +19,37 @@ class UserController extends Controller
         return view('dashboard.admin.users', compact('users'));
     }
 
+    public function mesinformation()
+    {
+        // Fetch all users from the database
+        $user = User::all()->where('id', auth()->user()->id);
+
+        // Return a view with the users data
+        return view('dashboard.organizer.organizer', compact('user'));
+    }
+
+    public function updateinfo(Request $request, string $id)
+    {
+        $user = User::findOrFail($id);
+        
+        
+        $path = $request->file('profile_picture')->store('profile_pictures', 'public');
+        
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'city' => $request->city,
+            'postal_code' => $request->postal_code,
+            'nom_entreprise' => $request->company,
+            'country' => $request->country,
+            'profile_picture' => $path ?? $user->profile_picture,
+
+        ]);
+        return redirect()->route('organizer.information', $user->id)->with('success', 'User updated successfully.');
+    }
+
    
 
     /**

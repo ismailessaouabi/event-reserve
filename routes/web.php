@@ -55,17 +55,19 @@ Route::get('/admin', function () {
 Route::get('/payement', function () {
     return view('pages.payement');
 })->name('payement');
-Route::get('/organizer', function () {
-    return view('dashboard.organizer.layouts');
-})->name('organizer');
+
 Route::get('/organizerinfo', function () {
     return view('dashboard.organizer.organizer');
 })->name('organizer.information');
+Route::get('/organizer', [EventController::class, 'countevents'])->name('organizer');
 Route::get('/organizerevent', [EventController::class, 'organiserevents'])->name('organizer.mesevents');
 Route::get('/billes', function () {return view('dashboard.organizer.billets-vendus');})->name('organizer.billets');
 Route::get('/statistiques', function () {return view('dashboard.organizer.statistiques');})->name('organizer.statistiques');
 Route::get('/payements', function () {return view('dashboard.organizer.payements');})->name('organizer.payements');
-Route::get('/participants', function () {return view('dashboard.organizer.participants');})->name('organizer.participants');
+Route::get('/participants', [UserController::class, 'mesinformation'])->name('organizer.participants');
+Route::put('/organizer/{id}', [UserController::class, 'updateinfo'])->name('organizer.update');
+Route::get('/socialmedia', [SocialmediaController::class, 'index'])->name('organizer.socialmedia');
+Route::post('/socialmedia', [SocialmediaController::class, 'store'])->name('socialmedia.store');
 
 
 

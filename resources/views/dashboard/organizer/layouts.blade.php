@@ -18,7 +18,7 @@
             </button>
             <div class="flex items-center">
                 <div class="w-10 h-10 bg-gray-300 rounded-full mr-3 overflow-hidden">
-                    <img src="" alt="Profile" class="w-full h-full object-cover">
+                    <img src="{{ Storage::url(Auth::user()->profile_picture) }}" alt="Profile" class="w-full h-full object-cover">
                 </div>
                 <span class="text-lg font-semibold">{{ Auth::user()->name }}</span>
             </div>
@@ -29,17 +29,17 @@
             <!-- User Profile -->
             <div class="flex items-center mb-8 p-2">
                 <div class="w-12 h-12 bg-gray-300 rounded-full mr-3 overflow-hidden">
-                    <img src="" alt="Profile" class="w-full h-full object-cover">
+                    <img src="{{ Storage::url(Auth::user()->profile_picture) }}" alt="Profile" class="w-full h-full object-cover">
                 </div>
                 <span class="text-lg font-semibold">{{ Auth::user()->name }}</span>
             </div>
             
             <!-- Navigation -->
             <nav class="flex flex-col gap-1">
-                <div class="flex items-center p-3 rounded-lg bg-gray-700 text-orange-500">
+                <a href="{{ route('organizer') }}" class="flex items-center p-3 rounded-lg bg-gray-700 text-orange-500">
                     <i class="fas fa-chart-line w-6 text-center mr-3"></i>
                     <span>Tableau de bord</span>
-                </div>
+                </a>
                 <a href="{{ route('organizer.information') }}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
                     <i class="fas fa-user w-6 text-center mr-3"></i>
                     <span>Mes informations</span>
@@ -92,11 +92,11 @@
                     <div class="bg-gray-800 p-4 sm:p-6 rounded-lg">
                         <div class="flex justify-between items-start">
                             <div>
-                                <h3 class="text-3xl sm:text-4xl font-bold">0</h3>
+                                <h3 class="text-3xl sm:text-4xl font-bold">{{$eventsCount}}</h3>
                                 <h2 class="text-lg sm:text-xl mt-4 sm:mt-6 mb-2 sm:mb-3">Événements créés</h2>
                                 <div class="border-b border-orange-500/20"></div>
                                 <div class="flex items-center mt-2 sm:mt-3 text-xs sm:text-sm hover:text-orange-500 transition-colors duration-200 cursor-pointer">
-                                    <span>Voir tous les événements</span>
+                                    <a href="{{ route('organizer.mesevents') }}">Voir tous les événements</a>
                                     <i class="fas fa-arrow-right ml-2 text-orange-500"></i>
                                 </div>
                             </div>
@@ -110,11 +110,11 @@
                     <div class="bg-gray-800 p-4 sm:p-6 rounded-lg">
                         <div class="flex justify-between items-start">
                             <div>
-                                <h3 class="text-3xl sm:text-4xl font-bold text-orange-500">0</h3>
+                                <h3 class="text-3xl sm:text-4xl font-bold text-orange-500">{{$participantsCount}}</h3>
                                 <h2 class="text-lg sm:text-xl mt-4 sm:mt-6 mb-2 sm:mb-3">Participants</h2>
                                 <div class="border-b border-orange-500/20"></div>
                                 <div class="flex items-center mt-2 sm:mt-3 text-xs sm:text-sm hover:text-orange-500 transition-colors duration-200 cursor-pointer">
-                                    <span>Gérer les participants</span>
+                                    <a href="{{ route('organizer.participants') }}">Gérer les participants</a>
                                     <i class="fas fa-arrow-right ml-2 text-orange-500"></i>
                                 </div>
                             </div>
