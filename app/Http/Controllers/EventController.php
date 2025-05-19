@@ -15,16 +15,7 @@ use App\Models\User;
 class EventController extends Controller
 {
     
-    public function index(){
-        $categories = Category::all();
-        $events = Event::all();
-        return view('dashboard.admin.events', compact( 'categories', 'events'));
-    }
-    public function countevents(){
-        $eventsCount = Event::all()->count();//->whire('organizer_id', auth()->user()->id);
-        $participantsCount = User::all()->count();//->whire(auth()->user()->id,'organizer_id' );
-        return view('dashboard.organizer.layouts', compact('eventsCount', 'participantsCount'));
-    }
+
     public function list_events_organizer(){
         $categories = Category::all();
         $events = Event::all();
@@ -72,17 +63,17 @@ class EventController extends Controller
         $event->delete();
         return redirect()->route('organizer.events.index')->with('success', 'Event deleted successfully.');
     }
-
-    
-    
-
-    public function home(){
-        $events = Event::with('place')->get();
-        $categories = Category::all();
-        return view('pages.accuiell', compact('events', 'categories'));
+    public function countevents_organizer(){
+        $eventsCount = Event::all()->count();//->whire('organizer_id', auth()->user()->id);
+        $participantsCount = User::all()->count();//->whire(auth()->user()->id,'organizer_id' );
+        return view('dashboard.organizer.layouts', compact('eventsCount', 'participantsCount'));
     }
-
-    public function store(Request $request){
+    public function list_events_admin(){
+        $categories = Category::all();
+        $events = Event::all();
+        return view('dashboard.admin.events', compact( 'categories', 'events'));
+    }
+    public function store_event_admin(Request $request){
         $place = Place::create([
             'name' => $request->lieu,
             'capacity' => $request->capacity,
@@ -102,12 +93,17 @@ class EventController extends Controller
         ]);
         return redirect()->route('events.index')->with('success', 'Event created successfully.');
     }
+    
 
-    public function show(string $id){
+    public function list_events_accueil(){
+        $events = Event::with('place')->get();
+        $categories = Category::all();
+        return view('pages.accuiell', compact('events', 'categories'));
+    }
+    public function show_event_accueil(string $id){
         $event = Event::findOrFail($id);
         return view('pages.showEvent', compact('event'));
     }
-
     public function edit(string $id){
         $event = Event::findOrFail($id);
         $categories = Category::all();

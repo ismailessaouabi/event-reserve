@@ -1,7 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    @vite('resources/css/app.css')
+</head>
+<body>
+    
 
-@extends('dashboard.organizer.layouts')
 
-@section('content')
+
 <div class="bg-gray-900 text-white min-h-screen">
     <!-- Header avec bouton retour -->
     <div class="flex items-center justify-between p-4">
@@ -27,12 +36,12 @@
     <!-- Image de l'événement et informations -->
     <div class="flex flex-col md:flex-row">
         <!-- Image principale -->
-        <div class="w-full md:w-1/2">
-            <img src="{{ Storage::url($event->image_path) }}" alt="Master Musicians of Jajouka" class="w-full h-full object-cover">
+        <div class="w-[90%]  flex justify-center items-center md:w-1/2">
+            <img src="{{ Storage::url($event->image_path) }}" alt="Master Musicians of Jajouka" class="w-[70%] h-fit object-cover">
         </div>
         
         <!-- Informations de l'événement -->
-        <div class="w-full md:w-1/2 p-6 bg-gray-900">
+        <div class=" w-full md:w-1/2 p-6 bg-gray-900">
             <div class="mb-4">
                 <span class="text-xs text-green-500 uppercase tracking-wide font-semibold">{{ $event->category->name }}</span>
             </div>
@@ -51,30 +60,49 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                <span>{{ $event->start_time }}</span>
+                <span> début : {{ $event->start_time }}</span>
             </div>
             
-            <div class="mb-4">
-                <p class="text-sm text-gray-400">Dirigé par Bachir Attar</p>
+            <div class="flex items-center mb-6 text-gray-400">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span> fin : {{ $event->end_time }}</span>
             </div>
             
-            <div class="space-y-4 mb-8">
-                <p class="italic text-gray-300">"Thunder on the mountain, rolling like a drum"</p>
-                <p class="italic text-gray-300">"Gonna sleep over there, that's where the music coming from"</p>
-                <p class="italic text-gray-300">"I don't need any guide, I already know the way"</p>
-                <p class="text-sm text-gray-400 mt-2">Bob Dylan – Thunder on the mountain</p>
-            </div>
+            <p class="text-gray-400 description">
+                {{ $event->description }}
+            </p>
+            <p class="text-gray-400 description">
+                700 MAD
+            </p>
+            <form action="" class="flex flex-col" method="POST">
+                <label for="quantity_tickets" class="text-gray-400">
+                    Nombre de tickets :
+                    <input type="number" id="quantity_tickets" name="quantity_tickets" value="1" min="1" class="bg-gray-700 text-white p-2 rounded">
+                </label>
+                <button type="submit" id="buyButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
+                    Acheter
+                    <p class="prix_complete">700 MAD</p>
+                </button>
+            </form>
             
-            <div class="space-y-4 mb-8">
-                <p class="text-sm text-gray-300">C'est à la fin des années cinquante, lorsque la Beat Generation entame sa quête poétique vers l'Orient qui la mènera bientôt jusqu'en Inde, source d'inspiration pour George Harrison, les Beatles, le rock psychédélique d'Hendrix ou des Byrds, que Tanger devient un véritable creuset de créativité.</p>
-                
-                <p class="text-sm text-gray-300">À la suite de l'installation de Paul Bowles et de son épouse en 1947, les fondateurs de la Beat Generation...</p>
-            </div>
             
-            <button class="w-full bg-white text-black py-4 px-6 rounded-full font-bold hover:bg-gray-200 transition">
-                Acheter maintenant
-            </button>
+            
         </div>
+
+
     </div>
 </div>
-@endsection
+<script>
+    const quantity_tickets = document.getElementById('quantity_tickets');
+    const prixComplete = document.querySelector('.prix_complete');
+    quantity_tickets.addEventListener('change', function() {
+        const quantityTickets = document.getElementById('quantity_tickets').value;
+        const prixTotal = 700 * quantityTickets;
+        prixComplete.textContent = prixTotal + ' MAD';
+    });
+</script>
+
+</body>
+</html>

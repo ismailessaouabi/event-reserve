@@ -36,22 +36,25 @@ Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('users.edi
 Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
 Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 
+// Routes pour evenements dans page d'accueil
+Route::get('/', [EventController::class, 'list_events_accueil'])->name('events.home');
+Route::get('/event/{id}', [EventController::class, 'show_event_accueil'])->name('accueil.event.show');
 
 // Routes des evenements dans dashboard admin 
-Route::post('/admin/events', [EventController::class, 'store'])->name('events.store');
-Route::get('/admin/events', [EventController::class, 'index'])->name('events.index');
-Route::get('/', [EventController::class, 'home'])->name('events.home');
-Route::get('/admin/events/edit/{id}', [EventController::class, 'edit'])->name('events.edit');
-Route::put('/admin/events/{id}', [EventController::class, 'update'])->name('events.update');
-Route::delete('/admin/events/{id}', [EventController::class, 'destroy'])->name('events.destroy');
+Route::post('/admin/events', [EventController::class, 'store_event_admin'])->name('admin.events.store');
+Route::get('/admin/events', [EventController::class, 'list_events_admin'])->name('admin.events.index');
+Route::get('/{id}', [EventController::class, 'show_event_admin'])->name('admin.events.show');
+Route::get('/admin/events/edit/{id}', [EventController::class, 'edit'])->name('admin.events.edit');
+Route::put('/admin/events/{id}', [EventController::class, 'update'])->name('admin.events.update');
+Route::delete('/admin/events/{id}', [EventController::class, 'destroy'])->name('admin.events.destroy');
 
 
 // Routes des lieux dans dashboard admin 
-Route::get('/places', [PlaceController::class, 'index'])->name('places.index');
-Route::post('/places', [PlaceController::class, 'store'])->name('places.store');
-Route::get('/places/edit/{id}', [PlaceController::class, 'edit'])->name('places.edit');
-Route::put('/places/{id}', [PlaceController::class, 'update'])->name('places.update');
-Route::delete('/places/{id}', [PlaceController::class, 'destroy'])->name('places.destroy');
+Route::get('/places', [PlaceController::class, 'index'])->name('admin.places.index');
+Route::post('/places', [PlaceController::class, 'store'])->name('admin.places.store');
+Route::get('/places/edit/{id}', [PlaceController::class, 'edit'])->name('admin.places.edit');
+Route::put('/places/{id}', [PlaceController::class, 'update'])->name('admin.places.update');
+Route::delete('/places/{id}', [PlaceController::class, 'destroy'])->name('admin.places.destroy');
 
 // Routes des informations de l'organisateur dans dashboard organisateur
 Route::get('/organizerinfo', [UserController::class, 'mesinformation'])->name('organizer.information');
