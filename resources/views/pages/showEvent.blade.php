@@ -76,7 +76,8 @@
             <p class="text-gray-400 description">
                 700 MAD
             </p>
-            <form action="" class="flex flex-col" method="POST">
+            <form action="{{ route('pay', $event) }}" class="flex flex-col" method="POST">
+                @csrf
                 <label for="quantity_tickets" class="text-gray-400">
                     Nombre de tickets :
                     <input type="number" id="quantity_tickets" name="quantity_tickets" value="1" min="1" class="bg-gray-700 text-white p-2 rounded">

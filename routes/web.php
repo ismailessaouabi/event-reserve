@@ -19,6 +19,10 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.po
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
+//Route de paiement
+Route::get('/pay', [PayementController::class, 'showPaymentForm'])->name('pay.form');
+Route::post('/pay', [PayementController::class, 'processTransaction'])->name('pay.process');
+
 
 // Routes des catégories dans dashboard admin 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
@@ -43,7 +47,6 @@ Route::get('/event/{id}', [EventController::class, 'show_event_accueil'])->name(
 // Routes des evenements dans dashboard admin 
 Route::post('/admin/events', [EventController::class, 'store_event_admin'])->name('admin.events.store');
 Route::get('/admin/events', [EventController::class, 'list_events_admin'])->name('admin.events.index');
-Route::get('/{id}', [EventController::class, 'show_event_admin'])->name('admin.events.show');
 Route::get('/admin/events/edit/{id}', [EventController::class, 'edit'])->name('admin.events.edit');
 Route::put('/admin/events/{id}', [EventController::class, 'update'])->name('admin.events.update');
 Route::delete('/admin/events/{id}', [EventController::class, 'destroy'])->name('admin.events.destroy');

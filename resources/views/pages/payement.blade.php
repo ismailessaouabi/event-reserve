@@ -1,170 +1,109 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paiement</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <title>Document</title>
+    @vite('resources/css/app.css')
 </head>
-<body class="bg-[#051529]">
-    <div class="container mx-auto px-4 py-8">
-        <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
-            <!-- En-tête -->
-            <div class="bg-blue-600 px-6 py-4">
-                <h1 class="text-2xl font-bold text-white">Finaliser votre commande</h1>
-            </div>
+<body>
+    
 
-            <!-- Détails de la commande -->
-            <div class="p-6 border-b">
-                <h2 class="text-xl font-semibold mb-4">Récapitulatif de la commande</h2>
-                
-                <div class="space-y-4">
-                    <div class="flex justify-between">
-                        <span>Produit 1</span>
-                        <span class="font-medium">25,00 €</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span>Produit 2</span>
-                        <span class="font-medium">35,00 €</span>
-                    </div>
-                    <div class="flex justify-between border-t pt-4">
-                        <span class="font-bold">Total</span>
-                        <span class="font-bold text-blue-600">60,00 €</span>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Formulaire de paiement -->
-            <div class="p-6">
-                <h2 class="text-xl font-semibold mb-4">Informations de paiement</h2>
-                
-                <form action="#" method="POST" id="payment-form">
-                    @csrf
-                    
-                    <!-- Informations de la carte -->
-                    <div class="mb-6">
-                        <label for="card-element" class="block text-sm font-medium text-gray-700 mb-2">
-                            Carte de crédit
-                        </label>
-                        <div id="card-element" class="p-3 border border-gray-300 rounded-md">
-                            <!-- Un élément Stripe sera inséré ici -->
-                        </div>
-                        <div id="card-errors" role="alert" class="text-red-500 text-sm mt-2"></div>
-                    </div>
 
-                    <!-- Adresse de facturation -->
-                    <div class="mb-6">
-                        <h3 class="text-lg font-medium mb-3">Adresse de facturation</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label for="name" class="block text-sm font-medium text-gray-700">Nom complet</label>
-                                <input type="text" id="name" name="name" required 
-                                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                            </div>
-                            <div>
-                                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                                <input type="email" id="email" name="email" required 
-                                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                            </div>
-                            <div>
-                                <label for="address" class="block text-sm font-medium text-gray-700">Adresse</label>
-                                <input type="text" id="address" name="address" required 
-                                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                            </div>
-                            <div>
-                                <label for="city" class="block text-sm font-medium text-gray-700">Ville</label>
-                                <input type="text" id="city" name="city" required 
-                                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                            </div>
-                            <div>
-                                <label for="postal_code" class="block text-sm font-medium text-gray-700">Code postal</label>
-                                <input type="text" id="postal_code" name="postal_code" required 
-                                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                            </div>
-                            <div>
-                                <label for="country" class="block text-sm font-medium text-gray-700">Pays</label>
-                                <select id="country" name="country" required 
-                                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                                    <option value="FR">France</option>
-                                    <option value="BE">Belgique</option>
-                                    <option value="CH">Suisse</option>
-                                    <option value="LU">Luxembourg</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Bouton de soumission -->
-                    <div class="flex justify-end">
-                        <button type="submit" id="submit-button" 
-                            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out">
-                            Payer 60,00 €
-                        </button>
-                    </div>
-                </form>
-            </div>
+<div class="bg-gray-900 text-white min-h-screen">
+    <!-- Header avec bouton retour -->
+    <div class="flex items-center justify-between p-4">
+        <a href="{{ route('organizer.events.index') }}" class="rounded-full bg-gray-800 p-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </a>
+        <div class="flex gap-4">
+            <button class="rounded-full bg-gray-800 p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                </svg>
+            </button>
+            <button class="rounded-full bg-gray-800 p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+            </button>
         </div>
     </div>
 
-    <!-- Scripts Stripe (exemple) -->
-    <script src="https://js.stripe.com/v3/"></script>
-    <script>
-        // Configuration Stripe
-        const stripe = Stripe('{{ env("STRIPE_KEY") }}');
-        const elements = stripe.elements();
-        const cardElement = elements.create('card');
-        cardElement.mount('#card-element');
-
-        // Gestion des erreurs
-        cardElement.addEventListener('change', function(event) {
-            const displayError = document.getElementById('card-errors');
-            if (event.error) {
-                displayError.textContent = event.error.message;
-            } else {
-                displayError.textContent = '';
-            }
-        });
-
-        // Soumission du formulaire
-        const form = document.getElementById('payment-form');
-        form.addEventListener('submit', async function(event) {
-            event.preventDefault();
+    <!-- Image de l'événement et informations -->
+    <div class="flex flex-col md:flex-row">
+        <!-- Image principale -->
+        <div class="w-[90%]  flex justify-center items-center md:w-1/2">
+            <img src="{{ Storage::url($event->image_path) }}" alt="Master Musicians of Jajouka" class="w-[70%] h-fit object-cover">
+        </div>
+        
+        <!-- Informations de l'événement -->
+        <div class=" w-full md:w-1/2 p-6 bg-gray-900">
+            <div class="mb-4">
+                <span class="text-xs text-green-500 uppercase tracking-wide font-semibold">{{ $event->category->name }}</span>
+            </div>
             
-            const submitButton = document.getElementById('submit-button');
-            submitButton.disabled = true;
-            submitButton.textContent = 'Traitement en cours...';
+            <h1 class="text-2xl font-bold mb-4">{{ $event->name }}</h1>
+            
+            <div class="flex items-center mb-3 text-gray-400">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span>{{ $event->place->name }}</span>
+            </div>
+            
+            <div class="flex items-center mb-6 text-gray-400">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span> début : {{ $event->start_time }}</span>
+            </div>
+            
+            <div class="flex items-center mb-6 text-gray-400">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span> fin : {{ $event->end_time }}</span>
+            </div>
+            
+            <p class="text-gray-400 description">
+                {{ $event->description }}
+            </p>
+            <p class="text-gray-400 description">
+                700 MAD
+            </p>
+            <form action="{{ route('pay', $event) }}" class="flex flex-col" method="POST">
+                @csrf
+                <label for="quantity_tickets" class="text-gray-400">
+                    Nombre de tickets :
+                    <input type="number" id="quantity_tickets" name="quantity_tickets" value="1" min="1" class="bg-gray-700 text-white p-2 rounded">
+                </label>
+                <button type="submit" id="buyButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
+                    Acheter
+                    <p class="prix_complete">700 MAD</p>
+                </button>
+            </form>
+            
+            
+            
+        </div>
 
-            const { paymentMethod, error } = await stripe.createPaymentMethod({
-                type: 'card',
-                card: cardElement,
-                billing_details: {
-                    name: document.getElementById('name').value,
-                    email: document.getElementById('email').value,
-                    address: {
-                        line1: document.getElementById('address').value,
-                        city: document.getElementById('city').value,
-                        postal_code: document.getElementById('postal_code').value,
-                        country: document.getElementById('country').value
-                    }
-                }
-            });
 
-            if (error) {
-                document.getElementById('card-errors').textContent = error.message;
-                submitButton.disabled = false;
-                submitButton.textContent = 'Payer 60,00 €';
-            } else {
-                // Ajouter le paymentMethod.id au formulaire
-                const hiddenInput = document.createElement('input');
-                hiddenInput.setAttribute('type', 'hidden');
-                hiddenInput.setAttribute('name', 'payment_method_id');
-                hiddenInput.setAttribute('value', paymentMethod.id);
-                form.appendChild(hiddenInput);
+    </div>
+</div>
+<script>
+    const quantity_tickets = document.getElementById('quantity_tickets');
+    const prixComplete = document.querySelector('.prix_complete');
+    quantity_tickets.addEventListener('change', function() {
+        const quantityTickets = document.getElementById('quantity_tickets').value;
+        const prixTotal = 700 * quantityTickets;
+        prixComplete.textContent = prixTotal + ' MAD';
+    });
+</script>
 
-                // Soumettre le formulaire
-                form.submit();
-            }
-        });
-    </script>
 </body>
 </html>
