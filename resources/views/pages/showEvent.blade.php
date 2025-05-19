@@ -14,7 +14,7 @@
 <div class="bg-gray-900 text-white min-h-screen">
     <!-- Header avec bouton retour -->
     <div class="flex items-center justify-between p-4">
-        <a href="{{ route('organizer.events.index') }}" class="rounded-full bg-gray-800 p-2">
+        <a href="{{ route('events.home') }}" class="rounded-full bg-gray-800 p-2">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
             </svg>
@@ -76,7 +76,7 @@
             <p class="text-gray-400 description">
                 700 MAD
             </p>
-            <form action="{{ route('pay', $event) }}" class="flex flex-col" method="POST">
+            <form action="#" class="flex flex-col" method="POST">
                 @csrf
                 <label for="quantity_tickets" class="text-gray-400">
                     Nombre de tickets :
