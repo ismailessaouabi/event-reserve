@@ -76,7 +76,7 @@
             <p class="text-gray-400 description">
                 700 MAD
             </p>
-            <form action="{{ route('payement.checkout') }}" class="flex flex-col" method="POST">
+            <form action="{{ route('payement.checkout') }}" class="flex flex-col" method="GET">
                 @csrf
                 <label for="quantity_tickets" class="text-gray-400">
                     Nombre de tickets :

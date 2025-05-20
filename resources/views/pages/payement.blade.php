@@ -10,7 +10,7 @@
 
 
 
-<div class="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+<div class="min-h-screen bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
             Formulaire de paiement
@@ -19,10 +19,20 @@
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <form method="POST" action="{{ route('payment.process') }}" class="space-y-6">
+            <form method="POST" action="{{ route('payement.process') }}" class="space-y-6">
                 @csrf
                 
                 <div>
+                    @if (session('success'))
+                        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                            <span class="block sm:inline">{{ session('success') }}</span>
+                        </div>
+                    @endif
+                    @if (session('error'))
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                            <span class="block sm:inline">{{ session('error') }}</span>
+                        </div>
+                    @endif
                     <label for="amount" class="block text-sm font-medium text-gray-700">
                         Montant à payer
                     </label>
@@ -61,8 +71,7 @@
                     </label>
                     <select id="payment_method" name="payment_method" 
                         class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                        <option value="card">Carte bancaire</option>
-                        <option value="transfer">Virement bancaire</option>
+                        <option value="stripe">Stripe</option>
                         <option value="paypal">PayPal</option>
                     </select>
                     

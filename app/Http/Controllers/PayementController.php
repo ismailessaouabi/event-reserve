@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
+use App\Models\Transaction;
 
 class PayementController extends Controller
 {
     /**
      * Préparer la transaction PayPal
      */
-    public function createTransaction(Request $request)
+    public function createTransaction()
     {
         return view('pages.payement');
     }
@@ -83,13 +84,15 @@ class PayementController extends Controller
             if (isset($response['status']) && $response['status'] == 'COMPLETED') {
                 // Ici, vous enregistrez la transaction dans votre base de données
                 // Par exemple:
-                // Transaction::create([
-                //     'payment_id' => $response['id'],
-                //     'payer_email' => $response['payer']['email_address'],
-                //     'amount' => $response['purchase_units'][0]['payments']['captures'][0]['amount']['value'],
-                //     'currency' => $response['purchase_units'][0]['payments']['captures'][0]['amount']['currency_code'],
-                //     'payment_status' => $response['status'],
-                // ]);
+                Transaction::create([
+                    'user_id' => 1, // Ou l'ID utilisateur de votre système
+                    'event_id' => 1, // L'ID de l'événement acheté
+                    'paypal_transaction_id' => $response['id'], // Nouveau champ
+                    'payer_email' => $response['payer']['email_address'], // Nouveau champ
+                    'quantity' => 1, // Doit être un entier
+                    'total_price' => $response['purchase_units'][0]['payments']['captures'][0]['amount']['value'],
+                    'status' => $response['status'],
+                ]);
                 
                 return redirect()
                     ->route('payement.checkout')
