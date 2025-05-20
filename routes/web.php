@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\PayementController;
 use App\Http\Controllers\SocialmediaController;
+ 
 
 
 
@@ -22,7 +23,11 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 // Routes pour evenements dans page d'accueil
 Route::get('/', [EventController::class, 'list_events_accueil'])->name('events.home');
 Route::get('/event/{id}', [EventController::class, 'show_event_accueil'])->name('accueil.event.show');
-
+// Routes pour payements dans page d'accueil
+Route::get('/payement', [PayementController::class, 'createTransaction'])->name('payement.checkout');
+Route::post('/payement', [PayementController::class, 'processTransaction'])->name('payement.process');
+Route::get('/payement/success', [PayementController::class, 'successTransaction'])->name('payement.success');
+Route::get('/payement/cancel', [PayementController::class, 'cancelTransaction'])->name('payement.cancel');
 
 
 
