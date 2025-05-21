@@ -8,11 +8,10 @@ class Tecket extends Model
 {
     // Define the fillable attributes
     protected $fillable = [
-        'event_id',
-        'user_id',
-        'quantity',
-        'total_price',
-        'status',
+        'prix',
+        'event_id'
+        
+        
     ];
     // Define the relationship with the Event model
     public function event()

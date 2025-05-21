@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('places', function (Blueprint $table) {
-            $table->dropColumn(['latitude', 'longitude', 'address', 'city',  'description', 'postal_code']);
-
+        Schema::create('teckets', function (Blueprint $table) {
+            $table->id();
+            $table->decimal('prix',8,2);
+            $table->foreignId('event_id')->constrained('events')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -22,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('places', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('_teckets');
     }
 };

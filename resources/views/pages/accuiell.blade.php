@@ -76,7 +76,7 @@
             <nav class="overflow-x-auto whitespace-nowrap py-2 -mx-4 px-4 hidden md:block">
                 <div class="flex space-x-6">
                     @foreach ($categories as $category)
-                        <a href="#" class="text-white font-medium">{{ $category->name }}</a>
+                        <a href="{{ route('eventsparcategory' , $category->id)}}" class="text-white font-medium">{{ $category->name }}</a>
                     @endforeach
                     
                     <div class="ml-auto flex items-center space-x-4">

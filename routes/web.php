@@ -28,6 +28,10 @@ Route::get('/payement', [PayementController::class, 'createTransaction'])->name(
 Route::post('/payement', [PayementController::class, 'processTransaction'])->name('payement.process');
 Route::get('/payement/success', [PayementController::class, 'successTransaction'])->name('payement.success');
 Route::get('/payement/cancel', [PayementController::class, 'cancelTransaction'])->name('payement.cancel');
+// Route pour lister events par categorie
+Route::get('/eventsparcategorie/{id}', [CategoryController::class, 'events_par_categorie_accueil'])->name('eventsparcategory');   
+
+
 
 
 
@@ -62,7 +66,7 @@ Route::delete('/places/{id}', [PlaceController::class, 'destroy'])->name('admin.
 // Routes des informations de l'organisateur dans dashboard organisateur
 Route::get('/organizerinfo', [UserController::class, 'mesinformation'])->name('organizer.information');
 Route::put('/organizerinfo/{id}', [UserController::class, 'updateinfo'])->name('organizer.update');
-Route::get('/organizer', [EventController::class, 'countevents'])->name('organizer');
+Route::get('/organizer', [EventController::class, 'countevents_organizer'])->name('organizer');
 Route::get('/billes', function () {return view('dashboard.organizer.billets-vendus');})->name('organizer.billets');
 Route::get('/statistiques', function () {return view('dashboard.organizer.statistiques');})->name('organizer.statistiques');
 Route::get('/payements', function () {return view('dashboard.organizer.payements');})->name('organizer.payements');

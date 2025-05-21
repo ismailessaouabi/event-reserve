@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Event;
 
 class CategoryController extends Controller
 {
@@ -99,6 +100,13 @@ class CategoryController extends Controller
 
         // Redirect to the categories index with a success message
         return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
+    }
+
+    public function events_par_categorie_accueil(string $id){
+        $events = Event::where('category_id','=', $id);
+        return view('pages.eventsparcategory' , compact('events'));
+
+
     }
 
     /**

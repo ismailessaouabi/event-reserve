@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use App\Models\Category;
 use App\Models\Place;
 use App\Models\User;
+use App\models\Tecket;
 
 
 
@@ -42,6 +43,11 @@ class EventController extends Controller
             'category_id' => $request->category_id,
             'organizer_id' => auth()->user()->id
         ]);
+        $tecket = Tecket::create([
+            'event_id' => $event->id ,
+            'prix'=> $request->ticket_price
+            
+        ]);
         return redirect()->route('organizer.events.index')->with('success', 'Event created successfully.');
     }
     public function show_event_organizer($id){
@@ -68,6 +74,14 @@ class EventController extends Controller
         $participantsCount = User::all()->count();//->whire(auth()->user()->id,'organizer_id' );
         return view('dashboard.organizer.layouts', compact('eventsCount', 'participantsCount'));
     }
+
+
+
+
+
+
+
+
     public function list_events_admin(){
         $categories = Category::all();
         $events = Event::all();
@@ -92,9 +106,7 @@ class EventController extends Controller
             'category_id' => $request->category
         ]);
         return redirect()->route('events.index')->with('success', 'Event created successfully.');
-    }
-    
-
+    }    
     public function list_events_accueil(){
         $events = Event::with('place')->get();
         $categories = Category::all();
@@ -109,8 +121,6 @@ class EventController extends Controller
         $categories = Category::all();
         return view('dashboard.admin.editevent', compact('event', 'categories'));
     }
-
-    
     public function update(Request $request, string $id)
     {
         $event = Event::findOrFail($id);
@@ -143,8 +153,6 @@ class EventController extends Controller
         
         return redirect()->route('events.index')->with('success', 'Event updated successfully.');
     }
-
-   
     public function destroy(string $id){
         $event = Event::findOrFail($id);
         $event->delete();
