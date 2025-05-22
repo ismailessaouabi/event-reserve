@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Category;
 use App\Models\Place;
-
+use App\Models\User;
+use App\Models\Tecket;
 
 class Event extends Model
 {
@@ -32,4 +33,13 @@ class Event extends Model
     {
         return $this->belongsTo(Place::class);
     }
+    public function organizer()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function tecket()
+    {
+        return $this->hasMany(Tecket::class);
+    }
+    
 }

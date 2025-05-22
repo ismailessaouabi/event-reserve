@@ -103,7 +103,7 @@ class CategoryController extends Controller
     }
 
     public function events_par_categorie_accueil(string $id){
-        $events = Event::where('category_id','=', $id);
+        $events = Event::where('category_id', $id)->get(); // Ajoutez ->get()
         return view('pages.eventsparcategory' , compact('events'));
 
 

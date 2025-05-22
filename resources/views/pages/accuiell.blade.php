@@ -220,7 +220,7 @@
                         <span class="text-gray-400 text-xs ml-1">{{ $event->place->name }}</span>
                     </div>
                     <div class="mt-3 flex justify-between items-center">
-                        <span class="text-white font-bold text-sm">70,00 MAD</span>
+                        <span class="text-white font-bold text-sm">200 MAD</span>
                     </div>
                 </div>
             </a>
