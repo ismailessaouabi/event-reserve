@@ -79,9 +79,6 @@ class EventController extends Controller
 
 
 
-
-
-
     public function list_events_admin(){
         $categories = Category::all();
         $events = Event::all();
@@ -106,7 +103,11 @@ class EventController extends Controller
             'category_id' => $request->category
         ]);
         return redirect()->route('events.index')->with('success', 'Event created successfully.');
-    }    
+    }  
+    
+    
+
+
     public function list_events_accueil(){
         $events = Event::with('place')->get();
         $categories = Category::all();
@@ -115,6 +116,18 @@ class EventController extends Controller
     public function show_event_accueil(string $id){
         $event = Event::findOrFail($id);
         return view('pages.showEvent', compact('event'));
+    }
+    public function list_events_par_date_accueil(Request $request){
+        $now = Carbon::now();
+        $events = Event::whereDate('start_time', '>=', $now)->get();
+        return view('pages.eventspardate', compact('events'));
+
+    }
+    public function list_events_aujourdhui(Request $request){
+        $now = Carbon::now();
+        $events = Event::whereDate('start_time', $now)->get();
+        return view('pages.eventspardate', compact('events'));
+
     }
     public function edit(string $id){
         $event = Event::findOrFail($id);

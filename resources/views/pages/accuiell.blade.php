@@ -129,7 +129,7 @@
                 <button class="bg-blue-900 px-3 py-1 rounded text-xs font-medium">Aujourd'hui</button>
                 <button class="bg-gray-800 px-3 py-1 rounded text-xs font-medium">Cette semaine</button>
                 <button class="bg-gray-800 px-3 py-1 rounded text-xs font-medium">Ce weekend</button>
-                <button class="bg-gray-800 px-3 py-1 rounded text-xs font-medium">Ce mois-ci</button>
+                <a href="{{ route('eventspardate') }}" class="bg-gray-800 px-3 py-1 rounded text-xs font-medium">Ce mois-ci</a>
             </div>
         </div>
         
