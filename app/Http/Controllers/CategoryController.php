@@ -29,7 +29,8 @@ class CategoryController extends Controller
     public function showcategories()
     {
         $categories = Category::all();
-        return view('pages.accuiell', compact('categories'));
+        // Return the view with the categories data
+        return view('pages.layouts', compact('categories'));
     }
     
 
@@ -104,7 +105,8 @@ class CategoryController extends Controller
 
     public function events_par_categorie_accueil(string $id){
         $events = Event::where('category_id', $id)->get(); // Ajoutez ->get()
-        return view('pages.eventsparcategory' , compact('events'));
+        $categories = Category::all();
+        return view('pages.eventsparcategory' , compact('events', 'categories'));
 
 
     }

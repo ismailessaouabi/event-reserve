@@ -123,7 +123,7 @@ class EventController extends Controller
         return view('pages.eventspardate', compact('events'));
 
     }
-    public function list_events_aujourdhui(Request $request){
+    public function list_events_aujourdhui_accueil(Request $request){
         $now = Carbon::now();
         $events = Event::whereDate('start_time', $now)->get();
         return view('pages.eventspardate', compact('events'));

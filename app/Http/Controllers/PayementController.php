@@ -95,7 +95,7 @@ class PayementController extends Controller
                 ]);
                 
                 return redirect()
-                    ->route('payement.checkout')
+                    ->route('payement.pdf', ['id' => $response['id']])
                     ->with('success', 'Transaction complétée.');
             } else {
                 return redirect()
@@ -107,6 +107,12 @@ class PayementController extends Controller
                 ->route('payement.checkout')
                 ->with('error', $e->getMessage());
         }
+    }
+
+    public function pdf($id)
+    {
+        $transaction = Transaction::where('paypal_transaction_id', $id)->first();
+        return view('pages.pdf', compact('transaction'));
     }
 
     /**

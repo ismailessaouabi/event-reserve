@@ -1,124 +1,24 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guichet - Billetterie d'événements</title>
-    @vite('resources/css/app.css')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #051529;
-            color: white;
-        }
-        
-        .event-card {
-            transition: transform 0.3s ease;
-        }
-        
-        .event-card:hover {
-            transform: translateY(-5px);
-        }
 
-        .truncate-2-lines {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-    </style>
-</head>
-<body class="min-h-screen">
-    <!-- Header -->
-    <header class="bg-[#051529] border-b border-gray-700">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center py-4">
-                <div class="flex items-center">
-                    <a href="#" class="text-white font-bold text-2xl">
-                        <img src="/api/placeholder/120/40" alt="Guichet Logo" class="h-8">
-                    </a>
-                </div>
-                
-                <div class="hidden md:flex space-x-4 mx-auto">
-                    <button class="bg-white text-blue-900 px-3 py-1 rounded-full text-sm font-medium">FR</button>
-                    <button class="text-white px-2 py-1 rounded-full text-sm font-medium">EN</button>
-                    <div class="px-4">|</div>
-                    <div class="relative">
-                        <input type="text" placeholder="Rechercher" class="bg-gray-800 text-white rounded-full py-1 px-4 text-sm pr-8">
-                        <i class="fas fa-search absolute right-3 top-2 text-gray-400"></i>
-                    </div>
-                </div>
-                
-                <div class="flex items-center space-x-4">
-                    <div class="hidden md:flex space-x-4">
-                        <a href="#" class="text-white">Store</a>
-                        <a href="#" class="text-white">Voyage</a>
-                        <a href="#" class="text-white">Cinéma</a>
-                        <a href="#" class="text-white">Sport</a>
-                    </div>
-                    <div class="flex items-center">
-                        <a href="{{ route('login') }}" class="bg-red-600 text-white px-4 py-2 rounded-full text-sm">Se connecter</a>
-                        <a href="{{ route('register') }}" class="bg-red-600 text-white px-4 py-2 rounded-full text-sm">S'inscrire</a>
+    @extends('pages.layouts')
 
-                        <div class="ml-4 relative">
-                            <button class="flex items-center justify-center w-8 h-8 bg-gray-700 rounded-full">
-                                <i class="fas fa-user text-white"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Navigation secondaire -->
-            <nav class="overflow-x-auto whitespace-nowrap py-2 -mx-4 px-4 hidden md:block">
-                <div class="flex space-x-6">
-                    @foreach ($categories as $category)
-                        <a href="{{ route('eventsparcategory' , $category->id)}}" class="text-white font-medium">{{ $category->name }}</a>
-                    @endforeach
-                    
-                    <div class="ml-auto flex items-center space-x-4">
-                        <a href="#" class="text-gray-300 text-sm">Aide & Contact</a>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </header>
-
+    @section('content')
     <!-- Featured Events Banner Section -->
     <section class="container mx-auto px-4 py-6">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            @for($i = 0; $i < 3; $i++)
+                
             <!-- Featured Event 1 -->
-            <div class="relative rounded-lg overflow-hidden h-64">
-                <img src="/api/placeholder/400/320" alt="Festival" class="w-full h-full object-cover">
+            <a href="{{ route('accueil.event.show', $events[$i]->id) }}" class="relative rounded-lg overflow-hidden h-64">
+                <img src="{{ Storage::url($events[$i]->image_path) }}" alt="Festival" class="w-full h-full object-cover">
                 <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
                     <span class="bg-yellow-500 text-black px-2 py-1 rounded text-xs font-bold">FESTIVAL</span>
                     <h3 class="text-white font-bold mt-2">Festival de la Comédie Arabe</h3>
                     <p class="text-gray-200 text-sm">15-26 Jun 2023</p>
                 </div>
-            </div>
+            </a>
+            @endfor
             
-            <!-- Featured Event 2 -->
-            <div class="relative rounded-lg overflow-hidden h-64">
-                <img src="/api/placeholder/400/320" alt="REDMA Concert" class="w-full h-full object-cover">
-                <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
-                    <span class="bg-red-600 text-white px-2 py-1 rounded text-xs font-bold">CONCERT</span>
-                    <h3 class="text-white font-bold mt-2">REDMA</h3>
-                    <p class="text-gray-200 text-sm">15.06.2023 • Morocco Mall</p>
-                </div>
-            </div>
             
-            <!-- Featured Event 3 -->
-            <div class="relative rounded-lg overflow-hidden h-64">
-                <img src="/api/placeholder/400/320" alt="Stand-up Show" class="w-full h-full object-cover">
-                <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
-                    <span class="bg-blue-500 text-white px-2 py-1 rounded text-xs font-bold">STAND-UP</span>
-                    <h3 class="text-white font-bold mt-2">L'Irresistible Show de Oualas</h3>
-                    <p class="text-gray-200 text-sm">07.06.2023 • Megarama</p>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -248,60 +148,8 @@
             </div>
         </div>
     </section>
+    
+    @endsection
 
-    <!-- Footer -->
-    <footer class="bg-[#051529] py-10 border-t border-gray-700">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
-                <div>
-                    <img src="/api/placeholder/120/40" alt="Guichet Logo" class="h-8 mb-4">
-                    <p class="text-gray-400 text-xs mb-4">Guichet est une plateforme de billetterie innovante qui offre une expérience utilisateur optimale pour acheter des billets d'événements au Maroc.</p>
-                    <div class="flex space-x-3">
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h3 class="text-white font-medium mb-4">Explorer</h3>
-                    <ul class="text-gray-400 text-sm space-y-2">
-                        <li><a href="#" class="hover:text-white">Événements</a></li>
-                        <li><a href="#" class="hover:text-white">Théâtre</a></li>
-                        <li><a href="#" class="hover:text-white">Concerts</a></li>
-                        <li><a href="#" class="hover:text-white">Festivals</a></li>
-                        <li><a href="#" class="hover:text-white">Sport</a></li>
-                        <li><a href="#" class="hover:text-white">Blog</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-white font-medium mb-4">Service client</h3>
-                    <ul class="text-gray-400 text-sm space-y-2">
-                        <li><a href="#" class="hover:text-white">Mon compte</a></li>
-                        <li><a href="#" class="hover:text-white">FAQ</a></li>
-                        <li><a href="#" class="hover:text-white">Comment ça marche</a></li>
-                        <li><a href="#" class="hover:text-white">Politiques de remboursement</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-white font-medium mb-4">Termes & Conditions</h3>
-                    <ul class="text-gray-400 text-sm space-y-2">
-                        <li><a href="#" class="hover:text-white">Politique de confidentialité</a></li>
-                        <li><a href="#" class="hover:text-white">Termes d'utilisation</a></li>
-                        <li><a href="#" class="hover:text-white">Conditions générales de vente</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-white font-medium mb-4">Téléchargez l'application</h3>
-                    <div class="flex flex-col space-y-2">
-                        <a href="#" class="block">
-                            <img src="/api/placeholder/120/40" alt="App Store" class="h-10">
-                        </a>
-                        <a href="#" class="block">
-                            <img src="/api/placeholder/120/40" alt="Google Play" class="h-10">
-                        </a>
-                    </div>
+  
+    
