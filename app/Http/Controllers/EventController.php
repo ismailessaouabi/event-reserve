@@ -104,39 +104,12 @@ class EventController extends Controller
         ]);
         return redirect()->route('events.index')->with('success', 'Event created successfully.');
     }  
-    
-    
-
-
-    public function list_events_accueil(){
-        $events = Event::with('place')->get();
-        $categories = Category::all();
-        return view('pages.accuiell', compact('events', 'categories'));
-    }
-    public function show_event_accueil(string $id){
-        $event = Event::findOrFail($id);
-        return view('pages.showEvent', compact('event'));
-    }
-    public function list_events_par_date_accueil(Request $request){
-        $now = Carbon::now();
-        $events = Event::whereDate('start_time', '>=', $now)->get();
-        return view('pages.eventspardate', compact('events'));
-
-    }
-    public function list_events_aujourdhui_accueil(Request $request){
-        $now = Carbon::now();
-        $events = Event::whereDate('start_time', $now)->get();
-        return view('pages.eventspardate', compact('events'));
-
-    }
-    
-    public function edit(string $id){
+    public function edit_event_admin(string $id){
         $event = Event::findOrFail($id);
         $categories = Category::all();
         return view('dashboard.admin.editevent', compact('event', 'categories'));
     }
-    public function update(Request $request, string $id)
-    {
+    public function update_event_admin(Request $request, string $id){
         $event = Event::findOrFail($id);
         
         // Pour le modèle Place, il faut d'abord trouver l'instance ou en créer une nouvelle
@@ -167,9 +140,36 @@ class EventController extends Controller
         
         return redirect()->route('events.index')->with('success', 'Event updated successfully.');
     }
-    public function destroy(string $id){
+    public function destroy_event_admin(string $id){
         $event = Event::findOrFail($id);
         $event->delete();
         return redirect()->route('events.index')->with('success', 'Event deleted successfully.');
     }
+    
+    
+
+
+    public function list_events_accueil(){
+        $events = Event::with('place','teckets')->get();
+        $categories = Category::all();
+        return view('pages.accuiell', compact('events', 'categories'));
+    }
+    public function show_event_accueil(string $id){
+        $event = Event::findOrFail($id);
+        return view('pages.showEvent', compact('event'));
+    }
+    public function list_events_par_date_accueil(Request $request){
+        $now = Carbon::now();
+        $events = Event::whereDate('start_time', '>=', $now)->get();
+        return view('pages.eventspardate', compact('events'));
+
+    }
+    public function list_events_aujourdhui_accueil(Request $request){
+        $now = Carbon::now();
+        $events = Event::whereDate('start_time', $now)->get();
+        return view('pages.eventspardate', compact('events'));
+
+    }
+    
+   
 }

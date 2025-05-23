@@ -37,7 +37,7 @@ class Event extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function tecket()
+    public function teckets()
     {
         return $this->hasMany(Tecket::class);
     }

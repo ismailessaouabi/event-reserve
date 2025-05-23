@@ -11,9 +11,9 @@
             <a href="{{ route('accueil.event.show', $events[$i]->id) }}" class="relative rounded-lg overflow-hidden h-64">
                 <img src="{{ Storage::url($events[$i]->image_path) }}" alt="Festival" class="w-full h-full object-cover">
                 <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
-                    <span class="bg-yellow-500 text-black px-2 py-1 rounded text-xs font-bold">FESTIVAL</span>
-                    <h3 class="text-white font-bold mt-2">Festival de la Comédie Arabe</h3>
-                    <p class="text-gray-200 text-sm">15-26 Jun 2023</p>
+                    <span class="bg-yellow-500 text-black px-2 py-1 rounded text-xs font-bold">{{ $events[$i]->category->name }}</span>
+                    <h3 class="text-white font-bold mt-2">{{ $events[$i]->name }}</h3>
+                    <p class="text-gray-200 text-sm">{{ $events[$i]->start_time }}</p>
                 </div>
             </a>
             @endfor
@@ -119,9 +119,15 @@
                         <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
                         <span class="text-gray-400 text-xs ml-1">{{ $event->place->name }}</span>
                     </div>
+                    @if ($event->teckets->count() > 0)
                     <div class="mt-3 flex justify-between items-center">
-                        <span class="text-white font-bold text-sm">200 MAD</span>
+                        <span class="text-white font-bold text-sm">{{ $event->teckets->first()->prix }} MAD</span>
                     </div>
+                    @else
+                    <div class="mt-3 flex justify-between items-center">
+                        <span class="text-white font-bold text-sm">300 MAD</span>
+                    </div>
+                    @endif
                 </div>
             </a>
             
