@@ -129,6 +129,7 @@ class EventController extends Controller
         return view('pages.eventspardate', compact('events'));
 
     }
+    
     public function edit(string $id){
         $event = Event::findOrFail($id);
         $categories = Category::all();

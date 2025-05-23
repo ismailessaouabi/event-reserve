@@ -3,8 +3,11 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
+use PDF;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use App\Models\Transaction;
+use App\Models\Ticket;
+use App\Models\Category;
 
 class PayementController extends Controller
 {
@@ -84,7 +87,7 @@ class PayementController extends Controller
             if (isset($response['status']) && $response['status'] == 'COMPLETED') {
                 // Ici, vous enregistrez la transaction dans votre base de données
                 // Par exemple:
-                Transaction::create([
+                $transaction = Transaction::create([
                     'user_id' => 1, // Ou l'ID utilisateur de votre système
                     'event_id' => 1, // L'ID de l'événement acheté
                     'paypal_transaction_id' => $response['id'], // Nouveau champ
@@ -95,7 +98,7 @@ class PayementController extends Controller
                 ]);
                 
                 return redirect()
-                    ->route('payement.pdf', ['id' => $response['id']])
+                    ->route('tecket.index', ['id' => $transaction->event_id])
                     ->with('success', 'Transaction complétée.');
             } else {
                 return redirect()
@@ -109,12 +112,7 @@ class PayementController extends Controller
         }
     }
 
-    public function pdf($id)
-    {
-        $transaction = Transaction::where('paypal_transaction_id', $id)->first();
-        return view('pages.pdf', compact('transaction'));
-    }
-
+    
     /**
      * Annulation de la transaction PayPal
      */
@@ -124,4 +122,47 @@ class PayementController extends Controller
             ->route('payement.checkout')
             ->with('error', 'Vous avez annulé la transaction.');
     }
+
+    public function index(string $id)
+    {
+        // Récupérer l'événement par ID
+
+        $transaction = Transaction::where('event_id', $id)->first();
+        $categories = Category::all();
+        return view('pages.tecket', compact('transaction','categories'));
+    }
+    /**
+     * Générer le PDF du ticket
+     */
+    public function generateTicket(String $ticketId)
+    {
+        // Récupérer les données du ticket et de l'événement
+        $categories = Category::all();
+        $transaction = Transaction::with('event', 'user')->findOrFail($ticketId);
+        $event = $transaction->event;
+        $user = $transaction->user;
+        
+        // Données à passer à la vue
+        $data = [
+            'transaction' => $transaction,
+            'event' => $event,
+            'user' => $user,
+            'categories' => $categories,
+            //'qrCode' => $this->generateQrCode($ticket->code) // Optionnel
+        ];
+        
+        // Générer le PDF
+        $pdf = PDF::loadView('pages.tecket', $data);
+        
+        // Télécharger ou afficher le PDF
+        return $pdf->download('ticket-'.$transaction->code.'.pdf');
+        // ou return $pdf->stream(); pour afficher dans le navigateur
+    }
+    
+   // protected function generateQrCode($code)
+   // {
+        // Implémentation optionnelle pour générer un QR code
+        // Vous pouvez utiliser un package comme simplesoftwareio/simple-qrcode
+        //return \QrCode::size(100)->generate($code);
+    //}
 }

@@ -28,6 +28,9 @@ Route::get('/payement', [PayementController::class, 'createTransaction'])->name(
 Route::post('/payement', [PayementController::class, 'processTransaction'])->name('payement.process');
 Route::get('/payement/success', [PayementController::class, 'successTransaction'])->name('payement.success');
 Route::get('/payement/cancel', [PayementController::class, 'cancelTransaction'])->name('payement.cancel');
+Route::get('/tecket/index/{id}', [PayementController::class, 'index'])->name('tecket.index');
+Route::get('/tickets/{ticket}/download', [PayementController::class, 'generateTicket'])
+    ->name('tickets.download');
 // Route pour lister events par categorie accuiel
 Route::get('/eventsparcategorie/{id}', [CategoryController::class, 'events_par_categorie_accueil'])->name('eventsparcategory');   
 // Route pour lister events par date accuiel
