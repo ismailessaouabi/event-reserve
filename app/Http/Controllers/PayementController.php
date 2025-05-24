@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use PDF;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use App\Models\Transaction;
-use App\Models\Ticket;
+use App\Models\Tecket;
 use App\Models\Category;
 
 class PayementController extends Controller
@@ -14,9 +14,10 @@ class PayementController extends Controller
     /**
      * Préparer la transaction PayPal
      */
-    public function createTransaction()
+    public function createTransaction(Request $request )
     {
-        return view('pages.payement');
+        $quantity = $request->input('quantity_tickets');
+        return view('pages.payement', compact('quantity'));
     }
 
     /**
@@ -41,7 +42,7 @@ class PayementController extends Controller
                     [
                         "amount" => [
                             "currency_code" => "EUR",
-                            "value" => 34.99,
+                            "value" => $request->input('amount')*$request->input('quantity'),
                         ],
                         "description" => "Achat sur Mon Site Web",
                     ]
@@ -57,16 +58,16 @@ class PayementController extends Controller
                 }
                 
                 return redirect()
-                    ->route('payement.checkout')
+                    ->route('payement.checkout', ['event_id' => $request->event_id])
                     ->with('error', 'Erreur lors de la création du paiement PayPal.');
             } else {
                 return redirect()
-                    ->route('payement.checkout')
+                    ->route('payement.checkout', ['event_id' => $request->event_id])
                     ->with('error', $order['message'] ?? 'Erreur lors de la création du paiement PayPal.');
             }
         } catch (\Exception $e) {
             return redirect()
-                ->route('payement.checkout')
+                ->route('payement.checkout', ['event_id' => $request->event_id])
                 ->with('error', $e->getMessage());
         }
     }
@@ -102,12 +103,12 @@ class PayementController extends Controller
                     ->with('success', 'Transaction complétée.');
             } else {
                 return redirect()
-                    ->route('payement.checkout')
+                    ->route('payement.checkout', ['event_id' => $request->event_id])
                     ->with('error', $response['message'] ?? 'Quelque chose s\'est mal passé.');
             }
         } catch (\Exception $e) {
             return redirect()
-                ->route('payement.checkout')
+                ->route('payement.checkout', ['event_id' => $request->event_id])
                 ->with('error', $e->getMessage());
         }
     }
@@ -119,7 +120,7 @@ class PayementController extends Controller
     public function cancelTransaction(Request $request)
     {
         return redirect()
-            ->route('payement.checkout')
+            ->route('payement.checkout', ['event_id' => $request->event_id])
             ->with('error', 'Vous avez annulé la transaction.');
     }
 
@@ -152,7 +153,7 @@ class PayementController extends Controller
         ];
         
         // Générer le PDF
-        $pdf = PDF::loadView('pages.tecket', $data);
+        $pdf = PDF::loadView('pages.pdf', $data);
         
         // Télécharger ou afficher le PDF
         return $pdf->download('ticket-'.$transaction->code.'.pdf');

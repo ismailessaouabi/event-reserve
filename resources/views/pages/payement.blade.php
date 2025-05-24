@@ -41,11 +41,13 @@
                             <span class="text-gray-500 sm:text-sm">€</span>
                         </div>
                         <input type="text" name="amount" id="amount" 
-                            class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
-                            placeholder="0.00"
-                            aria-describedby="price-currency"
-                            value="{{ old('amount') }}"
-                            required>
+                                class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+                                placeholder="0.00"
+                                aria-describedby="price-currency"
+                                
+                                value="34"
+
+                                required>
                         <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                             <span class="text-gray-500 sm:text-sm" id="price-currency">EUR</span>
                         </div>
@@ -55,12 +57,12 @@
 
                 <div>
                     <label for="description" class="block text-sm font-medium text-gray-700">
-                        Description du paiement
+                        quantity
                     </label>
                     <div class="mt-1">
-                        <input type="text" name="description" id="description"
+                        <input type="text" name="quantity" id="description"
                             class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                            value="{{ old('description') }}">
+                            value="{{ $quantity }}">
                     </div>
                     
                 </div>

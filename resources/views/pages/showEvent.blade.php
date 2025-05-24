@@ -74,7 +74,7 @@
                 {{ $event->description }}
             </p>
             <p class="text-gray-400 description">
-                700 MAD
+                {{$event->teckets->first()->prix}} MAD
             </p>
             <form action="{{ route('payement.checkout') }}" class="flex flex-col" method="GET">
                 @csrf
@@ -84,7 +84,7 @@
                 </label>
                 <button type="submit" id="buyButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
                     Acheter
-                    <p class="prix_complete">700 MAD</p>
+                    <p class="prix_complete">{{$event->teckets->first()->prix}} MAD</p>
                 </button>
             </form>
             
@@ -100,7 +100,7 @@
     const prixComplete = document.querySelector('.prix_complete');
     quantity_tickets.addEventListener('change', function() {
         const quantityTickets = document.getElementById('quantity_tickets').value;
-        const prixTotal = 700 * quantityTickets;
+        const prixTotal = {{$event->teckets->first()->prix}} * quantityTickets;
         prixComplete.textContent = prixTotal + ' MAD';
     });
 </script>
