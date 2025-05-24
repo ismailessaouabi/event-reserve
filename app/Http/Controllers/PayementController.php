@@ -27,7 +27,12 @@ class PayementController extends Controller
             // Stockez les informations importantes en session
             session([
                 'last_event_id' => $id,
+                'nom' => $request->input('nom'),
+                'email' => $request->input('email'),
+                'telephone' => $request->input('telephone'),
+
                 'last_quantity' => $request->input('quantity')
+
             ]);
             
             $provider = new PayPalClient;

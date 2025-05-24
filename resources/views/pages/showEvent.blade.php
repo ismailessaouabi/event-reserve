@@ -73,9 +73,16 @@
             <p class="text-gray-400 description">
                 {{ $event->description }}
             </p>
+            @if($event->teckets->count() > 0)
             <p class="text-gray-400 description">
+
                 {{$event->teckets->first()->prix}} MAD
             </p>
+            @else
+            <p class="text-gray-400 description">
+                300 MAD
+            </p>
+            @endif
             <form action="{{ route('payement.checkout',$event->id) }}" class="flex flex-col" method="GET">
                 @csrf
                 <label for="quantity_tickets" class="text-gray-400">
@@ -84,7 +91,11 @@
                 </label>
                 <button type="submit" id="buyButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
                     Acheter
+                    @if($event->teckets->count() > 0)
                     <p class="prix_complete">{{$event->teckets->first()->prix}} MAD</p>
+                    @else
+                    <p class="prix_complete">300 MAD</p>
+                    @endif
                 </button>
             </form>
             

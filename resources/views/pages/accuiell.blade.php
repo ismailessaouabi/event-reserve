@@ -114,24 +114,24 @@
                     <h3 class="text-white font-medium text-sm truncate-2-lines">{{ $event->name }}</h3>
                     <div class="flex items-center mt-2">
                     <i class="fas fa-clock text-gray-400 text-xs"></i>
-                        <span class="text-gray-400 text-xs ml-1">{{ $event->start_time }}</span>
+                        <span class="text-gray-400 text-xs ml-1">début : {{ $event->start_time }}</span>
                     </div>
                     <div class="flex items-center mt-2">
                     <i class="fas fa-clock text-gray-400 text-xs"></i>
-                        <span class="text-gray-400 text-xs ml-1">{{ $event->end_time }}</span>
+                        <span class="text-gray-400 text-xs ml-1">fin : {{ $event->end_time }}</span>
                     </div>                  
 
                     <div class="flex items-center mt-2">
                         <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
-                        <span class="text-gray-400 text-xs ml-1">{{ $event->place->name }}</span>
+                        <span class="text-gray-400 text-xs ml-1">Lieu : {{ $event->place->name }}</span>
                     </div>
                     @if ($event->teckets->count() > 0)
                     <div class="mt-3 flex justify-between items-center">
-                        <span class="text-white font-bold text-sm">{{ $event->teckets->first()->prix }} MAD</span>
+                        <span class="text-white bg-gray-700 px-2 py-1 rounded font-bold text-sm">{{ $event->teckets->first()->prix }} MAD</span>
                     </div>
                     @else
                     <div class="mt-3 flex justify-between items-center">
-                        <span class="text-white font-bold text-sm">300 MAD</span>
+                        <span class="text-white bg-gray-700 px-2 py-1 rounded font-bold text-sm">300 MAD</span>
                     </div>
                     @endif
                 </div>
