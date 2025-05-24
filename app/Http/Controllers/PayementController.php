@@ -89,15 +89,15 @@ class PayementController extends Controller
             
             if (isset($response['status']) && $response['status'] == 'COMPLETED') {
                 // Récupérez les données de session ou autres moyens de stockage temporaire
-                $event_id = 1;
-                $quantity = 2;
-                $user_id = 1; // Si vous utilisez l'authentification
+                $event = Event::where('id', session('last_event_id'))->first();
+                $quantity = session('last_quantity');
+               
                 
                 
                 
                 $transaction = Transaction::create([
-                    'user_id' => $user_id,
-                    'event_id' => $event_id,
+                    'user_id' => 2,
+                    'event_id' => $event->id,
                     'paypal_transaction_id' => $response['id'],
                     'payer_email' => $response['payer']['email_address'],
                     'quantity' => $quantity,

@@ -23,38 +23,38 @@
                 @csrf
                 
                 <div>
-                    @if (session('success'))
-                        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-                            <span class="block sm:inline">{{ session('success') }}</span>
-                        </div>
-                    @endif
-                    @if (session('error'))
-                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                            <span class="block sm:inline">{{ session('error') }}</span>
-                        </div>
-                    @endif
-                    <label for="amount" class="block text-sm font-medium text-gray-700">
-                        Montant à payer
+                    <label for="description" class="block text-sm font-medium text-gray-700">
+                        Votre Nom
                     </label>
-                    <div class="mt-1 relative rounded-md shadow-sm">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <span class="text-gray-500 sm:text-sm">€</span>
-                        </div>
-                        <input type="text" name="amount" id="amount" 
-                                class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
-                                placeholder="0.00"
-                                aria-describedby="price-currency"
-                                
-                                value="34"
-
-                                required>
-                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                            <span class="text-gray-500 sm:text-sm" id="price-currency">EUR</span>
-                        </div>
-                    </div>
-                    
+                    <div class="mt-1">
+                        <input type="text" name="quantity" id="description"
+                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                            value="{{ $quantity }}">
+                    </div>                    
                 </div>
 
+                <div>
+                    <label for="description" class="block text-sm font-medium text-gray-700">
+                        Votre Téléphone 
+                    </label>
+                    <div class="mt-1">
+                        <input type="text" name="quantity" id="description"
+                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                            value="{{ $quantity }}">
+                    </div>                    
+                </div>
+
+                <div>
+                    <label for="description" class="block text-sm font-medium text-gray-700">
+                        Votre Email
+                    </label>
+                    <div class="mt-1">
+                        <input type="text" name="quantity" id="description"
+                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                            value="{{ $quantity }}">
+                    </div>                    
+                </div>
+                
                 <div>
                     <label for="description" class="block text-sm font-medium text-gray-700">
                         quantity
@@ -63,8 +63,7 @@
                         <input type="text" name="quantity" id="description"
                             class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                             value="{{ $quantity }}">
-                    </div>
-                    
+                    </div>                    
                 </div>
 
                 <div>
@@ -77,15 +76,7 @@
                         <option value="paypal">PayPal</option>
                     </select>
                     
-                </div>
-
-                <div class="flex items-center">
-                    <input id="terms" name="terms" type="checkbox" 
-                        class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" required>
-                    <label for="terms" class="ml-2 block text-sm text-gray-900">
-                        J'accepte les <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">conditions générales</a>
-                    </label>
-                </div>
+                </div>            
 
                 <div>
                     <button type="submit" 
