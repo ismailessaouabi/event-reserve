@@ -41,6 +41,8 @@ class PayementController extends Controller
             $provider->setAccessToken($paypalToken);
             
             $event = Event::findOrFail($id);
+            $teckt = Tecket::where('event_id', $event->id)->first();
+            $prix = $teckt->prix;
 
     
             $order = $provider->createOrder([
@@ -53,7 +55,7 @@ class PayementController extends Controller
                     [
                         "amount" => [
                             "currency_code" => "EUR",
-                            "value" => $request->input('amount') * $request->input('quantity'),
+                            "value" => $prix*$request->input('quantity'),
                         ],
                         "description" => "Achat de billets",
                     ]
