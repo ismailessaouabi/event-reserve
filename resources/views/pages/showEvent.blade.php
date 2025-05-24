@@ -76,7 +76,7 @@
             <p class="text-gray-400 description">
                 {{$event->teckets->first()->prix}} MAD
             </p>
-            <form action="{{ route('payement.checkout') }}" class="flex flex-col" method="GET">
+            <form action="{{ route('payement.checkout',$event->id) }}" class="flex flex-col" method="GET">
                 @csrf
                 <label for="quantity_tickets" class="text-gray-400">
                     Nombre de tickets :

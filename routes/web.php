@@ -24,10 +24,10 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/', [EventController::class, 'list_events_accueil'])->name('events.home');
 Route::get('/event/{id}', [EventController::class, 'show_event_accueil'])->name('accueil.event.show');
 // Routes pour payements dans page d'accueil
-Route::get('/payement', [PayementController::class, 'createTransaction'])->name('payement.checkout');
-Route::post('/payement', [PayementController::class, 'processTransaction'])->name('payement.process');
-Route::get('/payement/success', [PayementController::class, 'successTransaction'])->name('payement.success');
-Route::get('/payement/cancel', [PayementController::class, 'cancelTransaction'])->name('payement.cancel');
+Route::get('/payement/{id}', [PayementController::class, 'createTransaction'])->name('payement.checkout');
+Route::post('/payement/{id}/process', [PayementController::class, 'processTransaction'])->name('payement.process');
+Route::get('/payement/{id}/success', [PayementController::class, 'successTransaction'])->name('payement.success');
+Route::get('/payement/cancel', [PayementController::class, 'cancelTransaction'])->name('payement.cancel'); // Ajoutez cette route
 Route::get('/tecket/index/{id}', [PayementController::class, 'index'])->name('tecket.index');
 Route::get('/tickets/{ticket}/download', [PayementController::class, 'generateTicket'])
     ->name('tickets.download');

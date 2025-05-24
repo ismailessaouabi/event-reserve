@@ -8,48 +8,53 @@ use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use App\Models\Transaction;
 use App\Models\Tecket;
 use App\Models\Category;
+use App\Models\Event;
 
 class PayementController extends Controller
 {
-    /**
-     * Préparer la transaction PayPal
-     */
-    public function createTransaction(Request $request )
+    
+    public function createTransaction(Request $request, $id)
     {
         $quantity = $request->input('quantity_tickets');
-        return view('pages.payement', compact('quantity'));
+        $event = Event::findOrFail($id); // Retirez first()
+        return view('pages.payement', compact('quantity', 'event'));
     }
 
-    /**
-     * Traiter le paiement PayPal
-     */
-    public function processTransaction(Request $request)
+   
+    public function processTransaction(Request $request, $id)
     {
         try {
+            // Stockez les informations importantes en session
+            session([
+                'last_event_id' => $id,
+                'last_quantity' => $request->input('quantity')
+            ]);
+            
             $provider = new PayPalClient;
             $provider->setApiCredentials(config('paypal'));
             $paypalToken = $provider->getAccessToken();
             $provider->setAccessToken($paypalToken);
+            
+            $event = Event::findOrFail($id);
 
-            // Créer l'ordre
+    
             $order = $provider->createOrder([
                 "intent" => "CAPTURE",
                 "application_context" => [
-                    "return_url" => route('payement.success'),
-                    "cancel_url" => route('payement.cancel'),
+                    "return_url" => route('payement.success', ['id' => $event->id]),
+                    "cancel_url" => route('payement.cancel', ['id' => $event->id]),
                 ],
                 "purchase_units" => [
                     [
                         "amount" => [
                             "currency_code" => "EUR",
-                            "value" => $request->input('amount')*$request->input('quantity'),
+                            "value" => $request->input('amount') * $request->input('quantity'),
                         ],
-                        "description" => "Achat sur Mon Site Web",
+                        "description" => "Achat de billets",
                     ]
                 ]
             ]);
-
-            // Rediriger vers PayPal pour paiement
+            
             if (isset($order['id']) && $order['id'] != null) {
                 foreach ($order['links'] as $link) {
                     if ($link['rel'] === 'approve') {
@@ -58,23 +63,20 @@ class PayementController extends Controller
                 }
                 
                 return redirect()
-                    ->route('payement.checkout', ['event_id' => $request->event_id])
+                    ->route('payement.checkout', ['id' => $id])
                     ->with('error', 'Erreur lors de la création du paiement PayPal.');
             } else {
                 return redirect()
-                    ->route('payement.checkout', ['event_id' => $request->event_id])
+                    ->route('payement.checkout', ['id' => $id])
                     ->with('error', $order['message'] ?? 'Erreur lors de la création du paiement PayPal.');
             }
         } catch (\Exception $e) {
             return redirect()
-                ->route('payement.checkout', ['event_id' => $request->event_id])
+                ->route('payement.checkout', ['id' => $id])
                 ->with('error', $e->getMessage());
         }
     }
-
-    /**
-     * Succès de la transaction PayPal
-     */
+    
     public function successTransaction(Request $request)
     {
         try {
@@ -86,37 +88,42 @@ class PayementController extends Controller
             $response = $provider->capturePaymentOrder($request->token);
             
             if (isset($response['status']) && $response['status'] == 'COMPLETED') {
-                // Ici, vous enregistrez la transaction dans votre base de données
-                // Par exemple:
+                // Récupérez les données de session ou autres moyens de stockage temporaire
+                $event_id = 1;
+                $quantity = 2;
+                $user_id = 1; // Si vous utilisez l'authentification
+                
+                
+                
                 $transaction = Transaction::create([
-                    'user_id' => 1, // Ou l'ID utilisateur de votre système
-                    'event_id' => 1, // L'ID de l'événement acheté
-                    'paypal_transaction_id' => $response['id'], // Nouveau champ
-                    'payer_email' => $response['payer']['email_address'], // Nouveau champ
-                    'quantity' => 1, // Doit être un entier
+                    'user_id' => $user_id,
+                    'event_id' => $event_id,
+                    'paypal_transaction_id' => $response['id'],
+                    'payer_email' => $response['payer']['email_address'],
+                    'quantity' => $quantity,
                     'total_price' => $response['purchase_units'][0]['payments']['captures'][0]['amount']['value'],
                     'status' => $response['status'],
                 ]);
+                
+                // Nettoyez la session
+                session()->forget(['last_event_id', 'last_quantity']);
                 
                 return redirect()
                     ->route('tecket.index', ['id' => $transaction->event_id])
                     ->with('success', 'Transaction complétée.');
             } else {
                 return redirect()
-                    ->route('payement.checkout', ['event_id' => $request->event_id])
+                    ->route('payement.checkout', ['id' => session('last_event_id')]) // Redirigez vers une page générique
                     ->with('error', $response['message'] ?? 'Quelque chose s\'est mal passé.');
             }
         } catch (\Exception $e) {
             return redirect()
-                ->route('payement.checkout', ['event_id' => $request->event_id])
+                ->route('home')
                 ->with('error', $e->getMessage());
         }
     }
 
-    
-    /**
-     * Annulation de la transaction PayPal
-     */
+
     public function cancelTransaction(Request $request)
     {
         return redirect()
@@ -132,18 +139,14 @@ class PayementController extends Controller
         $categories = Category::all();
         return view('pages.tecket', compact('transaction','categories'));
     }
-    /**
-     * Générer le PDF du ticket
-     */
+   
     public function generateTicket(String $ticketId)
     {
-        // Récupérer les données du ticket et de l'événement
         $categories = Category::all();
         $transaction = Transaction::with('event', 'user')->findOrFail($ticketId);
         $event = $transaction->event;
         $user = $transaction->user;
         
-        // Données à passer à la vue
         $data = [
             'transaction' => $transaction,
             'event' => $event,
@@ -166,4 +169,6 @@ class PayementController extends Controller
         // Vous pouvez utiliser un package comme simplesoftwareio/simple-qrcode
         //return \QrCode::size(100)->generate($code);
     //}
+
+    
 }
