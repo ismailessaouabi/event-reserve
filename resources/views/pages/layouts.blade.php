@@ -8,6 +8,13 @@
     <title>Event-reserve | Guichet en ligne</title>
 </head>
 <body class="bg-[#051529] text-white ">
+    <style>
+    .active{
+        border: 2px solid white;
+        padding: 3px 8px;
+        border-radius: 3px;
+       }       
+    </style>
     <header class="bg-[#051529] border-b border-gray-700">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-4">
@@ -44,7 +51,7 @@
             <nav class="overflow-x-auto whitespace-nowrap py-2 -mx-4 px-4 hidden md:block">
                 <div class="flex space-x-6">
                     @foreach ($categories as $category)
-                        <a href="{{ route('eventsparcategory' , $category->id)}}" class="text-white font-medium">{{ $category->name }}</a>
+                        <a href="{{ route('eventsparcategory' , $category->id)}}" class="category text-white font-medium {{ request()->route('id') == $category->id ? 'active' : '' }} ">{{ $category->name }}</a>
                     @endforeach
                     
                     <div class="ml-auto flex items-center space-x-4">
@@ -121,6 +128,17 @@
             </div>
         </div>
     </footer>
-    
+    <script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const categoryLinks = document.querySelectorAll('.category');
+        categoryLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                categoryLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    });
+</script> 
 </body>
 </html>
