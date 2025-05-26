@@ -8,46 +8,9 @@
     <title>Event-reserve | Guichet en ligne</title>
 </head>
 <body class="bg-[#051529] text-white">
-    <style>
-        .active{
-            border: 2px solid white;
-            padding: 3px 8px;
-            border-radius: 3px;
-        }  
-        .heddin{
-            display: none;
-        }
-        .mobile-menu {
-            display: none;
-        }
-        @media (max-width: 768px) {
-            .mobile-menu {
-                display: block;
-            }
-            .desktop-menu {
-                display: none;
-            }
-            .search-container {
-                order: 3;
-                width: 100%;
-                margin-top: 1rem;
-            }
-            .header-container {
-                flex-wrap: wrap;
-            }
-            .nav-secondary {
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-            .footer-grid {
-                grid-template-columns: 1fr !important;
-                gap: 2rem !important;
-            }
-        }
-    </style>
     <header class="bg-[#051529] w-full border-b border-gray-700">
         <div class="container w-full mx-auto px-4">
-            <div class="header-container flex w-full justify-between items-center py-4">
+            <div class="header-container flex w-full flex-wrap justify-between items-center py-4">
                 <div class="flex items-center">
                     <a href="/" class="text-white font-bold text-xl md:text-2xl">
                         <i class="fa-regular fa-calendar-check text-xl md:text-2xl font-white"></i>
@@ -56,31 +19,22 @@
                 </div>
                 
                 <!-- Mobile menu button -->
-                <div class="mobile-menu md:hidden">
+                <div class="md:hidden">
                     <button id="mobileMenuButton" class="text-white focus:outline-none">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
                 
-                <form action="{{ route('events.home') }}" method="GET" class="search-container hidden md:flex space-x-4 mx-auto">
+                <form action="{{ route('events.rechercher') }}" method="GET" class="hidden md:flex space-x-4 mx-auto order-3 md:order-none w-full md:w-auto mt-4 md:mt-0">
                     <div class="relative w-[200px] md:w-[300px] input_rechercher">
                         <input type="text" placeholder="Rechercher" name="name_event" class="bg-gray-800 w-full text-white rounded-full p-2 text-sm md:p-2.5 pr-8">
                         <i class="fas fa-search absolute right-3 top-2.5 md:top-3 text-gray-400"></i>
-                        <div class="events_rechercher absolute z-50 bg-gray-800 w-full text-white rounded-lg text-sm">
-                            @if(!empty($events_rechercher))
-                                @foreach($events_rechercher as $event)
-                                    <div class="py-1 flex px-2 hover:bg-gray-700 rounded">
-                                        <img src="{{ Storage::url($event->image_path) }}" alt="" class="w-8 h-8 rounded-full mr-2">
-                                        <a href="{{ route('accueil.event.show', $event->id) }}" class="truncate-2-lines">{{ $event->name }}</a>
-                                    </div>
-                                @endforeach
-                            @endif                      
-                        </div>
+                        
                     </div>
                     <button type="submit" class="bg-blue-600 text-white px-4 h-fit py-1.5 md:py-2 rounded-full text-sm">Rechercher</button>
                 </form>
                 
-                <div class="desktop-menu flex items-center space-x-2 md:space-x-4">
+                <div class="hidden md:flex items-center space-x-2 md:space-x-4">
                     <div class="flex items-center gap-1.5 md:gap-2.5">
                         <a href="{{ route('login') }}" class="bg-blue-600 text-white px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm">Se connecter</a>
                         <a href="{{ route('register') }}" class="bg-blue-600 text-white px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm">S'inscrire</a>        
@@ -90,20 +44,11 @@
             
             <!-- Mobile menu content -->
             <div id="mobileMenuContent" class="hidden md:hidden bg-[#051529] py-4 border-t border-gray-700">
-                <form action="{{ route('events.home') }}" method="GET" class="mb-4">
+                <form action="{{ route('events.rechercher') }}" method="GET" class="mb-4">
                     <div class="relative input_rechercher">
                         <input type="text" placeholder="Rechercher" name="name_event" class="bg-gray-800 w-full text-white rounded-full p-2 text-sm pr-8">
                         <i class="fas fa-search absolute right-3 top-2.5 text-gray-400"></i>
-                        <div class="events_rechercher absolute z-50 bg-gray-800 w-full text-white rounded-lg text-sm">
-                            @if(!empty($events_rechercher))
-                                @foreach($events_rechercher as $event)
-                                    <div class="py-1 flex px-2 hover:bg-gray-700 rounded">
-                                        <img src="{{ Storage::url($event->image_path) }}" alt="" class="w-8 h-8 rounded-full mr-2">
-                                        <a href="{{ route('accueil.event.show', $event->id) }}" class="truncate-2-lines">{{ $event->name }}</a>
-                                    </div>
-                                @endforeach
-                            @endif                      
-                        </div>
+                        
                     </div>
                     <button type="submit" class="mt-2 bg-blue-600 text-white w-full py-2 rounded-full text-sm">Rechercher</button>
                 </form>
@@ -118,7 +63,7 @@
             <nav class="nav-secondary overflow-x-auto whitespace-nowrap py-2 -mx-4 px-4">
                 <div class="flex space-x-4 md:space-x-6">
                     @foreach ($categories as $category)
-                        <a href="{{ route('eventsparcategory' , $category->id)}}" class="category text-white font-medium text-sm md:text-base {{ request()->route('id') == $category->id ? 'active' : '' }}">{{ $category->name }}</a>
+                        <a href="{{ route('eventsparcategory' , $category->id)}}" class="category text-white font-medium text-sm md:text-base {{ request()->route('id') == $category->id ? 'border border-white px-2 py-0.5 md:px-2 md:py-0.5 rounded' : '' }}">{{ $category->name }}</a>
                     @endforeach
                     
                     <div class="ml-auto flex items-center space-x-4">
@@ -135,7 +80,7 @@
 
     <footer class="bg-[#051529] py-8 md:py-10 border-t border-gray-700">
         <div class="container mx-auto px-4">
-            <div class="footer-grid grid grid-cols-2 md:grid-cols-5 gap-6">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
                 <div class="col-span-2 md:col-span-1">
                     <img src="/api/placeholder/120/40" alt="Guichet Logo" class="h-8 mb-4">
                     <p class="text-gray-400 text-xs mb-4">Guichet est une plateforme de billetterie innovante qui offre une expérience utilisateur optimale pour acheter des billets d'événements au Maroc.</p>
@@ -195,17 +140,14 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-       
-
-        // Menu mobile - Correction ici
+        // Menu mobile
         const mobileMenuButton = document.getElementById('mobileMenuButton');
         const mobileMenuContent = document.getElementById('mobileMenuContent');
         
         if (mobileMenuButton && mobileMenuContent) {
             mobileMenuButton.addEventListener('click', function(e) {
-                e.preventDefault(); // Empêche tout comportement par défaut
+                e.preventDefault();
                 mobileMenuContent.classList.toggle('hidden');
-                // Changement d'icône quand le menu est ouvert/fermé
                 const icon = this.querySelector('i');
                 if (mobileMenuContent.classList.contains('hidden')) {
                     icon.classList.remove('fa-times');
@@ -234,12 +176,12 @@
         
         if (inputRechercher && eventsRechercher) {
             inputRechercher.addEventListener('focus', function() {
-                eventsRechercher.classList.remove('heddin');
+                eventsRechercher.classList.remove('hidden');
             });
             
             document.addEventListener('click', function(event) {
-                if (!eventsRechercher.contains(event.target) {
-                    eventsRechercher.classList.add('heddin');
+                if (!eventsRechercher.contains(event.target) && event.target !== inputRechercher) {
+                    eventsRechercher.classList.add('hidden');
                 }
             });
         }

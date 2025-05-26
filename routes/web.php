@@ -35,6 +35,9 @@ Route::get('/tickets/{ticket}/download', [PayementController::class, 'generateTi
 Route::get('/eventsparcategorie/{id}', [CategoryController::class, 'events_par_categorie_accueil'])->name('eventsparcategory');   
 // Route pour lister events par date accuiel
 Route::get('/eventspardate', [EventController::class, 'list_events_par_date_accueil'])->name('eventspardate');
+Route::get('/eventsrecherche', [EventController::class, 'events_rechercher_accueil'])->name('events.rechercher');
+
+
 
 
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,11 +13,13 @@ class AuthController extends Controller
 
     public function showformregister()
     {
-        return view('pages.register');
+        $categories = Category::all();
+        return view('pages.register', compact('categories'));
     }
     public function showformlogin()
     {
-        return view('pages.login');
+        $categories = Category::all();
+        return view('pages.login' , compact('categories'));
     }
     public function register(Request $request)
     {   
@@ -48,6 +51,18 @@ class AuthController extends Controller
         ];
 
         $user = User::where('email', $email)->first();
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'User not found');
+        }
+        // Check if the user is an admin
+        if ($user->role != 'admin' && $user->role != 'organizer') {
+            return redirect()->route('login')->with('error', 'Unauthorized user role');
+        }
+        // check if the password is correct
+        if (!Hash::check($password, $user->password)) {
+            return redirect()->route('login')->with('error', 'Invalid credentials');
+        }
+        
         if(Auth::attempt($values))
         {
             if ($user->role == 'admin') {
