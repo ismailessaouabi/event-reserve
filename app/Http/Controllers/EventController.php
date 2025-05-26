@@ -153,7 +153,11 @@ class EventController extends Controller
         $events = Event::with('place','teckets')->get();
         $categories = Category::all();
         $name_event = $request->name_event;
-        $events_rechercher = Event::where('name', 'like', '%' . $name_event . '%')->get();
+        if ($name_event) {
+            $events_rechercher = Event::where('name', 'like', '%' . $name_event . '%')->get();
+        } else {
+            $events_rechercher = [];
+        }
         return view('pages.accuiell', compact('events', 'categories',  'events_rechercher'));
     }
     public function show_event_accueil(string $id){
