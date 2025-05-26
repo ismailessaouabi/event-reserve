@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     @vite('resources/css/app.css')
     <title>Event-reserve | Guichet en ligne</title>
 </head>
@@ -15,34 +15,42 @@
         border-radius: 3px;
        }       
     </style>
-    <header class="bg-[#051529] border-b border-gray-700">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center py-4">
+    <header class="bg-[#051529] w-full border-b border-gray-700">
+        <div class="container w-full mx-auto px-4">
+            <div class="flex w-full justify-between items-center py-4">
                 <div class="flex items-center">
                     <a href="/" class="text-white font-bold text-2xl">
+                        <i class="fa-regular fa-calendar-check text-2xl font-white"></i>
                         Event-reserve
                     </a>
                 </div>
                 
-                <div class="hidden md:flex space-x-4 mx-auto">
-                    <div class="px-4">|</div>
-                    <div class="relative">
-                        <input type="text" placeholder="Rechercher" class="bg-gray-800 text-white rounded-full py-1 px-4 text-sm pr-8">
-                        <i class="fas fa-search absolute right-3 top-2 text-gray-400"></i>
+                <form action="{{ route('events.home') }}" method="GET" class="hidden md:flex space-x-4 mx-auto">
+                    <div class="relative w-[300px]  ">
+                        <input type="text" placeholder="Rechercher" name="name_event" class="bg-gray-800 w-full text-white rounded-full p-2.5 text-sm pr-8">
+                        <i class="fas fa-search absolute right-3 top-3 text-gray-400"></i>
                     </div>
-                </div>
+                    @if(isset($events_rechercher))
+                        @foreach($events_rechercher as $event)
+                            <div class="relative w-[300px]  ">
+                                <a href="{{ route('accueil.event.show', $event->id) }}" class="bg-gray-800 w-full text-white rounded-full p-2.5 text-sm pr-8">{{$event->name}}</a>
+                            </div>
+                        @endforeach
+                    @else
+                        <div class="relative w-[300px]  ">
+                            <p class="bg-gray-800 w-full text-white rounded-full p-2.5 text-sm pr-8">aucune recherche</p>
+                        </div>
+                    @endif
+
+                    
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm">Rechercher</button>
+                </form>
                 
                 <div class="flex items-center space-x-4">
                     
-                    <div class="flex items-center">
+                    <div class="flex items-center gap-2.5">
                         <a href="{{ route('login') }}" class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm">Se connecter</a>
-                        <a href="{{ route('register') }}" class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm">S'inscrire</a>
-
-                        <div class="ml-4 relative">
-                            <button class="flex items-center justify-center w-8 h-8 bg-gray-700 rounded-full">
-                                <i class="fas fa-user text-white"></i>
-                            </button>
-                        </div>
+                        <a href="{{ route('register') }}" class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm">S'inscrire</a>        
                     </div>
                 </div>
             </div>

@@ -149,10 +149,12 @@ class EventController extends Controller
     
 
 
-    public function list_events_accueil(){
+    public function list_events_accueil(Request $request){
         $events = Event::with('place','teckets')->get();
         $categories = Category::all();
-        return view('pages.accuiell', compact('events', 'categories'));
+        $name_event = $request->name_event;
+        $events_rechercher = Event::where('name', 'like', '%' . $name_event . '%')->get();
+        return view('pages.accuiell', compact('events', 'categories',  'events_rechercher'));
     }
     public function show_event_accueil(string $id){
         $event = Event::findOrFail($id);
@@ -164,6 +166,7 @@ class EventController extends Controller
         return view('pages.eventspardate', compact('events'));
 
     }
+    
     public function list_events_aujourdhui_accueil(Request $request){
         $now = Carbon::now();
         $events = Event::whereDate('start_time', $now)->get();

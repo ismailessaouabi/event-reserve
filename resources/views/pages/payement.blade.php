@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire de Paiement</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite('resources/css/app.css')
 </head>
 <body class="min-h-screen bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-800">
     <div class="min-h-screen flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8">
