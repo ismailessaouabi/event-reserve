@@ -20,9 +20,6 @@ Route::get('/login', [AuthController::class, 'showformlogin'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-// Routes pour evenements dans page d'accueil
-Route::get('/', [EventController::class, 'list_events_accueil'])->name('events.home');
-Route::get('/event/{id}', [EventController::class, 'show_event_accueil'])->name('accueil.event.show');
 // Routes pour payements dans page d'accueil
 Route::get('/payement/{id}', [PayementController::class, 'createTransaction'])->name('payement.checkout');
 Route::post('/payement/{id}/process', [PayementController::class, 'processTransaction'])->name('payement.process');
@@ -31,9 +28,10 @@ Route::get('/payement/cancel', [PayementController::class, 'cancelTransaction'])
 Route::get('/tecket/index/{id}', [PayementController::class, 'index'])->name('tecket.index');
 Route::get('/tickets/{ticket}/download', [PayementController::class, 'generateTicket'])
     ->name('tickets.download');
-// Route pour lister events par categorie accuiel
+// Route pour lister events par  accuiel
+Route::get('/event/{id}', [EventController::class, 'show_event_accueil'])->name('accueil.event.show');
+Route::get('/', [EventController::class, 'list_events_accueil'])->name('events.home');
 Route::get('/eventsparcategorie/{id}', [CategoryController::class, 'events_par_categorie_accueil'])->name('eventsparcategory');   
-// Route pour lister events par date accuiel
 Route::get('/eventspardate', [EventController::class, 'list_events_par_date_accueil'])->name('eventspardate');
 Route::get('/eventsrecherche', [EventController::class, 'events_rechercher_accueil'])->name('events.rechercher');
 

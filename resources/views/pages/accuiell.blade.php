@@ -8,7 +8,7 @@
             @for($i = 0; $i < 3; $i++)
                 
             <!-- Featured Event 1 -->
-            <a href="{{ route('accueil.event.show', $events[$i]->id) }}" class="relative rounded-lg overflow-hidden h-64">
+            <a href="{{ route('accueil.event.show', $events[$i]->id) }}" class="relative rounded-lg overflow-hidden ">
                 <img src="{{ Storage::url($events[$i]->image_path) }}" alt="Festival" class="w-full h-full object-cover">
                 <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
                     <span class="bg-yellow-500 text-black px-2 py-1 rounded text-xs font-bold">{{ $events[$i]->category->name }}</span>
@@ -35,65 +35,48 @@
         
         <!-- Events Grid -->
         <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">           
-            <!-- Event Card 2 -->
-            <div class="bg-gray-900 rounded-lg overflow-hidden event-card">
+            @if(!empty($events_aujourd_hui))
+            @foreach ($events_aujourd_hui as $event)
+            <a href="{{ route('accueil.event.show', $event->id) }}" class="bg-gray-900 rounded-lg border border-gray-700 overflow-hidden event-card">
                 <div class="relative">
-                    <img src="/api/placeholder/300/180" alt="Comedy Show" class="w-full h-40 object-cover">
-                    <span class="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded text-xs">Comédie Show</span>
+                    <img src="{{ Storage::url($event->image_path) }}" alt="Comedy Festival" class="w-full h-60 object-cover">
+                    <span class="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded text-xs">{{ $event->category->name }}</span>
                 </div>
                 <div class="p-3">
-                    <h3 class="text-white font-medium text-sm truncate-2-lines">Grande Comédie Show - Le plus fou des soirées comiques</h3>
-                    <p class="text-gray-400 text-xs mt-1">15 Juin 2023 à 20:00</p>
+                    <h3 class="text-white font-medium text-sm truncate-2-lines">{{ $event->name }}</h3>
+                    <div class="flex items-center mt-2">
+                    <i class="fas fa-clock text-gray-400 text-xs"></i>
+                        <span class="text-gray-400 text-xs ml-1">début : {{ $event->start_time }}</span>
+                    </div>
+                    <div class="flex items-center mt-2">
+                    <i class="fas fa-clock text-gray-400 text-xs"></i>
+                        <span class="text-gray-400 text-xs ml-1">fin : {{ $event->end_time }}</span>
+                    </div>                  
+
                     <div class="flex items-center mt-2">
                         <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
-                        <span class="text-gray-400 text-xs ml-1">Complexe Culturel ESPACE ROUDANI</span>
+                        <span class="text-gray-400 text-xs ml-1">Lieu : {{ $event->place->name }}</span>
                     </div>
+                    @if ($event->teckets->count() > 0)
                     <div class="mt-3 flex justify-between items-center">
-                        <span class="text-white font-bold text-sm">150,00 MAD</span>
+                        <span class="text-white bg-gray-700 px-2 py-1 rounded font-bold text-sm">{{ $event->teckets->first()->prix }} MAD</span>
                     </div>
+                    @else
+                    <div class="mt-3 flex justify-between items-center">
+                        <span class="text-white bg-gray-700 px-2 py-1 rounded font-bold text-sm">300 MAD</span>
+                    </div>
+                    @endif
                 </div>
-            </div>
+            </a>
             
-            <!-- Event Card 3 -->
-            <div class="bg-gray-900 rounded-lg overflow-hidden event-card">
-                <div class="relative">
-                    <img src="/api/placeholder/300/180" alt="Music Event" class="w-full h-40 object-cover">
-                    <span class="absolute top-2 left-2 bg-yellow-500 text-black px-2 py-1 rounded text-xs">MUSIC EVENT</span>
-                </div>
-                <div class="p-3">
-                    <h3 class="text-white font-medium text-sm truncate-2-lines">Soirée Red & Conditions</h3>
-                    <p class="text-gray-400 text-xs mt-1">17 Juin 2023 à 22:00</p>
-                    <div class="flex items-center mt-2">
-                        <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
-                        <span class="text-gray-400 text-xs ml-1">Complexe Événementiel BOULTEK</span>
-                    </div>
-                    <div class="mt-3 flex justify-between items-center">
-                        <span class="text-white font-bold text-sm">200,00 MAD</span>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+            @else
+            <p class="text-white text-sm ">Aucun événement aujourd'hui.</p>
+            @endif
             
-            <!-- Event Card 4 - Sold Out -->
-            <div class="bg-gray-900 rounded-lg overflow-hidden event-card">
-                <div class="relative">
-                    <img src="/api/placeholder/300/180" alt="Rappers Night" class="w-full h-40 object-cover">
-                    <span class="absolute top-2 left-2 bg-purple-500 text-white px-2 py-1 rounded text-xs">Rap & Pop</span>
-                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                        <span class="bg-red-600 text-white px-4 py-2 rounded-lg font-bold">SOLD OUT</span>
-                    </div>
-                </div>
-                <div class="p-3">
-                    <h3 class="text-white font-medium text-sm truncate-2-lines">Rappers Delight: Al Hoceima</h3>
-                    <p class="text-gray-400 text-xs mt-1">12 Juin 2023 à 23:00</p>
-                    <div class="flex items-center mt-2">
-                        <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
-                        <span class="text-gray-400 text-xs ml-1">Quartier Mirador, Al Hoceima</span>
-                    </div>
-                    <div class="mt-3 flex justify-between items-center">
-                        <span class="text-white font-bold text-sm">250,00 MAD</span>
-                    </div>
-                </div>
-            </div>
+           
+            
+           
         </div>
     </section>
     
