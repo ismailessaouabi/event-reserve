@@ -34,6 +34,9 @@ Route::get('/', [EventController::class, 'list_8events_accueil'])->name('events.
 Route::get('/list_events', [EventController::class, 'list_events_accueil'])->name('tout.events');
 Route::get('/eventsparcategorie/{id}', [CategoryController::class, 'events_par_categorie_accueil'])->name('eventsparcategory');   
 Route::get('/eventsrecherche', [EventController::class, 'events_rechercher_accueil'])->name('events.rechercher');
+Route::get('/eventsfiltrer', [EventController::class, 'filtrer_events_accueil'])->name('events.filtrer');
+
+
 
 
 

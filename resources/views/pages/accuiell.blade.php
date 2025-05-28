@@ -124,14 +124,15 @@
             @endforeach
         </div>
         
-        <!-- Load More Button -->
-        <div class="text-center mb-10">
-            <a href="{{ route('tout.events') }}" class="bg-gray-800 text-white px-6 py-2 rounded-full hover:bg-gray-700 transition">Plus d'événements</button>
-        </div>
+       
+        
     </section>
+    <div class="text-center ">
+        <a href="{{ route('tout.events') }}" class="bg-gray-800 text-white px-6 py-2 rounded-full hover:bg-gray-700 transition">Plus d'événements</a>
+    </div>
 
     <!-- Newsletter Section -->
-    <section class="bg-gray-900 py-8">
+    <section class="bg-gray-900 mt-8 py-8">
         <div class="container mx-auto px-4">
             <div class="text-center">
                 <h2 class="text-xl font-bold text-white mb-4">RESTEZ INFORMÉ!</h2>

@@ -9,7 +9,7 @@
             <label for="ville" class="block text-sm font-medium text-gray-300 mb-1">Ville</label>
             <select name="ville" id="ville" class="w-full bg-gray-700 text-white rounded-md px-3 py-2 text-sm">
                 <option value="">Toutes les villes</option>
-                @foreach($events as $event)
+                @foreach($allevents as $event)
                     <option value="{{ $event->place->name }}" {{ request('ville') == $event->place->name ? 'selected' : '' }}>{{ $event->place->name }}</option>
                 @endforeach
             </select>
@@ -44,7 +44,7 @@
                 Filtrer
             </button>
             @if(request()->has('ville') || request()->has('categorie') || request()->has('prix_max'))
-                <a href="#" class="ml-2 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-md text-sm">
+                <a href="{{ route('tout.events') }}" class="ml-2 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-md text-sm">
                     Réinitialiser
                 </a>
             @endif

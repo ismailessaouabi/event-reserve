@@ -85,51 +85,51 @@
                     <img src="/api/placeholder/120/40" alt="Guichet Logo" class="h-8 mb-4">
                     <p class="text-gray-400 text-xs mb-4">Guichet est une plateforme de billetterie innovante qui offre une expérience utilisateur optimale pour acheter des billets d'événements au Maroc.</p>
                     <div class="flex space-x-3">
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                        <a href="/" class="text-gray-400 hover:text-white"><i class="fab fa-facebook"></i></a>
+                        <a href="/" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="/" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="/" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 
                 <div>
                     <h3 class="text-white font-medium mb-3 md:mb-4">Explorer</h3>
                     <ul class="text-gray-400 text-xs md:text-sm space-y-1.5 md:space-y-2">
-                        <li><a href="#" class="hover:text-white">Événements</a></li>
-                        <li><a href="#" class="hover:text-white">Théâtre</a></li>
-                        <li><a href="#" class="hover:text-white">Concerts</a></li>
-                        <li><a href="#" class="hover:text-white">Festivals</a></li>
-                        <li><a href="#" class="hover:text-white">Sport</a></li>
-                        <li><a href="#" class="hover:text-white">Blog</a></li>
+                        <li><a href="/" class="hover:text-white">Événements</a></li>
+                        <li><a href="/" class="hover:text-white">Théâtre</a></li>
+                        <li><a href="/" class="hover:text-white">Concerts</a></li>
+                        <li><a href="/" class="hover:text-white">Festivals</a></li>
+                        <li><a href="/" class="hover:text-white">Sport</a></li>
+                        <li><a href="/" class="hover:text-white">Blog</a></li>
                     </ul>
                 </div>
                 
                 <div>
                     <h3 class="text-white font-medium mb-3 md:mb-4">Service client</h3>
                     <ul class="text-gray-400 text-xs md:text-sm space-y-1.5 md:space-y-2">
-                        <li><a href="#" class="hover:text-white">Mon compte</a></li>
-                        <li><a href="#" class="hover:text-white">FAQ</a></li>
-                        <li><a href="#" class="hover:text-white">Comment ça marche</a></li>
-                        <li><a href="#" class="hover:text-white">Politiques de remboursement</a></li>
+                        <li><a href="/" class="hover:text-white">Mon compte</a></li>
+                        <li><a href="/" class="hover:text-white">FAQ</a></li>
+                        <li><a href="/" class="hover:text-white">Comment ça marche</a></li>
+                        <li><a href="/" class="hover:text-white">Politiques de remboursement</a></li>
                     </ul>
                 </div>
                 
                 <div>
                     <h3 class="text-white font-medium mb-3 md:mb-4">Termes & Conditions</h3>
                     <ul class="text-gray-400 text-xs md:text-sm space-y-1.5 md:space-y-2">
-                        <li><a href="#" class="hover:text-white">Politique de confidentialité</a></li>
-                        <li><a href="#" class="hover:text-white">Termes d'utilisation</a></li>
-                        <li><a href="#" class="hover:text-white">Conditions générales de vente</a></li>
+                        <li><a href="/" class="hover:text-white">Politique de confidentialité</a></li>
+                        <li><a href="/" class="hover:text-white">Termes d'utilisation</a></li>
+                        <li><a href="/" class="hover:text-white">Conditions générales de vente</a></li>
                     </ul>
                 </div>
                 
                 <div class="col-span-2 md:col-span-1">
                     <h3 class="text-white font-medium mb-3 md:mb-4">Téléchargez l'application</h3>
                     <div class="flex flex-col space-y-2">
-                        <a href="#" class="block">
+                        <a href="/" class="block">
                             <img src="/api/placeholder/120/40" alt="App Store" class="h-8 md:h-10">
                         </a>
-                        <a href="#" class="block">
+                        <a href="/" class="block">
                             <img src="/api/placeholder/120/40" alt="Google Play" class="h-8 md:h-10">
                         </a>
                     </div>
