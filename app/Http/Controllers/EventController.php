@@ -171,40 +171,31 @@ class EventController extends Controller
         $events = Event::with('place','teckets')->get();
         return view('pages.toutesevents', compact( 'categories', 'events'));
     }
-
     public function filtrer_events_accueil(Request $request)
     {
         // Récupérer toutes les catégories pour le filtre
         $categories = Category::all();
         $allevents = Event::all();
-        
         // Commencer la requête avec les relations
         $query = Event::with(['place', 'teckets', 'category']);
-        
         // Appliquer les filtres seulement s'ils sont présents dans la requête
-        if ($request->has('category') && $request->category) {
-            $query->where('category_id', $request->category);
+        if ($request->has('categorie') && $request->categorie) {
+            $query->whereHas('category', function($q) use ($request) {
+                $q->where('id', $request->categorie);
+            });
         }
-        
-        
-        
         if ($request->has('ville') && $request->ville) {
             $query->whereHas('place', function($q) use ($request) {
                 $q->where('name', $request->ville);
             });
         }
-        
         if ($request->has('prix_max') && $request->prix_max) {
             $query->whereHas('teckets', function($q) use ($request) {
                 $q->where('prix', '<=', $request->prix_max);
             });
         }
-        
         // Exécuter la requête et paginer les résultats
         $events = $query->get();
-        
-       
-        
         return view('pages.eventsfiltrer', compact('categories', 'allevents', 'events' ));
     }
      

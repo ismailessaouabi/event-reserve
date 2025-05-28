@@ -54,6 +54,10 @@
 
 <!-- Liste des événements -->
 <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
+    @if ($events->isEmpty())
+        <p class="text-white text-sm font-semibold pl-3 pt-5">Il n'y a aucun événement correspondant avec votre filtre.</p>
+        
+    @else
     @foreach ($events as $event)
         <a href="{{ route('accueil.event.show', $event->id) }}" class="bg-gray-900 rounded-lg overflow-hidden event-card hover:border border-gray-700">
             <div class="relative">
@@ -87,6 +91,7 @@
             </div>
         </a>
     @endforeach
+    @endif
 </div>
 
 <!-- Pagination -->

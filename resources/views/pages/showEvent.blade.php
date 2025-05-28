@@ -107,11 +107,10 @@
     </div>
 </div>
 <script>
-    const quantity_tickets = document.getElementById('quantity_tickets');
     const prixComplete = document.querySelector('.prix_complete');
     quantity_tickets.addEventListener('change', function() {
         const quantityTickets = document.getElementById('quantity_tickets').value;
-        const prixTotal = {{$event->teckets->first()->prix}} ?    {{$event->teckets->first()->prix}} * quantity_tickets : 300 * quantity_tickets; 
+        const prixTotal = {{$event->teckets->first()->prix}} ?    {{$event->teckets->first()->prix}} * quantityTickets : 300 * quantityTickets; 
         prixComplete.textContent = prixTotal + ' MAD';
     });
 </script>
