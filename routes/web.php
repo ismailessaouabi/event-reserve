@@ -102,3 +102,7 @@ Route::delete('/organizer/events/{id}', [EventController::class, 'destroy_event_
 
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
