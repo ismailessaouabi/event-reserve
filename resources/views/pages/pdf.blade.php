@@ -9,7 +9,8 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
-            color: #333;
+            color: #ffffff;
+            background-color: #474f57;
         }
         .header {
             text-align: center;
@@ -17,6 +18,11 @@
         }
         .header img {
             width: 150px;
+        }
+        .header h1 {
+            font-size: 28px;
+            color: #ffffff;
+            margin: 10px 0;
         }
         .ticket-title {
             font-size: 24px;
@@ -30,6 +36,7 @@
             padding: 15px;
             border-radius: 5px;
             margin-bottom: 20px;
+            color: #2c3e50;
         }
         .event-info {
             margin: 20px 0;
@@ -48,7 +55,7 @@
 </head>
 <body>
     <div class="header">
-        <img src="{{ Storage::url($transaction->event->image_path) }}" alt="Guichet Logo">
+        <img src="{{ Storage::url($transaction->event->image_path) }}" alt="event-reserve Logo">
         <div class="ticket-title"># Ticket</div>
     </div>
 
@@ -81,7 +88,7 @@
     @endif
 
     <div class="footer">
-        <p>Guichet est une plateforme de billetterie innovante pour les événements au Maroc.</p>
+        <p>event-reserve est une plateforme de billetterie innovante pour les événements au Maroc.</p>
         <p>Pour toute question, contactez-nous via notre FAQ ou service client.</p>
     </div>
 </body>

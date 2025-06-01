@@ -15,9 +15,8 @@ class PayementController extends Controller
     
     public function createTransaction(Request $request, $id)
     {
-        $quantity = $request->input('quantity_tickets');
         $event = Event::findOrFail($id); // Retirez first()
-        return view('pages.payement', compact('quantity', 'event'));
+        return view('pages.payement', compact( 'event'));
     }
 
    
@@ -30,8 +29,7 @@ class PayementController extends Controller
                 'nom' => $request->input('nom'),
                 'email' => $request->input('email'),
                 'telephone' => $request->input('telephone'),
-
-                'last_quantity' => $request->input('quantity')
+                'ville' => $request->input('ville'),
 
             ]);
             
@@ -55,7 +53,7 @@ class PayementController extends Controller
                     [
                         "amount" => [
                             "currency_code" => "EUR",
-                            "value" => $prix*$request->input('quantity'),
+                            "value" => 34,
                         ],
                         "description" => "Achat de billets",
                     ]
@@ -71,11 +69,11 @@ class PayementController extends Controller
                 
                 return redirect()
                     ->route('payement.checkout', ['id' => $id])
-                    ->with('error', 'Erreur lors de la création du paiement PayPal.');
+                    ->with('error', 'Erreur lors de la création du paiement PayPal 1.');
             } else {
                 return redirect()
                     ->route('payement.checkout', ['id' => $id])
-                    ->with('error', $order['message'] ?? 'Erreur lors de la création du paiement PayPal.');
+                    ->with('error', $order['message'] ?? 'Erreur lors de la création du paiement PayPal 2.');
             }
         } catch (\Exception $e) {
             return redirect()
@@ -96,18 +94,14 @@ class PayementController extends Controller
             
             if (isset($response['status']) && $response['status'] == 'COMPLETED') {
                 // Récupérez les données de session ou autres moyens de stockage temporaire
-                $event = Event::where('id', session('last_event_id'))->first();
-                $quantity = session('last_quantity');
-               
-                
-                
-                
+                $event = Event::where('id', session('last_event_id'))->first();               
+                // Créez une nouvelle transaction
                 $transaction = Transaction::create([
                     'user_id' => 2,
                     'event_id' => $event->id,
                     'paypal_transaction_id' => $response['id'],
                     'payer_email' => $response['payer']['email_address'],
-                    'quantity' => $quantity,
+                    'quantity' => 4,
                     'total_price' => $response['purchase_units'][0]['payments']['captures'][0]['amount']['value'],
                     'status' => $response['status'],
                 ]);
@@ -125,7 +119,7 @@ class PayementController extends Controller
             }
         } catch (\Exception $e) {
             return redirect()
-                ->route('home')
+                ->route('payement.checkout', ['id' => session('last_event_id')])
                 ->with('error', $e->getMessage());
         }
     }

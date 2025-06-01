@@ -48,7 +48,7 @@
 </head>
 <body>
     <div class="header">
-        <img src="{{ public_path('images/guichet-logo.png') }}" alt="Guichet Logo">
+        <img src="{{ Storage::url($transaction->event->image_path) }}" alt="Guichet Logo">
         <div class="ticket-title"># Ticket</div>
     </div>
 

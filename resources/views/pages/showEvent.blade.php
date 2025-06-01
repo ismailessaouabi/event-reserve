@@ -74,30 +74,16 @@
                 {{ $event->description }}
             </p>
             @if($event->teckets->count() > 0)
-            <p class="text-gray-400 description">
+            <p class="text-gray-400 mb-8 description">
 
                 {{$event->teckets->first()->prix}} MAD
             </p>
             @else
-            <p class="text-gray-400 description">
+            <p class="text-gray-400 mb-8 description">
                 300 MAD
             </p>
             @endif
-            <form action="{{ route('payement.checkout',$event->id) }}" class="flex flex-col" method="GET">
-                @csrf
-                <label for="quantity_tickets" class="text-gray-400">
-                    Nombre de tickets :
-                    <input type="number" id="quantity_tickets" name="quantity_tickets" value="1" min="1" class="bg-gray-700 text-white p-2 rounded">
-                </label>
-                <button type="submit" id="buyButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
-                    Acheter
-                    @if($event->teckets->count() > 0)
-                    <p class="prix_complete">{{$event->teckets->first()->prix}} MAD</p>
-                    @else
-                    <p class="prix_complete">300 MAD</p>
-                    @endif
-                </button>
-            </form>
+            <a href="{{ route('payement.checkout', $event->id) }}" class=" bg-blue-900 hover:bg-blue-800 text-white py-2 px-4 rounded-lg">Acheter</a>
             
             
             
@@ -107,12 +93,7 @@
     </div>
 </div>
 <script>
-    const prixComplete = document.querySelector('.prix_complete');
-    quantity_tickets.addEventListener('change', function() {
-        const quantityTickets = document.getElementById('quantity_tickets').value;
-        const prixTotal = {{$event->teckets->first()->prix}} ?    {{$event->teckets->first()->prix}} * quantityTickets : 300 * quantityTickets; 
-        prixComplete.textContent = prixTotal + ' MAD';
-    });
+    
 </script>
 
 </body>

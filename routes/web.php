@@ -72,6 +72,8 @@ Route::delete('/places/{id}', [PlaceController::class, 'destroy'])->name('admin.
 
 
 
+
+
 // Routes des informations de l'organisateur dans dashboard organisateur
 Route::get('/organizerinfo', [UserController::class, 'mesinformation'])->name('organizer.information');
 Route::put('/organizerinfo/{id}', [UserController::class, 'updateinfo'])->name('organizer.update');
@@ -103,6 +105,3 @@ Route::delete('/organizer/events/{id}', [EventController::class, 'destroy_event_
 
 
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

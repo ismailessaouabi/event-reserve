@@ -17,7 +17,17 @@
         <!-- Formulaire -->
         <form action="{{ route('payement.process', $event->id) }}" method="POST" class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-2xl border border-white/20">
             @csrf
-            
+            @if (session('success'))
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <span class="block sm:inline">{{ session('success') }}</span>
+                </div>
+                
+            @endif
+            @if (session('error'))
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <span class="block sm:inline">{{ session('error') }}</span>
+                </div>
+            @endif
             <!-- Section Informations Personnelles -->
             <div class="mb-8">
                 <h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
@@ -85,48 +95,33 @@
                         >
                     </div>
 
-                    <!-- Quantité -->
+                   
+                    <!-- Ville -->
                     <div class="space-y-2">
-                        <label for="quantite" class="block text-sm font-medium text-gray-200">
-                            Nombre de tickets *
+                        <label for="ville" class="block text-sm font-medium text-gray-200">
+                            ville*
                         </label>
-                        <div class="relative">
-                            <input 
-                                type="number" 
-                                name="quantite" 
-                                id="quantite" 
-                                min="1" 
-                                max="10" 
-                                value="1" 
-                                required
-                                class="w-full px-4 py-3 bg-white/5 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
-                                placeholder="1"
-                            >
-                            <div class="absolute inset-y-0 right-0 flex items-center pr-3">
-                                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path>
-                                </svg>
-                            </div>
-                        </div>
+                        <input 
+                            type="text" 
+                            name="ville" 
+                            id="ville" 
+                            required
+                            class="w-full px-4 py-3 bg-white/5 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+                            placeholder="saisie ville"
+                        >
                     </div>
+                    
                 </div>
             </div>
 
             <!-- Résumé de la commande -->
             <div class="mb-8 p-6 bg-white/5 rounded-lg border border-gray-600">
                 <h3 class="text-lg font-semibold text-white mb-4">Résumé de la commande</h3>
-                <div class="flex justify-between items-center text-gray-300">
-                    <span>Prix par ticket:</span>
-                    <span class="font-semibold">200 MAD</span>
-                </div>
-                <div class="flex justify-between items-center text-gray-300 mt-2">
-                    <span>Quantité:</span>
-                    <span class="font-semibold" id="quantity-display">1</span>
-                </div>
+                
                 <hr class="my-4 border-gray-600">
                 <div class="flex justify-between items-center text-white text-lg font-bold">
-                    <span>Total:</span>
-                    <span id="total-price">200 MAD</span>
+                    <span>PRIX:</span>
+                    <span id="total-price">{{ $event->teckets->first()->prix }} MAD</span>
                 </div>
             </div>
 
