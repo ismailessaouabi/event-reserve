@@ -27,10 +27,10 @@ class PayementController extends Controller
             // Stockez les informations importantes en session
             session([
                 'last_event_id' => $id,
-                'nom' => $request->input('nom'),
-                'email' => $request->input('email'),
-                'telephone' => $request->input('telephone'),
-                'ville' => $request->input('ville'),
+                'nom' => $request->nom,
+                'email' => $request->email,
+                'telephone' => $request->telephone,
+                'ville' => $request->ville,
 
             ]);
             
@@ -97,21 +97,25 @@ class PayementController extends Controller
             if (isset($response['status']) && $response['status'] == 'COMPLETED') {
                 // Récupérez les données de session ou autres moyens de stockage temporaire
                 $event = Event::where('id', session('last_event_id'))->first(); 
-                //créez une nouvelle utilisateur si besoin
-                // Assurez-vous que l'utilisateur existe ou créez-le
+                if (!$event) {
+                    return redirect()
+                        ->route('payement.checkout', ['id' => session('last_event_id')])
+                        ->with('error', 'Événement non trouvé.');
+                }
                 $user = User::where('email', session('email'))->first();
                 if (!$user) {
-                    $user = User::create([
-                        'nom' => session('nom'),
+                    // Si l'utilisateur n'existe pas, vous pouvez le créer ou gérer l'erreur
+                    $neveauser = User::create([
+                        'name' => session('nom'),
                         'email' => session('email'),
                         'telephone' => session('telephone'),
+                        'password' => bcrypt('default_password'), // Assurez-vous de gérer le mot de passe correctement
                         'ville' => session('ville'),
                     ]);
-                    
                 }
                 // Créez une nouvelle transaction
                 $transaction = Transaction::create([
-                    'user_id' => $user->id,
+                    'user_id' => $user->id ?? $neveauser->id, // Utilisez l'ID de l'utilisateur ou du nouvel utilisateur
                     'event_id' => $event->id,
                     'paypal_transaction_id' => $response['id'],
                     'payer_email' => $response['payer']['email_address'],
