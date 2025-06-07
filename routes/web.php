@@ -89,6 +89,7 @@ Route::get('/organizer/events/{id}', [EventController::class, 'show_event_organi
 Route::get('/organizer/events/edit/{id}', [EventController::class, 'edit_event_organizer'])->name('organizer.events.edit');
 Route::put('/organizer/events/{id}', [EventController::class, 'update_event_organizer'])->name('organizer.events.update');
 Route::delete('/organizer/events/{id}', [EventController::class, 'destroy_event_organizer'])->name('organizer.events.destroy');
+Route::get('/organizer/participants', [UserController::class, 'display_participants'])->name('organizer.participants');
 
 
 

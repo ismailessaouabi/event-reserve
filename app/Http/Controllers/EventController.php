@@ -70,7 +70,7 @@ class EventController extends Controller
         return redirect()->route('organizer.events.index')->with('success', 'Event deleted successfully.');
     }
     public function countevents_organizer(){
-        $eventsCount = Event::all()->count();//->whire('organizer_id', auth()->user()->id);
+        $eventsCount = Event::all()->where('organizer_id', auth()->user()->id)->count();
         $participantsCount = User::all()->count();//->whire(auth()->user()->id,'organizer_id' );
         return view('dashboard.organizer.layouts', compact('eventsCount', 'participantsCount'));
     }

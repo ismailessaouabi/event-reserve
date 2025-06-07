@@ -9,6 +9,7 @@ use App\Models\Transaction;
 use App\Models\Tecket;
 use App\Models\Category;
 use App\Models\Event;
+use App\Models\User;
 
 class PayementController extends Controller
 {
@@ -53,7 +54,7 @@ class PayementController extends Controller
                     [
                         "amount" => [
                             "currency_code" => "EUR",
-                            "value" => 34,
+                            "value" => $prix,
                         ],
                         "description" => "Achat de billets",
                     ]
@@ -92,23 +93,32 @@ class PayementController extends Controller
             
             $response = $provider->capturePaymentOrder($request->token);
             
+            
             if (isset($response['status']) && $response['status'] == 'COMPLETED') {
                 // Récupérez les données de session ou autres moyens de stockage temporaire
-                $event = Event::where('id', session('last_event_id'))->first();               
+                $event = Event::where('id', session('last_event_id'))->first(); 
+                //créez une nouvelle utilisateur si besoin
+                // Assurez-vous que l'utilisateur existe ou créez-le
+                $user = User::where('email', session('email'))->first();
+                if (!$user) {
+                    $user = User::create([
+                        'nom' => session('nom'),
+                        'email' => session('email'),
+                        'telephone' => session('telephone'),
+                        'ville' => session('ville'),
+                    ]);
+                    
+                }
                 // Créez une nouvelle transaction
                 $transaction = Transaction::create([
-                    'user_id' => 2,
+                    'user_id' => $user->id,
                     'event_id' => $event->id,
                     'paypal_transaction_id' => $response['id'],
                     'payer_email' => $response['payer']['email_address'],
-                    'quantity' => 4,
+                    'quantity' => 1,
                     'total_price' => $response['purchase_units'][0]['payments']['captures'][0]['amount']['value'],
                     'status' => $response['status'],
-                ]);
-                
-                // Nettoyez la session
-                session()->forget(['last_event_id', 'last_quantity']);
-                
+                ]);              
                 return redirect()
                     ->route('tecket.index', ['id' => $transaction->event_id])
                     ->with('success', 'Transaction complétée.');

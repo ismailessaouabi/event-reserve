@@ -23,20 +23,26 @@ class AuthController extends Controller
     }
     public function register(Request $request)
     {   
+        $request->validate([
+            'nom' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8',
+            'telephone' => 'required',
+            'ville' => 'required',
+            'payes' => 'required',
+        ]);
 
-        // Create the user
-        if($request->role != 'admin')
-        {
-            $user = User::create([
-                'name' => $request->nom,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'role' => $request->role,
-                'telephone' => $request->telephone,
-                'ville' => $request->ville,
-                'payes' => $request->payes,
-            ]);
-        }
+        // Create the user    
+        $user = User::create([
+            'name' => $request->nom,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => 'organizer',
+            'telephone' => $request->telephone,
+            'ville' => $request->ville,
+            'payes' => $request->payes,
+        ]);
+        
         // Redirect to the login page with a success message
         return redirect()->route('login')->with('success', 'Registration successful');
     }
@@ -54,8 +60,8 @@ class AuthController extends Controller
         if (!$user) {
             return redirect()->route('login')->with('error', 'User not found');
         }
-        // Check if the user is an admin
-        if ($user->role != 'admin' && $user->role != 'organizer') {
+        // Check if the user is an organizer
+        if ($user->role != 'organizer') {
             return redirect()->route('login')->with('error', 'Unauthorized user role');
         }
         // check if the password is correct
@@ -65,22 +71,18 @@ class AuthController extends Controller
         
         if(Auth::attempt($values))
         {
-            if ($user->role == 'admin') {
+            if ($user->role == 'organizer') {
                 $request->session()->regenerateToken();
-                $response = view('dashboard.admin.layouts' , compact('user'));
+                return redirect()->route('organizer.events.index', ['id' => $user->id])->with('success', 'Login successful');
                 
-            } else {
-                $request->session()->regenerateToken();
-                $response =  redirect()->route('organizer', ['id' => $user->id])->with('success', 'Login successful');
-            }
+            } 
             
         }
         else
         {
-            $response = redirect()->route('login')->with('error', 'Login failed');
+            return redirect()->route('login')->with('error', 'Login failed');
         }
         
-        return $response;
     }
 
    

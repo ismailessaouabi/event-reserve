@@ -8,9 +8,7 @@ use App\Models\Socialmedia;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
         // Fetch all users from the database
@@ -20,14 +18,17 @@ class UserController extends Controller
         return view('dashboard.admin.users', compact('users'));
     }
 
+    public function display_participants(){
+        return view('dashboard.organizer.participants');
+    }
 
     public function mesinformation()
-{
-    $user = User::where('id', auth()->user()->id)->first();
-    $socialmedia = Socialmedia::where('user_id', auth()->user()->id)->first();
-            
-    return view('dashboard.organizer.organizer', compact('user', 'socialmedia'));
-}
+    {
+        $user = User::where('id', auth()->user()->id)->first();
+        $socialmedia = Socialmedia::where('user_id', auth()->user()->id)->first();
+                
+        return view('dashboard.organizer.organizer', compact('user', 'socialmedia'));
+    }
 
     public function updateinfo(Request $request, string $id)
     {
@@ -51,11 +52,6 @@ class UserController extends Controller
         return redirect()->route('organizer.information', $user->id)->with('success', 'User updated successfully.');
     }
 
-   
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         // Validate the request data
@@ -74,10 +70,7 @@ class UserController extends Controller
         // Redirect to the users index page with a success message
         return redirect()->route('users.index')->with('success', 'User created successfully.');
     }
-
-    /**
-     * Display the specified resource.
-     */
+    
     public function show(string $id)
     {
         // Fetch the user by ID
@@ -87,9 +80,6 @@ class UserController extends Controller
         return view('users.show', compact('user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         // Fetch the user by ID
@@ -99,9 +89,6 @@ class UserController extends Controller
         return view('dashboard.admin.edituser', compact('user'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         // Validate the request data
@@ -121,9 +108,6 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         // Find the user by ID and delete it
