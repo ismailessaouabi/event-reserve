@@ -9,7 +9,7 @@ use App\Models\Socialmedia;
 class UserController extends Controller
 {
     
-    public function index()
+    public function index_users_admin()
     {
         // Fetch all users from the database
         $users = User::all();
@@ -68,19 +68,19 @@ class UserController extends Controller
         ]);
 
         // Redirect to the users index page with a success message
-        return redirect()->route('users.index')->with('success', 'User created successfully.');
+        return redirect()->route('admin.users.index')->with('success', 'User created successfully.');
     }
     
-    public function show(string $id)
+    public function show_user_admin(string $id)
     {
         // Fetch the user by ID
         $user = User::findOrFail($id);
 
         // Return a view with the user data
-        return view('users.show', compact('user'));
+        return view('admin.users.show', compact('user'));
     }
 
-    public function edit(string $id)
+    public function edit_user_admin(string $id)
     {
         // Fetch the user by ID
         $user = User::findOrFail($id);
@@ -89,7 +89,7 @@ class UserController extends Controller
         return view('dashboard.admin.edituser', compact('user'));
     }
 
-    public function update(Request $request, string $id)
+    public function update_user_admin(Request $request, string $id)
     {
         // Validate the request data
         $request->validate([
@@ -108,7 +108,7 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
 
-    public function destroy(string $id)
+    public function destroy_user_admin(string $id)
     {
         // Find the user by ID and delete it
         $user = User::findOrFail($id);

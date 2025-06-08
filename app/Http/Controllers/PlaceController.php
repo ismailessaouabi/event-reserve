@@ -7,20 +7,16 @@ use App\Models\Place;
 
 class PlaceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    
+    public function index_places_admin()
     {
         // This method should return a view with a list of places
         $places = Place::all();
         return view('dashboard.admin.places', compact('places'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    
+    public function store_place_admin(Request $request)
     {
         // Validate the request data
         $request->validate([
@@ -33,7 +29,7 @@ class PlaceController extends Controller
         // Check if the place already exists
         $place = Place::where('name', $request->lieu)->first();
         if ($place) {
-            return redirect()->route('places.index')->with('error', 'Le lieu existe deja');
+            return redirect()->route('admin.places.index')->with('error', 'Le lieu existe deja');
         }
 
         // Create a new place
@@ -50,7 +46,7 @@ class PlaceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show_place_admin(string $id)
     {
         //
     }
@@ -58,7 +54,7 @@ class PlaceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit_place_admin(string $id)
     {
         // Find the place by ID
         $place = Place::findOrFail($id);
@@ -70,7 +66,7 @@ class PlaceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update_place_admin(Request $request, string $id)
     {
         // Validate the request data
         $request->validate([
@@ -90,19 +86,19 @@ class PlaceController extends Controller
         ]);
 
         // Redirect to the index page
-        return redirect()->route('places.index');
+        return redirect()->route('admin.places.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy_place_admin(string $id)
     {
         // Find the place by ID and delete it
         $place = Place::findOrFail($id);
         $place->delete();
 
         // Redirect to the index page
-        return redirect()->route('places.index');
+        return redirect()->route('admin.places.index');
     }
 }

@@ -9,7 +9,7 @@
                 <div class="bg-white rounded-lg shadow-md p-6">
                     <h2 class="text-xl font-semibold text-gray-700 mb-4">Ajouter un Utilisateur</h2>
                     
-                    <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.users.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         
                         <div class="mb-4">
@@ -56,7 +56,7 @@
             <div class="w-full lg:w-2/3">
                 <h2 class="text-xl font-semibold text-gray-700 mb-4">Liste des Utilisateurs</h2>
                 <!--  formulaire de recherche -->
-                <form action="{{ route('users.index') }}" method="GET" class="mb-4">
+                <form action="{{ route('admin.users.index') }}" method="GET" class="mb-4">
                     <input type="text" name="search" placeholder="Rechercher par nom" class="w-96 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-200">Rechercher</button>
                 </form>
@@ -79,8 +79,8 @@
                                 <td class="py-3 px-4 text-sm text-gray-700">{{ $user->role }}</td>
                                 <td class="py-3 px-4 text-sm text-gray-700">{{ $user->events()->count() ?? 0 }}</td>
                                 <td class="py-3 px-4 text-sm text-gray-700">
-                                    <a href="{{ route('users.edit', $user->id) }}" class="text-blue-600 hover:text-blue-800 mr-2">Modifier</a>
-                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="inline-block">
+                                    <a href="{{ route('admin.users.edit', $user->id) }}" class="text-blue-600 hover:text-blue-800 mr-2">Modifier</a>
+                                    <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="inline-block">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-red-600 hover:text-red-800">Supprimer</button>

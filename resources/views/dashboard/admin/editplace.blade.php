@@ -21,7 +21,7 @@
             <div class="bg-white rounded-lg shadow-md p-6">
                 <h2 class="text-xl font-semibold text-gray-700 mb-4">Modifier un Lieu</h2>
                 
-                <form action="{{ route('places.update', $place->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.places.update', $place->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="mb-4">

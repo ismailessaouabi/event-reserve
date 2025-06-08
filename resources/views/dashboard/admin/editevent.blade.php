@@ -5,7 +5,7 @@
     <div class="w-full lg:w-1/3">
         <div class="bg-white rounded shadow">
             <div class="p-6">
-                <form action="{{ route('events.update',  $event->id) }}" method="POST" >
+                <form action="{{ route('admin.events.update',  $event->id) }}" method="POST" >
                     @csrf
                     @method('PUT')
                     <div class="mb-4">

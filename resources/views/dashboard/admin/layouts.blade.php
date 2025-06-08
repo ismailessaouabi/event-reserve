@@ -34,31 +34,31 @@
                     <i class="fas fa-tachometer-alt mr-3"></i>
                     Tableau de bord
                 </a>
-                <a href="/" class=" menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
+                <a href="{{ route('admin.events.index') }}" class=" menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg {{ request()->routeIs('admin.events.index') ? 'active' : '' }}">
                     <i class="fas fa-calendar-alt mr-3"></i>
                     Événements
                 </a>
-                <a href="#" class=" menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
+                <a href="#" class=" menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg {{ request()->routeIs('admin.tickets.index') ? 'active' : '' }} ">
                     <i class="fas fa-calendar-alt mr-3"></i>
                     Teckets
                 </a>
-                <a href="#" class=" menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
+                <a href="{{ route('admin.categories.index') }}" class=" menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg {{ request()->routeIs('admin.categories.index') ? 'active' : '' }}">
                     <i class="fas fa-calendar-alt mr-3"></i>
                     Catégories
                 </a>
-                <a href="#" class="  menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
+                <a href="{{ route('admin.places.index') }}" class="  menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg {{ request()->routeIs('admin.places.index') ? 'active' : '' }}">
                     <i class="fas fa-ticket-alt mr-3"></i>
                     places
                 </a>
-                <a href="{{ route('users.index') }}" class="  menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
+                <a href="{{ route('admin.users.index') }}" class="  menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg {{ request()->routeIs('admin.users.index') ? 'active' : '' }}">
                     <i class="fas fa-users mr-3"></i>
                     Utilisateurs
                 </a>
-                <a href="#" class=" menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
+                <a href="#" class=" menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg {{ request()->routeIs('admin.statistics.index') ? 'active' : '' }}">
                     <i class="fas fa-chart-bar mr-3"></i>
                     Statistiques
                 </a>
-                <a href="#" class=" menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
+                <a href="#" class=" menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg {{ request()->routeIs('admin.settings.index') ? 'active' : '' }}">
                     <i class="fas fa-cog mr-3"></i>
                     Paramètres
                 </a>

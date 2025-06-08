@@ -66,7 +66,7 @@
                         </div>
                     @endif
                     
-                    <form action="" method="POST" enctype="multipart/form-data" class="space-y-6">
+                    <form action="{{ route('admin.events.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                         @csrf
                         
                         <!-- Nom de l'événement -->
@@ -303,18 +303,25 @@
                                                         <i class="fas fa-user-tie mr-1 text-xs"></i>
                                                         {{ $event->organizer->name }}
                                                     </span>
+                                                    <span class="inline-flex items-center bg-gradient-to-r from-yellow-100 to-orange-100 text-yellow-800 text-sm px-3 py-1 rounded-full border border-yellow-200">
+                                                        <i class="fas fa-calendar-alt mr-1 text-xs"></i>
+                                                        {{ $event->category->name ?? 'Non définie' }}
+                                                    </span>
+                                                    
+
+                                                    
                                                 </div>
                                             </div>
                                         </div>
                                         
                                         <!-- Actions améliorées -->
                                         <div class="flex flex-row lg:flex-col gap-3">
-                                            <a href="#" 
+                                            <a href="{{ route('admin.events.edit', $event->id) }}" 
                                                 class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white text-sm font-semibold rounded-lg transition duration-200 transform hover:scale-105 shadow-md hover:shadow-lg">
                                                 <i class="fas fa-edit mr-2 text-xs"></i>
                                                 Modifier
                                             </a>
-                                            <form action="" method="POST" class="inline">
+                                            <form action="{{ route('admin.events.destroy', $event->id) }}" method="POST" class="inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" 

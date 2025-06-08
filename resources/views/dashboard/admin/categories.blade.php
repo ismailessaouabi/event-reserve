@@ -4,7 +4,7 @@
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-3xl font-bold text-gray-800 mb-8">Gestion des Catégories</h1>
         
-        <form action="{{ route('categories.store') }}" class="mb-8 bg-white p-6 rounded-lg shadow-md" method="POST">
+        <form action="{{ route('admin.categories.store') }}" class="mb-8 bg-white p-6 rounded-lg shadow-md" method="POST">
             @csrf
             <div class="flex gap-4">
                 <input 
@@ -64,8 +64,8 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <div class="flex space-x-4 justify-end">
-                                            <a href="{{ route('categories.edit', $category->id) }}" class="text-indigo-600 hover:text-indigo-900">Modifier</a>
-                                            <form action="{{ route('categories.destroy', $category->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?');">
+                                            <a href="{{ route('admin.categories.edit', $category->id) }}" class="text-indigo-600 hover:text-indigo-900">Modifier</a>
+                                            <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="text-red-600 hover:text-red-900">Supprimer</button>

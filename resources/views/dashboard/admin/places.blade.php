@@ -20,7 +20,7 @@
             <div class="bg-white rounded-lg shadow-md p-6">
                 <h2 class="text-xl font-semibold text-gray-700 mb-4">Ajouter un Lieu</h2>
                 
-                <form action="{{ route('places.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.places.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('POST')
                     <div class="mb-4">
@@ -91,8 +91,8 @@
                                     {{ $place->capacity }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="{{ route('places.edit', $place->id) }}" class="text-blue-600 hover:text-blue-800">Modifier</a>
-                                    <form action="{{ route('places.destroy', $place->id) }}" method="POST" class="inline">
+                                    <a href="{{ route('admin.places.edit', $place->id) }}" class="text-blue-600 hover:text-blue-800">Modifier</a>
+                                    <form action="{{ route('admin.places.destroy', $place->id) }}" method="POST" class="inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-red-600 hover:text-red-800">Supprimer</button>

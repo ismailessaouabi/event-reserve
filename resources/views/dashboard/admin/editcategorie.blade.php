@@ -5,7 +5,7 @@
         <h1 class="text-3xl font-bold text-gray-800 mb-8">Modifier la Catégorie</h1>
 
         <div class="bg-white shadow-md rounded-lg p-6 mb-8">
-            <form action="{{ route('categories.update', $category->id) }}" method="POST">
+            <form action="{{ route('admin.categories.update', $category->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 
@@ -26,7 +26,7 @@
 
                 <div class="flex items-center justify-end space-x-4">
                     <a 
-                        href="{{ route('categories.index') }}" 
+                        href="{{ route('admin.categories.index') }}" 
                         class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                         Annuler
