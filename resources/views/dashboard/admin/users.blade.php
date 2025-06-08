@@ -66,6 +66,8 @@
                         <tr>
                             <th class="py-3 px-4 bg-gray-200 text-left text-sm font-semibold text-gray-600">Nom</th>
                             <th class="py-3 px-4 bg-gray-200 text-left text-sm font-semibold text-gray-600">Email</th>
+                            <th class="py-3 px-4 bg-gray-200 text-left text-sm font-semibold text-gray-600">Rôle</th>
+                            <th class="py-3 px-4 bg-gray-200 text-left text-sm font-semibold text-gray-600">nombre des evenements crée</th>
                             <th class="py-3 px-4 bg-gray-200 text-left text-sm font-semibold text-gray-600">Actions</th>
                         </tr>
                     </thead>
@@ -74,6 +76,8 @@
                             <tr>
                                 <td class="py-3 px-4 text-sm text-gray-700">{{ $user->name }}</td>
                                 <td class="py-3 px-4 text-sm text-gray-700">{{ $user->email }}</td>
+                                <td class="py-3 px-4 text-sm text-gray-700">{{ $user->role }}</td>
+                                <td class="py-3 px-4 text-sm text-gray-700">{{ $user->events()->count() ?? 0 }}</td>
                                 <td class="py-3 px-4 text-sm text-gray-700">
                                     <a href="{{ route('users.edit', $user->id) }}" class="text-blue-600 hover:text-blue-800 mr-2">Modifier</a>
                                     <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="inline-block">

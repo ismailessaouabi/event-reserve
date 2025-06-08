@@ -35,7 +35,7 @@ class Event extends Model
     }
     public function organizer()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class );
     }
     public function teckets()
     {

@@ -42,11 +42,11 @@
                     <i class="fas fa-calendar-alt mr-3"></i>
                     Teckets
                 </a>
-                <a href="{{ route('categories.index') }}" class=" menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
+                <a href="#" class=" menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
                     <i class="fas fa-calendar-alt mr-3"></i>
                     Catégories
                 </a>
-                <a href="{{ route('places.index') }}" class="  menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
+                <a href="#" class="  menu-item flex items-center px-4 py-3 text-sm font-medium text-indigo-200 hover:bg-indigo-700 rounded-lg">
                     <i class="fas fa-ticket-alt mr-3"></i>
                     places
                 </a>

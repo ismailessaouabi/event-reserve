@@ -81,7 +81,7 @@ class EventController extends Controller
 
     public function list_events_admin(){
         $categories = Category::all();
-        $events = Event::all();
+        $events = Event::with('organizer')->get();
         return view('dashboard.admin.events', compact( 'categories', 'events'));
     }
     public function store_event_admin(Request $request){
