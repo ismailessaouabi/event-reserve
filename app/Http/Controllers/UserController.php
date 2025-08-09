@@ -52,7 +52,7 @@ class UserController extends Controller
         return redirect()->route('organizer.information', $user->id)->with('success', 'User updated successfully.');
     }
 
-    public function store(Request $request)
+    public function store_user_admin(Request $request)
     {
         // Validate the request data
         $request->validate([
@@ -64,6 +64,7 @@ class UserController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'role' => 'admin',
             'password' => bcrypt($request->password),
         ]);
 

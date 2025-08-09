@@ -46,6 +46,7 @@ class AuthController extends Controller
         // Redirect to the login page with a success message
         return redirect()->route('login')->with('success', 'Registration successful');
     }
+
     
     public function login(Request $request)
     {
@@ -85,6 +86,33 @@ class AuthController extends Controller
         
     }
 
+
+    public function showformlogin_admin()
+    {
+        return view('dashboard.admin.login-admin');
+    }
+
+    public function login_admin(Request $request)
+    {
+        $email = $request->email;
+        $password = $request->password;
+        $values = [
+            'email' => $email,
+            'password' =>  $password,
+        ];
+        if(Auth::attempt($values))
+        {
+            if (Auth::user()->role == 'admin') {
+                $request->session()->regenerateToken();
+                return redirect()->route('admin.events.index')->with('success', 'Login successful');
+            }
+        }
+        else
+        {
+            return redirect()->route('login.admin')->with('error', 'Login failed');
+        }
+    }
+
    
 
 
@@ -94,7 +122,7 @@ class AuthController extends Controller
     {
         Auth::logout();
         // Invalidate the session
-        request()->session()->invalidate();
+        request()->session()->destroy();
         // Regenerate the CSRF token
         request()->session()->regenerateToken();
         // Redirect to the login page with a success message

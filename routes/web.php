@@ -43,7 +43,9 @@ Route::get('/eventsfiltrer', [EventController::class, 'filtrer_events_accueil'])
 
 
 
-
+//Routes pour authentification admin
+Route::get('/login-admin', [AuthController::class, 'showformlogin_admin'])->name('login.admin');
+Route::post('/login-admin', [AuthController::class, 'login_admin'])->name('login.admin.post');
 // Routes des catégories dans dashboard admin 
 Route::get('/categories', [CategoryController::class, 'index_category_admin'])->name('admin.categories.index');
 Route::post('/categories', [CategoryController::class, 'store_category_admin'])->name('admin.categories.store');
