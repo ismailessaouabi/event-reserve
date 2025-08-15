@@ -6,18 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
+    protected $table = 'users';
     protected $fillable = [
-        'role',
-        'name',        
+        'id',
+        'name',
         'email',
         'password',
         'phone',
-        'city',
-        'country',
         'address',
-        'postal_code',
-        'nom_entreprise',
         'profile_picture',
+        'created_at',
+        'updated_at',
 
         
         

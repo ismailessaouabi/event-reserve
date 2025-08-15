@@ -18,9 +18,20 @@
             </button>
             <div class="flex items-center">
                 <div class="w-10 h-10 bg-gray-300 rounded-full mr-3 overflow-hidden">
-                    <img src="{{ Storage::url(Auth::user()->profile_picture) }}" alt="Profile" class="w-full h-full object-cover">
+                    @if (Auth::user()->profile_picture)
+                        <img src="{{ Storage::url(Auth::user()->profile_picture) }}" alt="Profile" class="w-full h-full object-cover">
+                        
+                    @else
+                        <img src="{{ asset('images/default-profile.png') }}" alt="Profile" class="w-full h-full object-cover">
+                        
+                    @endif
                 </div>
-                <span class="text-lg font-semibold">{{ Auth::user()->name }}</span>
+                <span class="text-lg font-semibold">@if (Auth::check())
+                    {{ Auth::user()->name }}
+                    
+                @else
+                    nom d'utilisateur
+                @endif</span>
             </div>
         </div>
 
@@ -31,7 +42,13 @@
                 <div class="w-12 h-12 bg-gray-300 rounded-full mr-3 overflow-hidden">
                     <img src="{{ Storage::url(Auth::user()->profile_picture) }}" alt="Profile" class="w-full h-full object-cover">
                 </div>
-                <span class="text-lg font-semibold">{{ Auth::user()->name }}</span>
+                <span class="text-lg font-semibold">
+                    @if (Auth::check())
+                        {{ Auth::user()->name }}
+                    @else
+                        nom d'utilisateur
+                    @endif
+                    </span>
             </div>
             
             <!-- Navigation -->
@@ -110,7 +127,14 @@
                     <div class="bg-gray-800 p-4 sm:p-6 rounded-lg">
                         <div class="flex justify-between items-start">
                             <div>
-                                <h3 class="text-3xl sm:text-4xl font-bold text-orange-500">{{$participantsCount}} dans {{$eventsCount}}</h3>
+                                <h3 class="text-3xl sm:text-4xl font-bold text-orange-500">@if ($participantsCount)
+                                    {{ $participantsCount }}
+
+                                    
+                                @else
+                                    0
+                                    
+                                @endif</h3>
                                 <h2 class="text-lg sm:text-xl mt-4 sm:mt-6 mb-2 sm:mb-3">Participants par événement</h2>
                                 <div class="border-b border-orange-500/20"></div>
                                 <div class="flex items-center mt-2 sm:mt-3 text-xs sm:text-sm hover:text-orange-500 transition-colors duration-200 cursor-pointer">

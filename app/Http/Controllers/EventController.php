@@ -32,7 +32,7 @@ class EventController extends Controller
         $place = Place::create([
             'name' => $request->location,
             'capacity' => $request->capacity,
-            'ville' => $request->city
+            'city' => $request->city
         ]);
         $event = Event::create([
             'name' => $request->title,

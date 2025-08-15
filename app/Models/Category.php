@@ -8,11 +8,10 @@ use app\Models\Event;
 
 class Category extends Model
 {
+    protected $table = 'categories';
     protected $fillable = [
         'id',
         'name',
-        'description',
-        'image_path',
         'created_at',
         'updated_at',
     ];
