@@ -14,7 +14,7 @@ use App\Models\User;
 class PayementController extends Controller
 {
     
-    public function createTransaction(Request $request, $id)
+    /*public function createTransaction(Request $request, $id)
     {
         $event = Event::findOrFail($id); // Retirez first()
         return view('pages.payement', compact( 'event'));
@@ -183,7 +183,7 @@ class PayementController extends Controller
         // Implémentation optionnelle pour générer un QR code
         // Vous pouvez utiliser un package comme simplesoftwareio/simple-qrcode
         //return \QrCode::size(100)->generate($code);
-    //}
+    //}*/
 
     
 }

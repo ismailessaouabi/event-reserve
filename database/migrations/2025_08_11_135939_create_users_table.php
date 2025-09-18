@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('password');
+            $table->string('password')->nullable(); // Password can be nullable for social logins
             $table->string('role')->default('user'); // Default role is 'user'
             $table->string('profile_picture')->nullable(); // Optional profile picture
             $table->string('remember_token')->nullable(); // For "remember me" functionality

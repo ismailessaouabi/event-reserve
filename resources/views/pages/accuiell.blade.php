@@ -17,7 +17,7 @@
                 <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
                     <span class="bg-yellow-500 text-black px-2 py-1 rounded text-xs font-bold">{{ $events[$i]->category->name }}</span>
                     <h3 class="text-white font-bold mt-2">{{ $events[$i]->name }}</h3>
-                    <p class="text-gray-200 text-sm">{{ $events[$i]->start_time }}</p>
+                    <p class="text-gray-200 text-sm">0000</p>
                 </div>
             </a>
             @endfor
@@ -54,7 +54,7 @@
                         <h3 class="text-white font-medium text-sm truncate-2-lines">{{ $event->name }}</h3>
                         <div class="flex items-center mt-2">
                         <i class="fas fa-clock text-gray-400 text-xs"></i>
-                            <span class="text-gray-400 text-xs ml-1">début : {{ $event->start_time }}</span>
+                            <span class="text-gray-400 text-xs ml-1">début : 0000</span>
                         </div>
                         <div class="flex items-center mt-2">
                         <i class="fas fa-clock text-gray-400 text-xs"></i>
@@ -109,7 +109,7 @@
                 <h3 class="text-white font-medium text-sm truncate-2-lines">{{ $event->name }}</h3>
                 <div class="flex items-center mt-2">
                 <i class="fas fa-clock text-gray-400 text-xs"></i>
-                    <span class="text-gray-400 text-xs ml-1">début : {{ $event->start_time }}</span>
+                    <span class="text-gray-400 text-xs ml-1">début :0000</span>
                 </div>
                 <div class="flex items-center mt-2">
                 <i class="fas fa-clock text-gray-400 text-xs"></i>

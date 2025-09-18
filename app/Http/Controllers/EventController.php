@@ -18,15 +18,16 @@ class EventController extends Controller
     
 
     public function list_events_organizer(){
-        $categories = Category::all();
-        $events = Event::all();
-        return view('dashboard.organizer.events.mesevents', compact( 'categories', 'events'));
+        
+        return view('dashboard.organizer.events.mesevents');
         
     }
+    
     public function create_event_organizer(){
-        $categories = Category::all();
-        return view('dashboard.organizer.events.ajoutevent', compact('categories'));
+        //$categories = Category::all();
+        return view('dashboard.organizer.events.ajoutevent');
     }
+    /*
     public function store_event_organizer(Request $request){
         $path = $request->file('image')->store('images', 'public');
         $place = Place::create([
@@ -88,19 +89,16 @@ class EventController extends Controller
         $place = Place::create([
             'name' => $request->lieu,
             'capacity' => $request->capacity,
-            'ville' => $request->ville
+            'city' => $request->ville
         ]);
 
         $path = $request->file('image')->store('images', 'public');
     
 
-        $event = Event::create([
-            'name' => $request->name,
+        $event = Event::create($request->all() + [
             'image_path' => $path,
-            'start_time' => $request->start_time,
-            'end_time' => $request->end_time,
             'place_id' => $place->id,
-            'category_id' => $request->category
+            'organizer_id' => auth()->user()->id, // Associer l'organisateur actuel
         ]);
         return redirect()->route('events.index')->with('success', 'Event created successfully.');
     }  
@@ -151,7 +149,7 @@ class EventController extends Controller
 
     public function list_8events_accueil(Request $request){
         $events = Event::with('place','teckets')->limit(8)->get();
-        $events_aujourd_hui = Event::whereDate('start_time', Carbon::now())->get();
+        $events_aujourd_hui = Event::whereDate('created_at', Carbon::now())->get();
         $categories = Category::all(); 
 
         return view('pages.accuiell', compact('events', 'categories', 'events_aujourd_hui'));
@@ -197,7 +195,7 @@ class EventController extends Controller
         // Exécuter la requête et paginer les résultats
         $events = $query->get();
         return view('pages.eventsfiltrer', compact('categories', 'allevents', 'events' ));
-    }
+    }*/
      
     
     

@@ -7,7 +7,7 @@ use App\Models\Place;
 
 class PlaceController extends Controller
 {
-    
+    /*
     public function index_places_admin()
     {
         // This method should return a view with a list of places
@@ -43,17 +43,13 @@ class PlaceController extends Controller
         return redirect()->route('places.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
+   
     public function show_place_admin(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
     public function edit_place_admin(string $id)
     {
         // Find the place by ID
@@ -63,9 +59,7 @@ class PlaceController extends Controller
         return view('dashboard.admin.editplace', compact('place'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function update_place_admin(Request $request, string $id)
     {
         // Validate the request data
@@ -89,9 +83,7 @@ class PlaceController extends Controller
         return redirect()->route('admin.places.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy_place_admin(string $id)
     {
         // Find the place by ID and delete it
@@ -101,4 +93,5 @@ class PlaceController extends Controller
         // Redirect to the index page
         return redirect()->route('admin.places.index');
     }
+    */
 }

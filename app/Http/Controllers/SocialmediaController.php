@@ -11,7 +11,7 @@ class SocialmediaController extends Controller
 
   
     
-    public function store(Request $request)
+    /*public function store(Request $request)
     {
         
        Socialmedia::updateOrCreate([
@@ -28,4 +28,5 @@ class SocialmediaController extends Controller
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Social media link added successfully.');
     }
+    */
 }

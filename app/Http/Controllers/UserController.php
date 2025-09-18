@@ -9,7 +9,7 @@ use App\Models\Socialmedia;
 class UserController extends Controller
 {
     
-    public function index_users_admin()
+    /*public function index_users_admin()
     {
         // Fetch all users from the database
         $users = User::all();
@@ -117,5 +117,5 @@ class UserController extends Controller
 
         // Redirect to the users index page with a success message
         return redirect()->route('users.index')->with('success', 'User deleted successfully.');
-    }
+    }*/
 }

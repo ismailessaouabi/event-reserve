@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class TrecketController extends Controller
+class TecketController extends Controller
 {
     
-    public function index()
+    /*public function index()
     {
         //
     }
@@ -46,5 +46,5 @@ class TrecketController extends Controller
     public function destroy(string $id)
     {
         //
-    }
+    }*/
 }

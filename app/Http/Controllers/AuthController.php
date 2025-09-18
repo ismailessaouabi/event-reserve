@@ -13,34 +13,31 @@ class AuthController extends Controller
 
     public function showformregister()
     {
-        $categories = Category::all();
-        return view('pages.register', compact('categories'));
+        
+        return view('pages.register');
     }
     public function showformlogin()
     {
-        $categories = Category::all();
-        return view('pages.login' , compact('categories'));
+        return view('pages.login');
     }
     public function register(Request $request)
     {   
         $request->validate([
-            'nom' => 'required',
+            'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
-            'telephone' => 'required',
-            'ville' => 'required',
-            'payes' => 'required',
+            'phone' => 'required',
+            'city' => 'required',
         ]);
 
         // Create the user    
         $user = User::create([
-            'name' => $request->nom,
+            'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => 'organizer',
-            'telephone' => $request->telephone,
-            'ville' => $request->ville,
-            'payes' => $request->payes,
+            'phone' => $request->phone,
+            'city' => $request->city,
         ]);
         
         // Redirect to the login page with a success message
@@ -59,11 +56,11 @@ class AuthController extends Controller
 
         $user = User::where('email', $email)->first();
         if (!$user) {
-            return redirect()->route('login')->with('error', 'User not found');
+            return redirect()->route('login')->with('error', 'your email is not registered');
         }
-        // Check if the user is an organizer
+         //Check if the user is an organizer
         if ($user->role != 'organizer') {
-            return redirect()->route('login')->with('error', 'Unauthorized user role');
+            return redirect()->route('login')->with('error', 'Unauthorized access');
         }
         // check if the password is correct
         if (!Hash::check($password, $user->password)) {
@@ -76,7 +73,7 @@ class AuthController extends Controller
                 $request->session()->regenerateToken();
                 return redirect()->route('organizer.events.index', ['id' => $user->id])->with('success', 'Login successful');
                 
-            } 
+            }
             
         }
         else

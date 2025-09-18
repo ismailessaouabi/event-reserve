@@ -1,41 +1,44 @@
 @extends('pages.layouts')
 @section('content')
 
-    <div class="bg-[#011127]  w-full h-fit flex flex-col justify-center items-center text-white" >
-        <h1 class="font-semibold text-3xl w-[40%] m-4 text-center">Bienvenue sur notre plateforme ! Nous sommes ravis de vous retrouver.</h1>
-        <form class="w-[40%] h-fit py-10 flex flex-col gap-6 justify-center items-center border border-[#222f40] rounded-3xl" action="{{ route('register.post') }}" method="POST">
-            @csrf           
-            <input class="w-[70%] border border-[#222f40] p-2.5" type="text" name="nom" placeholder="votre nom" required>
-            <input class="w-[70%] border border-[#222f40] p-2.5" type="text" name="email" placeholder="Email" required>
-            <input class="w-[70%] border border-[#222f40] p-2.5" type="password" name="password" placeholder="Password" required>
-            <input class="w-[70%] border border-[#222f40] p-2.5" type="password" name="password_confirmation" placeholder="confirm votre password" required>
-            <input class="w-[70%] border border-[#222f40] p-2.5" type="number" name="telephone" placeholder="Téléphone" required>
-            <input class="w-[70%] border border-[#222f40] p-2.5" type="text" name="ville" placeholder="ville" required>
-            <input class="w-[70%] border border-[#222f40] p-2.5" type="text" name="payes" placeholder="payes" required>
-            <input class="w-[70%] border border-[#222f40] p-2.5" type="text" name="address" placeholder="address" required>
+<div class="bg-[#011127] w-full min-h-screen flex flex-col justify-center items-center text-white py-10">
+    <h1 class="font-semibold text-3xl w-full max-w-3xl text-center mb-8">
+        Bienvenue sur notre plateforme ! Nous sommes ravis de vous retrouver.
+    </h1>
 
+    <form class="w-full max-w-3xl bg-[#0a1a35] p-8 rounded-3xl shadow-lg flex flex-col gap-6" action="{{ route('register.post') }}" method="POST">
+        @csrf
 
-            <div class="btns w-[70%] flex flex-col gap-2">
-                <input type="submit" value="inscriver" class="w-full px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition " >
-                
-            </div>
-            
-        </form>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input class="w-full border border-[#222f40] p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" name="name" placeholder="Votre nom" required>
+            <input class="w-full border border-[#222f40] p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" name="email" placeholder="Email" required>
+            <input class="w-full border border-[#222f40] p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" type="password" name="password" placeholder="Password" required>
+            <input class="w-full border border-[#222f40] p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" type="password" name="password_confirmation" placeholder="Confirmer votre password" required>
+            <input class="w-full border border-[#222f40] p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" type="number" name="phone" placeholder="Téléphone" required>
+            <input class="w-full border border-[#222f40] p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" name="city" placeholder="Ville" required>
+        </div>
+
+        <div class="mt-6">
+            <input type="submit" value="S'inscrire" class="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300">
+        </div>
 
         @if (session('error'))
-            <p style="color: red;">{{ session('error') }}</p>
+            <p class="text-red-500 mt-4">{{ session('error') }}</p>
         @endif
-    </div>
-    <script>
-        const selectElement = document.querySelector('select[name="role"]');
-        const email = document.querySelector('input[name="email"]');
+    </form>
+</div>
 
-        function selectrole() {
-            if (selectElement.value === 'organizateur') {
-                email.style.display = 'none';
-            } else {
-                email.style.display = 'block';
-            }
-        };
-    </script>
+<script>
+    const selectElement = document.querySelector('select[name="role"]');
+    const email = document.querySelector('input[name="email"]');
+
+    function selectrole() {
+        if (selectElement.value === 'organizateur') {
+            email.style.display = 'none';
+        } else {
+            email.style.display = 'block';
+        }
+    };
+</script>
+
 @endsection

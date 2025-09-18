@@ -25,7 +25,7 @@
                     </button>
                 </div>
                 
-                <form action="{{ route('events.rechercher') }}" method="GET" class="hidden md:flex space-x-4 mx-auto order-3 md:order-none w-full md:w-auto mt-4 md:mt-0">
+                <form action="" method="GET" class="hidden md:flex space-x-4 mx-auto order-3 md:order-none w-full md:w-auto mt-4 md:mt-0">
                     <div class="relative w-[200px] md:w-[300px] input_rechercher">
                         <input type="text" placeholder="Rechercher" name="name_event" class="bg-gray-800 w-full text-white rounded-full p-2 text-sm md:p-2.5 pr-8">
                         <i class="fas fa-search absolute right-3 top-2.5 md:top-3 text-gray-400"></i>
@@ -44,7 +44,7 @@
             
             <!-- Mobile menu content -->
             <div id="mobileMenuContent" class="hidden md:hidden bg-[#051529] py-4 border-t border-gray-700">
-                <form action="{{ route('events.rechercher') }}" method="GET" class="mb-4">
+                <form action="" method="GET" class="mb-4">
                     <div class="relative input_rechercher">
                         <input type="text" placeholder="Rechercher" name="name_event" class="bg-gray-800 w-full text-white rounded-full p-2 text-sm pr-8">
                         <i class="fas fa-search absolute right-3 top-2.5 text-gray-400"></i>
@@ -62,9 +62,9 @@
             <!-- Navigation secondaire -->
             <nav class="nav-secondary overflow-x-auto whitespace-nowrap py-2 -mx-4 px-4">
                 <div class="flex space-x-4 md:space-x-6">
-                    @foreach ($categories as $category)
-                        <a href="{{ route('eventsparcategory' , $category->id)}}" class="category text-white font-medium text-sm md:text-base {{ request()->route('id') == $category->id ? 'border border-white px-2 py-0.5 md:px-2 md:py-0.5 rounded' : '' }}">{{ $category->name }}</a>
-                    @endforeach
+                   {{-- @foreach ($categories as $category)
+                        <a href="" class="category text-white font-medium text-sm md:text-base {{ request()->route('id') == $category->id ? 'border border-white px-2 py-0.5 md:px-2 md:py-0.5 rounded' : '' }}">{{ $category->name }}</a>
+                    @endforeach--}}
                     
                     <div class="ml-auto flex items-center space-x-4">
                         <a href="#" class="text-gray-300 text-xs md:text-sm">Aide & Contact</a>

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tecket extends Model
 {
+    protected $table = 'tickets';
     // Define the fillable attributes
     protected $fillable = [
         'prix',

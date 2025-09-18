@@ -19,7 +19,7 @@
             
             <!-- Form -->
             <div class="flex-1">
-                <form action="{{ route('organizer.update' , auth()->user()->id)  }}" method="POST" enctype="multipart/form-data">
+                <form action="{{-- route('organizer.update' , auth()->user()->id)  --}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -48,7 +48,7 @@
                         <div>
                             <label for="first_name" class="block text-sm font-medium mb-1">Prénom</label>
                             <input type="text" id="first_name" name="name" 
-                                   value="{{ old('name', auth()->user()->name) }}"
+                                   value="{{-- old('name', auth()->user()->name) --}}"
                                    class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
                             @error('first_name')
                                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
@@ -59,7 +59,7 @@
                         <div class="md:col-span-2">
                             <label for="email" class="block text-sm font-medium mb-1">Email</label>
                             <input type="email" id="email" name="email" 
-                                   value="{{ old('email', auth()->user()->email) }}"
+                                   value="{{-- old('email', auth()->user()->email) --}}"
                                    class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
                             @error('email')
                                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
@@ -70,7 +70,7 @@
                         <div>
                             <label for="phone" class="block text-sm font-medium mb-1">Téléphone</label>
                             <input type="tel" id="phone" name="phone" 
-                                   value="{{ old('phone', auth()->user()->phone) }}"
+                                   value="{{-- old('phone', auth()->user()->phone) --}}"
                                    class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
                             @error('phone')
                                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
@@ -81,7 +81,7 @@
                         <div>
                             <label for="company" class="block text-sm font-medium mb-1">Société (optionnel)</label>
                             <input type="text" id="company" name="company" 
-                                   value="{{ old('company', auth()->user()->nom_entreprise) }}"
+                                   value="{{-- old('company', auth()->user()->nom_entreprise) --}}"
                                    class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
                             @error('company')
                                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
@@ -92,7 +92,7 @@
                         <div class="md:col-span-2">
                             <label for="address" class="block text-sm font-medium mb-1">Adresse</label>
                             <input type="text" id="address" name="address" 
-                                   value="{{ auth()->user()->address }}"
+                                   value="{{-- auth()->user()->address --}}"
                                    class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
                             @error('address')
                                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
@@ -103,7 +103,7 @@
                         <div>
                             <label for="city" class="block text-sm font-medium mb-1">Ville</label>
                             <input type="text" id="city" name="city" 
-                                   value="{{ auth()->user()->city }}"
+                                   value="{{-- auth()->user()->city --}}"
                                    class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
                             @error('city')
                                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
@@ -113,7 +113,7 @@
                         <div>
                             <label for="postal_code" class="block text-sm font-medium mb-1">Code postal</label>
                             <input type="text" id="postal_code" name="postal_code" 
-                                   value="{{  auth()->user()->postal_code }}"
+                                   value="{{--  auth()->user()->postal_code --}}"
                                    class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
                             @error('zip_code')
                                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
@@ -126,8 +126,8 @@
                             <select id="country" name="country" 
                                     class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
                                 <option value="">Sélectionnez un pays</option>
-                                    <option value=" {{ old('country', auth()->user()->country) }}">
-                                        {{ old('country', auth()->user()->country) }}
+                                    <option value=" {{-- old('country', auth()->user()->country) --}}">
+                                        {{-- old('country', auth()->user()->country)--}}
                                     </option>
                                     <option value="Afghanistan">Afghanistan</option>
                                     <option value="Africana">Africana</option>

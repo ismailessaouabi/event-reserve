@@ -40,7 +40,7 @@
             <!-- User Profile -->
             <div class="flex items-center mb-8 p-2">
                 <div class="w-12 h-12 bg-gray-300 rounded-full mr-3 overflow-hidden">
-                    <img src="{{ Storage::url(Auth::user()->profile_picture) }}" alt="Profile" class="w-full h-full object-cover">
+                    <img src="{{-- Storage::url(Auth::user()->profile_picture) --}}" alt="Profile" class="w-full h-full object-cover">
                 </div>
                 <span class="text-lg font-semibold">
                     @if (Auth::check())
@@ -53,36 +53,36 @@
             
             <!-- Navigation -->
             <nav class="flex flex-col gap-1">
-                <a href="{{ route('organizer') }}" class="flex items-center p-3 rounded-lg bg-gray-700 text-orange-500">
+                <a href="{{-- route('organizer') --}}" class="flex items-center p-3 rounded-lg bg-gray-700 text-orange-500">
                     <i class="fas fa-chart-line w-6 text-center mr-3"></i>
                     <span>Tableau de bord</span>
                 </a>
-                <a href="{{ route('organizer.information') }}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
+                <a href="{{-- route('organizer.information') --}}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
                     <i class="fas fa-user w-6 text-center mr-3"></i>
                     <span>Mes informations</span>
                 </a>
-                <a href="{{ route('organizer.events.index') }}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
+                <a href="{{-- route('organizer.events.index') --}}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
                     <i class="fas fa-calendar-check w-6 text-center mr-3"></i>
                     <span>Mes événements</span>
                 </a>
-                <a href="{{ route('organizer.billets') }}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
+                <a href="{{-- route('organizer.billets') --}}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
                     <i class="fas fa-ticket-alt w-6 text-center mr-3"></i>
                     <span>Billets vendus</span>
                 </a>
-                <a href="{{ route('organizer.statistiques') }}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
+                <a href="{{-- route('organizer.statistiques') --}}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
                     <i class="fas fa-chart-pie w-6 text-center mr-3"></i>
                     <span>Statistiques</span>
                 </a>
-                <a href="{{ route('organizer.payements') }}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
+                <a href="{{-- route('organizer.payements') --}}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
                     <i class="fas fa-wallet w-6 text-center mr-3"></i>
                     <span>Paiements</span>
                 </a>
-                <a href="{{ route('organizer.participants') }}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
+                <a href="{{-- route('organizer.participants') --}}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
                     <i class="fas fa-users w-6 text-center mr-3"></i>
                     <span>Participants</span>
                 </a>
                 
-                <a href="{{ route('logout') }}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
+                <a href="{{-- route('logout') --}}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
                     <i class="fas fa-sign-out-alt w-6 text-center mr-3"></i>
                     <span>Se déconnecter</span>
                 </a>
@@ -156,7 +156,7 @@
                                 <h2 class="text-lg sm:text-xl mt-4 sm:mt-6 mb-2 sm:mb-3">Revenus totaux</h2>
                                 <div class="border-b border-orange-500/20"></div>
                                 <div class="flex items-center mt-2 sm:mt-3 text-xs sm:text-sm hover:text-orange-500 transition-colors duration-200 cursor-pointer">
-                                    <a href="{{ route('organizer.payements') }}">Voir les transactions</a>
+                                    <a href="{{-- route('organizer.payements') --}}">Voir les transactions</a>
                                     <i class="fas fa-arrow-right ml-2 text-orange-500"></i>
                                 </div>
                             </div>

@@ -33,7 +33,7 @@
                         <!-- Titre de l'événement -->
                         <div class="col-span-2">
                             <label for="title" class="block text-sm font-medium text-gray-300 mb-1">Titre de l'événement *</label>
-                            <input type="text" id="title" name="title" value="{{ $event->name }}" required
+                            <input type="text" id="title" name="title" value="{{-- $event->name --}}" required
                                 class="w-full px-4 py-2 rounded-lg bg-gray-600 border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
                                 placeholder="Entrez le titre de votre événement">
                         </div>
@@ -43,7 +43,7 @@
                             <label for="description" class="block text-sm font-medium text-gray-300 mb-1">Description *</label>
                             <textarea id="description" name="description" rows="4" required
                                 class="w-full px-4 py-2 rounded-lg bg-gray-600 border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
-                                placeholder="Décrivez votre événement (minimum 50 caractères)">{{ $event->description }}</textarea>
+                                placeholder="Décrivez votre événement (minimum 50 caractères)">{{-- $event->description--}}</textarea>
                         </div>
                         
                         <!-- Catégorie -->
@@ -51,18 +51,21 @@
                             <label for="category_id" class="block text-sm font-medium text-gray-300 mb-1">Catégorie *</label>
                             <select id="category_id" name="category_id" required
                                 class="w-full px-4 py-2 rounded-lg bg-gray-600 border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
-                                <option value="{{ $event->category_id }}">{{ $event->category->name }}</option>
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
-                                        {{ $category->name }}
-                                    </option>
-                                @endforeach
+                                <option value="{{-- $event->category_id --}}">{{-- $event->category->name --}}</option>
+                                @if ($categories->count() > 0)
+                                    @foreach ($categories as $category)
+                                        @if ($category->id != $event->category_id)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endif
+                                    @endforeach
+                                    
+                                @endif
                             </select>
                         </div>
                         
                         <!-- Image de couverture -->
                         <div>
-                            <img src="{{ Storage::url($event->image_path) }}" alt="Image de couverture" class="w-full h-48 object-cover mb-4">
+                            <img src="{{-- Storage::url($event->image_path) --}}" alt="Image de couverture" class="w-full h-48 object-cover mb-4">
                             <label for="image" class="block text-sm font-medium text-gray-300 mb-1">Image de couverture *</label>
                             <div class="flex items-center">
                                 <input type="file" id="image" name="image" accept="image/*" required
@@ -81,7 +84,7 @@
                         <!-- Date de début -->
                         <div>
                             <label for="start_date" class="block text-sm font-medium text-gray-300 mb-1">Date de début *</label>
-                            <input type="datetime-local" id="start_date" name="start_date" value="{{ $event->start_time }}" required
+                            <input type="datetime-local" id="start_date" name="start_date" value="{{-- $event->start_time --}}" required
                                 class="w-full px-4 py-2 rounded-lg bg-gray-600 border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
                         </div>
                         
@@ -90,7 +93,7 @@
                         <!-- Date de fin -->
                         <div>
                             <label for="end_date" class="block text-sm font-medium text-gray-300 mb-1">Date de fin *</label>
-                            <input type="datetime-local" id="end_date" name="end_date" value="{{ $event->end_time }}" required
+                            <input type="datetime-local" id="end_date" name="end_date" value="{{-- $event->end_time --}}" required
                                 class="w-full px-4 py-2 rounded-lg bg-gray-600 border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
                         </div>
                         
@@ -106,7 +109,7 @@
                         <!-- Lieu -->
                         <div class="col-span-2">
                             <label for="location" class="block text-sm font-medium text-gray-300 mb-1">Lieu *</label>
-                            <input type="text" id="location" name="location" value="{{ $event->place->name }}" required
+                            <input type="text" id="location" name="location" value="{{-- $event->place->name --}}" required
                                 class="w-full px-4 py-2 rounded-lg bg-gray-600 border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
                                 placeholder="Adresse complète du lieu">
                         </div>
@@ -114,7 +117,7 @@
                         <!-- Ville -->
                         <div>
                             <label for="city" class="block text-sm font-medium text-gray-300 mb-1">Ville *</label>
-                            <input type="text" id="city" name="city" value="{{ $event->place->ville }}" required
+                            <input type="text" id="city" name="city" value="{{-- $event->place->ville --}}" required
                                 class="w-full px-4 py-2 rounded-lg bg-gray-600 border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
                                 placeholder="Ville">
                         </div>
@@ -122,7 +125,7 @@
                         <!-- Type d'événement (en présentiel/en ligne) -->
                         <div>
                             <label for="capacity" class="block text-sm font-medium text-gray-300 mb-1">Capacité *</label>
-                            <input type="number" name="capacity" id="capacity" value="{{ $event->place->capacity }}" class="w-full px-4 py-2 rounded-lg bg-gray-600 border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
+                            <input type="number" name="capacity" id="capacity" value="{{-- $event->place->capacity --}}" class="w-full px-4 py-2 rounded-lg bg-gray-600 border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
                         </div>
                         
                         <!-- Lien d'événement en ligne (conditionnel) -->
