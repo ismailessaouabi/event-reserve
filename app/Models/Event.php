@@ -32,7 +32,7 @@ class Event extends Model
     }
     public function place()
     {
-        return $this->belongsTo(Place::class);
+        return $this->belongsTo(Place::class , 'location_id');
     }
     public function organizer()
     {
@@ -40,7 +40,7 @@ class Event extends Model
     }
     public function teckets()
     {
-        return $this->hasMany(Tecket::class);
+        return $this->hasMany(Tecket::class, 'event_id');
     }
     
 }

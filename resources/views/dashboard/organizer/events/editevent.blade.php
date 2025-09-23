@@ -33,25 +33,19 @@
                         <!-- Titre de l'événement -->
                         <div class="col-span-2">
                             <label for="title" class="block text-sm font-medium text-gray-300 mb-1">Titre de l'événement *</label>
-                            <input type="text" id="title" name="title" value="{{-- $event->name --}}" required
+                            <input type="text" id="title" name="title" value="{{$event->name }}" required
                                 class="w-full px-4 py-2 rounded-lg bg-gray-600 border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
                                 placeholder="Entrez le titre de votre événement">
                         </div>
                         
-                        <!-- Description -->
-                        <div class="col-span-2">
-                            <label for="description" class="block text-sm font-medium text-gray-300 mb-1">Description *</label>
-                            <textarea id="description" name="description" rows="4" required
-                                class="w-full px-4 py-2 rounded-lg bg-gray-600 border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
-                                placeholder="Décrivez votre événement (minimum 50 caractères)">{{-- $event->description--}}</textarea>
-                        </div>
+                       
                         
                         <!-- Catégorie -->
                         <div>
                             <label for="category_id" class="block text-sm font-medium text-gray-300 mb-1">Catégorie *</label>
                             <select id="category_id" name="category_id" required
                                 class="w-full px-4 py-2 rounded-lg bg-gray-600 border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
-                                <option value="{{-- $event->category_id --}}">{{-- $event->category->name --}}</option>
+                                <option value="{{ $event->category_id }}">{{ $event->category->name }}</option>
                                 @if ($categories->count() > 0)
                                     @foreach ($categories as $category)
                                         @if ($category->id != $event->category_id)
@@ -65,7 +59,7 @@
                         
                         <!-- Image de couverture -->
                         <div>
-                            <img src="{{-- Storage::url($event->image_path) --}}" alt="Image de couverture" class="w-full h-48 object-cover mb-4">
+                            <img src="{{ Storage::url($event->image_path) }}" alt="Image de couverture" class="w-full h-48 object-cover mb-4">
                             <label for="image" class="block text-sm font-medium text-gray-300 mb-1">Image de couverture *</label>
                             <div class="flex items-center">
                                 <input type="file" id="image" name="image" accept="image/*" required
@@ -84,7 +78,7 @@
                         <!-- Date de début -->
                         <div>
                             <label for="start_date" class="block text-sm font-medium text-gray-300 mb-1">Date de début *</label>
-                            <input type="datetime-local" id="start_date" name="start_date" value="{{-- $event->start_time --}}" required
+                            <input type="datetime-local" id="start_date" name="start_date" value="{{ $event->start_time --}}" required
                                 class="w-full px-4 py-2 rounded-lg bg-gray-600 border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
                         </div>
                         
@@ -93,7 +87,7 @@
                         <!-- Date de fin -->
                         <div>
                             <label for="end_date" class="block text-sm font-medium text-gray-300 mb-1">Date de fin *</label>
-                            <input type="datetime-local" id="end_date" name="end_date" value="{{-- $event->end_time --}}" required
+                            <input type="datetime-local" id="end_date" name="end_date" value="{{ $event->end_time }}" required
                                 class="w-full px-4 py-2 rounded-lg bg-gray-600 border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
                         </div>
                         
@@ -109,7 +103,7 @@
                         <!-- Lieu -->
                         <div class="col-span-2">
                             <label for="location" class="block text-sm font-medium text-gray-300 mb-1">Lieu *</label>
-                            <input type="text" id="location" name="location" value="{{-- $event->place->name --}}" required
+                            <input type="text" id="location" name="location" value="{{ $event->place->name }}" required
                                 class="w-full px-4 py-2 rounded-lg bg-gray-600 border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
                                 placeholder="Adresse complète du lieu">
                         </div>
@@ -117,7 +111,7 @@
                         <!-- Ville -->
                         <div>
                             <label for="city" class="block text-sm font-medium text-gray-300 mb-1">Ville *</label>
-                            <input type="text" id="city" name="city" value="{{-- $event->place->ville --}}" required
+                            <input type="text" id="city" name="city" value="{{ $event->place->city }}" required
                                 class="w-full px-4 py-2 rounded-lg bg-gray-600 border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
                                 placeholder="Ville">
                         </div>
@@ -125,7 +119,7 @@
                         <!-- Type d'événement (en présentiel/en ligne) -->
                         <div>
                             <label for="capacity" class="block text-sm font-medium text-gray-300 mb-1">Capacité *</label>
-                            <input type="number" name="capacity" id="capacity" value="{{-- $event->place->capacity --}}" class="w-full px-4 py-2 rounded-lg bg-gray-600 border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
+                            <input type="number" name="capacity" id="capacity" value="{{ $event->place->capacity }}" class="w-full px-4 py-2 rounded-lg bg-gray-600 border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
                         </div>
                         
                         <!-- Lien d'événement en ligne (conditionnel) -->
@@ -146,7 +140,7 @@
                         <!-- Nombre maximum de participants -->
                         <div>
                             <label for="max_participants" class="block text-sm font-medium text-gray-300 mb-1">Nombre maximum de participants *</label>
-                            <input type="number" id="max_participants" name="max_participants" value="{{ old('max_participants') }}" min="1" 
+                            <input type="number" id="max_participants" name="max_participants" value="{{ $event->place->capacity }}" min="1" 
                                 class="w-full px-4 py-2 rounded-lg bg-gray-600 border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
                                 placeholder="Nombre de places disponibles">
                         </div>
@@ -154,7 +148,7 @@
                         <!-- Prix du billet -->
                         <div>
                             <label for="ticket_price" class="block text-sm font-medium text-gray-300 mb-1">Prix du billet (MAD) *</label>
-                            <input type="number" id="ticket_price" name="ticket_price" value="{{ old('ticket_price', 0) }}" min="0" step="0.01" 
+                            <input type="number" id="ticket_price" name="ticket_price" value="{{ $event->teckets->first()->price ?? 00 }}" min="0" step="0.01" 
                                 class="w-full px-4 py-2 rounded-lg bg-gray-600 border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
                                 placeholder="0.00 pour un événement gratuit">
                         </div>
@@ -185,37 +179,6 @@
                     </div>
                 </div>
 
-                <!-- Options supplémentaires -->
-                <div class="bg-gray-700 p-6 rounded-lg shadow-sm">
-                    <h3 class="text-xl font-semibold mb-4 text-white">Options supplémentaires</h3>
-                    
-                    <div class="space-y-4">
-                        <!-- Publication immédiate -->
-                        <div class="flex items-start">
-                            <div class="flex items-center h-5">
-                                <input id="is_published" name="is_published" type="checkbox" value="1" {{ old('is_published') ? 'checked' : '' }}
-                                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                            </div>
-                            <div class="ml-3 text-sm">
-                                <label for="is_published" class="font-medium text-gray-300">Publier immédiatement</label>
-                                <p class="text-gray-400">Si non coché, l'événement sera enregistré comme brouillon.</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Événement privé -->
-                        <div class="flex items-start">
-                            <div class="flex items-center h-5">
-                                <input id="is_private" name="is_private" type="checkbox" value="1" {{ old('is_private') ? 'checked' : '' }}
-                                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                            </div>
-                            <div class="ml-3 text-sm">
-                                <label for="is_private" class="font-medium text-gray-300">Événement privé</label>
-                                <p class="text-gray-400">Si coché, l'événement sera visible uniquement via un lien d'invitation.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Boutons d'action -->
                 <div class="flex flex-col sm:flex-row justify-end space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
                     <button type="button" onclick="window.location=''" 
@@ -223,10 +186,7 @@
                         Annuler
                     </button>
                     
-                    <button type="submit" name="save_draft" value="1"
-                        class="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition duration-200">
-                        Enregistrer comme brouillon
-                    </button>
+                   
                     
                     <button type="submit"
                         class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200">

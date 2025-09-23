@@ -46,15 +46,14 @@
                             <select id="category_id" name="category_id" required
                                 class="w-full px-4 py-2 rounded-lg bg-gray-600 border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
                                 <option value="1">Sélectionnez une catégorie</option>
-                                <option value="2">Sélectionnez une catégorie</option>
-                                {{--@if ($categories->count() > 0)
+                                
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
                                             {{ $category->name }}
                                         </option>
                                     @endforeach
                                     
-                                @endif--}}
+                               
                             </select>
                         </div>
                         

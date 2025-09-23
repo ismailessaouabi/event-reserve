@@ -1,7 +1,7 @@
 @extends('dashboard.organizer.layouts')
 
 @section('content')
-<section class="py-12 bg-gray-800">
+<section class="py-5 bg-gray-800">
     <div class="container mx-auto px-4">
         @if (session('success'))
             <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
@@ -50,22 +50,16 @@
                     <!-- Date et statut -->
                     <div class="flex justify-between items-center mb-3">
                         <span class="text-sm font-medium px-3 py-1 bg-blue-100 text-blue-800 rounded-full">
-                            {{$event->start_date}}
+                            {{ \Carbon\Carbon::parse($event->date)->format('d M Y') }}
                         </span>
-                        @if($event->is_past)
-                            <span class="text-sm font-medium px-3 py-1 bg-gray-100 text-gray-800 rounded-full">
-                                Terminé
-                            </span>
-                        @else
-                            <span class="text-sm font-medium px-3 py-1 bg-green-100 text-green-800 rounded-full">
-                                À venir
-                            </span>
-                        @endif
+                        <span class="text-sm font-medium px-3 py-1 bg-green-100 text-green-800 rounded-full">
+                            {{ $event->teckets->first()->price ?? 'N/A' }}
+                        </span>
+                        
                     </div>
                     
                     <!-- Titre et description -->
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">{{$event->name}}</h3>
-                    <p class="text-gray-600 mb-4 line-clamp-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Possimus, et!</p>
+                    <h3 class="text-xl font-bold text-gray-500 mb-2">{{$event->name}}</h3>
                     
                     <!-- Lieu et participants -->
                     <div class="flex items-center text-gray-500 text-sm mb-4">

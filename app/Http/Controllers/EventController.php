@@ -18,14 +18,14 @@ class EventController extends Controller
     
 
     public function list_events_organizer(){
-        $events = Event::White('place','teckets')->where('organizer_id', auth()->user()->id)->get();
+        $events = Event::With('place','teckets')->where('organizer_id', auth()->user()->id)->get();
         return view('dashboard.organizer.events.mesevents', compact('events'));
         
     }
     
     public function create_event_organizer(){
-        //$categories = Category::all();
-        return view('dashboard.organizer.events.ajoutevent');
+        $categories = Category::all();
+        return view('dashboard.organizer.events.ajoutevent', compact('categories'));
     }
     
     public function store_event_organizer(Request $request){
@@ -61,7 +61,7 @@ class EventController extends Controller
     public function show_event_organizer($id){
         $event = Event::findOrFail($id);
         return view('dashboard.organizer.events.showevent', compact('event'));
-    }
+    }*/
     public function edit_event_organizer($id){
         $event = Event::findOrFail($id);
         $categories = Category::all();
@@ -72,11 +72,13 @@ class EventController extends Controller
         $event->update($request->all());
         return redirect()->route('organizer.events.index')->with('success', 'Event updated successfully.');
     }
+    
     public function destroy_event_organizer($id){
         $event = Event::findOrFail($id);
         $event->delete();
         return redirect()->route('organizer.events.index')->with('success', 'Event deleted successfully.');
     }
+    /*
     public function countevents_organizer(){
         $eventsCount = Event::all()->where('organizer_id', auth()->user()->id)->count();
         $participantsCount = User::all()->count();//->whire(auth()->user()->id,'organizer_id' );
