@@ -8,7 +8,7 @@ use app\Models\Event;
 
 class Category extends Model
 {
-    protected $table = 'categories';
+    protected $table = 'categoris';
     protected $fillable = [
         'id',
         'name',

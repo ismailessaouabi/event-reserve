@@ -14,15 +14,16 @@ use App\Models\Tecket;
 class Event extends Model
 {
     protected $fillable = [
-        
+        'id',
         'name',
         'image_path',
-        'description',    
-        'category_id',        
         'start_time',
         'end_time',
-        'place_id',
+        'category_id',
         'organizer_id',
+        'location_id',
+        'created_at',
+        'updated_at'
     ];
 
     public function category()

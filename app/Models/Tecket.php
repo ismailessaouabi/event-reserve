@@ -6,11 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tecket extends Model
 {
-    protected $table = 'tickets';
+    protected $table = 'billiets';
     // Define the fillable attributes
     protected $fillable = [
-        'prix',
-        'event_id'
+        'id',
+        'price',
+        'user_id',
+        'event_id',
+        'created_at',
+        'updated_at'
         
         
     ];

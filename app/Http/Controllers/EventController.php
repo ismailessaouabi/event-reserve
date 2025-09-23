@@ -18,8 +18,8 @@ class EventController extends Controller
     
 
     public function list_events_organizer(){
-        
-        return view('dashboard.organizer.events.mesevents');
+        $events = Event::White('place','teckets')->where('organizer_id', auth()->user()->id)->get();
+        return view('dashboard.organizer.events.mesevents', compact('events'));
         
     }
     
@@ -27,7 +27,7 @@ class EventController extends Controller
         //$categories = Category::all();
         return view('dashboard.organizer.events.ajoutevent');
     }
-    /*
+    
     public function store_event_organizer(Request $request){
         $path = $request->file('image')->store('images', 'public');
         $place = Place::create([
@@ -35,22 +35,29 @@ class EventController extends Controller
             'capacity' => $request->capacity,
             'city' => $request->city
         ]);
+        $category = Category::create([
+            'id' => 13,
+            'name' => 'fiih',
+        ]);
         $event = Event::create([
             'name' => $request->title,
             'image_path' => $path,
             'start_time' => $request->start_date,
             'end_time' => $request->end_date,
-            'place_id' => $place->id,
-            'category_id' => $request->category_id,
-            'organizer_id' => auth()->user()->id
+            'category_id' => $category->id,
+            'organizer_id' => auth()->user()->id,
+            'location_id' => $place->id,
         ]);
         $tecket = Tecket::create([
+            'price'=> $request->ticket_price,
             'event_id' => $event->id ,
-            'prix'=> $request->ticket_price
+            'user_id' => auth()->user()->id,
+
             
         ]);
         return redirect()->route('organizer.events.index')->with('success', 'Event created successfully.');
     }
+    /*
     public function show_event_organizer($id){
         $event = Event::findOrFail($id);
         return view('dashboard.organizer.events.showevent', compact('event'));

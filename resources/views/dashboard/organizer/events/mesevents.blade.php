@@ -37,7 +37,7 @@
 
         <!-- Liste des événements -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-           {{-- @if ($events->isNotEmpty())
+           @if ($events->isNotEmpty())
             @foreach($events as $event)
             <div class="bg-gray-900 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
                 <!-- Image de l'événement -->
@@ -98,14 +98,14 @@
             </div>
         @endforeach
                 
-            @endif--}}
+            @endif
         </div>
 
         <!-- Pagination -->
         
 
         <!-- Message si aucun événement -->
-        {{--@if($events->isEmpty())
+        @if($events->isEmpty())
             <div class="text-center py-12">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -116,7 +116,7 @@
                     Créer mon premier événement
                 </button>
             </div>
-        @endif--}}
+        @endif
     </div>
 </section>
 @endsection

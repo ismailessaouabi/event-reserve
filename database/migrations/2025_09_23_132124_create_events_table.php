@@ -19,8 +19,10 @@ return new class extends Migration
             $table->dateTime('end_time');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('organizer_id');
+            $table->unsignedBigInteger('location_id');
             $table->foreign('category_id')->references('id')->on('categoris')->onDelete('cascade');
             $table->foreign('organizer_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('location_id')->references('id')->on('places')->onDelete('cascade');
             $table->timestamps();
         });
     }
