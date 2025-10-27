@@ -12,7 +12,7 @@
         <div class="container w-full mx-auto px-4">
             <div class="header-container flex w-full flex-wrap justify-between items-center py-4">
                 <div class="flex items-center">
-                    <a href="/" class="text-white font-bold text-xl md:text-2xl">
+                    <a href="/" class="text-white font-bold text-xl transition-all hover:text-blue-600 md:text-2xl">
                         <i class="fa-regular fa-calendar-check text-xl md:text-2xl font-white"></i>
                         Event-reserve
                     </a>
@@ -31,13 +31,13 @@
                         <i class="fas fa-search absolute right-3 top-2.5 md:top-3 text-gray-400"></i>
                         
                     </div>
-                    <button type="submit" class="bg-blue-600 text-white px-4 h-fit py-1.5 md:py-2 rounded-full text-sm">Rechercher</button>
+                    <button type="submit" class="bg-blue-600 text-white cursor-pointer transition-all hover:scale-[1.1] font-semibold px-4 h-fit py-1.5 md:py-2 rounded-full text-sm">Rechercher</button>
                 </form>
                 
                 <div class="hidden md:flex items-center space-x-2 md:space-x-4">
                     <div class="flex items-center gap-1.5 md:gap-2.5">
-                        <a href="{{ route('login') }}" class="bg-blue-600 text-white px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm">Se connecter</a>
-                        <a href="{{ route('register') }}" class="bg-blue-600 text-white px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm">S'inscrire</a>        
+                        <a href="{{ route('login.form') }}" class="bg-blue-600 font-semibold transition-all hover:scale-[1.1] text-white px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm">Se connecter</a>
+                        <a href="{{ route('register.form') }}" class="bg-blue-600 font-semibold transition-all hover:scale-[1.1] text-white px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm">S'inscrire</a>        
                     </div>
                 </div>
             </div>
@@ -54,23 +54,12 @@
                 </form>
                 
                 <div class="flex flex-col space-y-4">
-                    <a href="{{ route('login') }}" class="bg-blue-600 text-white text-center py-2 rounded-full text-sm">Se connecter</a>
-                    <a href="{{ route('register') }}" class="bg-blue-600 text-white text-center py-2 rounded-full text-sm">S'inscrire</a>
+                    <a href="{{ route('login.form') }}" class="bg-blue-600 text-white text-center py-2 rounded-full text-sm">Se connecter</a>
+                    <a href="{{ route('register.form') }}" class="bg-blue-600 text-white text-center py-2 rounded-full text-sm">S'inscrire</a>
                 </div>
             </div>
             
-            <!-- Navigation secondaire -->
-            <nav class="nav-secondary overflow-x-auto whitespace-nowrap py-2 -mx-4 px-4">
-                <div class="flex space-x-4 md:space-x-6">
-                   {{-- @foreach ($categories as $category)
-                        <a href="" class="category text-white font-medium text-sm md:text-base {{ request()->route('id') == $category->id ? 'border border-white px-2 py-0.5 md:px-2 md:py-0.5 rounded' : '' }}">{{ $category->name }}</a>
-                    @endforeach--}}
-                    
-                    <div class="ml-auto flex items-center space-x-4">
-                        <a href="#" class="text-gray-300 text-xs md:text-sm">Aide & Contact</a>
-                    </div>
-                </div>
-            </nav>
+           
         </div>
     </header>
 
@@ -83,7 +72,7 @@
             <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
                 <div class="col-span-2 md:col-span-1">
                     <img src="/api/placeholder/120/40" alt="Guichet Logo" class="h-8 mb-4">
-                    <p class="text-gray-400 text-xs mb-4">Guichet est une plateforme de billetterie innovante qui offre une expérience utilisateur optimale pour acheter des billets d'événements au Maroc.</p>
+                    <p class="text-gray-400 text-xs mb-4">Event-reserve est une plateforme de billetterie innovante qui offre une expérience utilisateur optimale pour acheter des billets d'événements au Maroc.</p>
                     <div class="flex space-x-3">
                         <a href="/" class="text-gray-400 hover:text-white"><i class="fab fa-facebook"></i></a>
                         <a href="/" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>

@@ -1,12 +1,12 @@
 @extends('pages.layouts')
 @section('content')
 
-<div class="bg-[#011127] w-full min-h-screen flex flex-col justify-center items-center text-white py-10">
+<div class="bg-[#011127] w-full  flex flex-col justify-center items-center text-white ">
     <h1 class="font-semibold text-3xl w-full max-w-3xl text-center mb-8">
         Bienvenue sur notre plateforme ! Nous sommes ravis de vous retrouver.
     </h1>
 
-    <form class="w-full max-w-3xl bg-[#0a1a35] p-8 rounded-3xl shadow-lg flex flex-col gap-6" action="{{ route('register.post') }}" method="POST">
+    <form class="w-full max-w-3xl bg-[#0a1a35] p-8 rounded-3xl shadow-lg flex flex-col gap-6" action="{{ route('register') }}" method="POST">
         @csrf
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -19,7 +19,7 @@
         </div>
 
         <div class="mt-6">
-            <input type="submit" value="S'inscrire" class="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300">
+            <input type="submit" value="S'inscrire" class="w-full py-3 cursor-pointer bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300">
         </div>
 
         @if (session('error'))

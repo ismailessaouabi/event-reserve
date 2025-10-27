@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Http\Requests\Auth\RegisterRequest;
 
 class AuthController extends Controller
 {
@@ -17,27 +19,31 @@ class AuthController extends Controller
     public function showformlogin(){
         return view('pages.login');
     }
-    public function register(Request $request){   
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:8',
-            'phone' => 'required',
-            'city' => 'required',
-        ]);
 
-        // Create the user    
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role' => 'organizer',
-            'phone' => $request->phone,
-            'city' => $request->city,
-        ]);
-        
-        // Redirect to the login page with a success message
-        return redirect()->route('login')->with('success', 'Registration successful');
+    public function register(RegistredRequest $request){   
+      
+        // Validate the request data
+        $validatedData = $request->validated();
+
+        try {
+            
+            // Create the user    
+            $user = User::create([
+                'name' => $validatedData['name'],
+                'email' => $validatedData['email'],
+                'password' => Hash::make($validatedData['password']),
+                'role' => 'organizer',
+                'phone' => $validatedData['phone'],
+                'city' => $validatedData['city'],
+            ]);
+         
+            Auth::login($user);
+            return redirect()->route('dashboard')->with('success', '...');
+
+       } catch (\Throwable $th) {
+
+            return redirect()->route('register')->with('error', 'Something went wrong, please try again.');
+       }
     }
     public function login(Request $request){
 
