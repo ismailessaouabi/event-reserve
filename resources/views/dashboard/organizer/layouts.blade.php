@@ -55,7 +55,7 @@
             <nav class="flex flex-col gap-1">
                 <a href="{{-- route('organizer') --}}" class="flex items-center p-3 rounded-lg bg-gray-700 text-orange-500">
                     <i class="fas fa-chart-line w-6 text-center mr-3"></i>
-                    <span>Tableau de bord</span>
+                    <span>Mes evenement</span>
                 </a>
                 <a href="{{-- route('organizer.information') --}}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
                     <i class="fas fa-user w-6 text-center mr-3"></i>

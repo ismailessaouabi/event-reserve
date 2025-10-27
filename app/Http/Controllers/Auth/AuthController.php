@@ -1,27 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Category;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
 
-    public function showformregister()
-    {
+    public function showformregister(){
         
         return view('pages.register');
     }
-    public function showformlogin()
-    {
+    public function showformlogin(){
         return view('pages.login');
     }
-    public function register(Request $request)
-    {   
+    public function register(Request $request){   
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
@@ -43,10 +39,8 @@ class AuthController extends Controller
         // Redirect to the login page with a success message
         return redirect()->route('login')->with('success', 'Registration successful');
     }
+    public function login(Request $request){
 
-    
-    public function login(Request $request)
-    {
         $email = $request->email;
         $password = $request->password;
         $values = [
@@ -82,48 +76,10 @@ class AuthController extends Controller
         }
         
     }
+    public function logout(){
 
-
-    public function showformlogin_admin()
-    {
-        return view('dashboard.admin.login-admin');
-    }
-
-    public function login_admin(Request $request)
-    {
-        $email = $request->email;
-        $password = $request->password;
-        $values = [
-            'email' => $email,
-            'password' =>  $password,
-        ];
-        if(Auth::attempt($values))
-        {
-            if (Auth::user()->role == 'admin') {
-                $request->session()->regenerateToken();
-                return redirect()->route('admin.events.index')->with('success', 'Login successful');
-            }
-        }
-        else
-        {
-            return redirect()->route('login.admin')->with('error', 'Login failed');
-        }
-    }
-
-   
-
-
-    
-
-    public function logout()
-    {
         Auth::logout();
-        // Invalidate the session
         request()->session()->destroy();
-        // Regenerate the CSRF token
-        request()->session()->regenerateToken();
-        // Redirect to the login page with a success message
-    
         return redirect()->route('login')->with('success', 'Logout successful');
     }  
     

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Socialmedia;
 
-class UserController extends Controller
+class UserAdminController extends Controller
 {
     
     /*public function index_users_admin()
