@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Requests\Auth\LoginRequest;
+
+
 
 class AuthController extends Controller
 {
@@ -20,7 +23,7 @@ class AuthController extends Controller
         return view('pages.login');
     }
 
-    public function register(RegistredRequest $request){   
+    public function register(RegisterRequest $request){   
       
         // Validate the request data
         $validatedData = $request->validated();
@@ -37,50 +40,37 @@ class AuthController extends Controller
                 'city' => $validatedData['city'],
             ]);
          
-            Auth::login($user);
-            return redirect()->route('dashboard')->with('success', '...');
+            return redirect()->route('register.form')->with('success', 'success');
 
        } catch (\Throwable $th) {
 
-            return redirect()->route('register')->with('error', 'Something went wrong, please try again.');
+            return redirect()->route('register.form')->with('error', 'Something went wrong, please try again.');
        }
     }
-    public function login(Request $request){
+    public function login(LoginRequest $request){
 
-        $email = $request->email;
-        $password = $request->password;
-        $values = [
-            'email' => $email,
-            'password' =>  $password,
-        ];
-
-        $user = User::where('email', $email)->first();
-        if (!$user) {
-            return redirect()->route('login')->with('error', 'your email is not registered');
-        }
-         //Check if the user is an organizer
-        if ($user->role != 'organizer') {
-            return redirect()->route('login')->with('error', 'Unauthorized access');
-        }
-        // check if the password is correct
-        if (!Hash::check($password, $user->password)) {
-            return redirect()->route('login')->with('error', 'Invalid credentials');
-        }
-        
-        if(Auth::attempt($values))
-        {
-            if ($user->role == 'organizer') {
-                $request->session()->regenerateToken();
-                return redirect()->route('organizer.events.index', ['id' => $user->id])->with('success', 'Login successful');
-                
+        $validatedData = $request->validated();
+    
+        try {
+            // Récupérer l'utilisateur
+            $user = User::where('email', $validatedData['email'])->first();
+    
+            // Vérifier existence + rôle + mot de passe
+            if (!$user || $user->role !== 'organizer' || !Hash::check($validatedData['password'], $user->password)) {
+                return redirect()->route('login.form')->with('error', 'Identifiants incorrects');
             }
+    
+            // Authentifier l'utilisateur
+            Auth::login($user);
+            $request->session()->regenerate();
+    
+            return redirect()->intended('dashboard');
+    
+        } catch (\Throwable $th) {
             
+            Log::error('Erreur login: ' . $th->getMessage());
+            return redirect()->route('login.form')->with('error', 'Une erreur est survenue');
         }
-        else
-        {
-            return redirect()->route('login')->with('error', 'Login failed');
-        }
-        
     }
     public function logout(){
 

@@ -7,6 +7,16 @@
     </h1>
 
     <form class="w-full max-w-3xl bg-[#0a1a35] p-8 rounded-3xl shadow-lg flex flex-col gap-6" action="{{ route('register') }}" method="POST">
+        @if (session('error'))
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                <span class="block sm:inline">{{ session('error') }}</span>
+            </div>                
+        @endif
+        @if (session('success'))
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                        <span class="block sm:inline">{{ session('success') }}</span>
+                    </div>  
+        @endif
         @csrf
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -22,9 +32,7 @@
             <input type="submit" value="S'inscrire" class="w-full py-3 cursor-pointer bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300">
         </div>
 
-        @if (session('error'))
-            <p class="text-red-500 mt-4">{{ session('error') }}</p>
-        @endif
+       
     </form>
 </div>
 
