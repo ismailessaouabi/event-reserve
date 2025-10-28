@@ -18,12 +18,14 @@
             </button>
             <div class="flex items-center">
                 <div class="w-10 h-10 bg-gray-300 rounded-full mr-3 overflow-hidden">
-                    @if (Auth::user()->profile_picture)
-                        <img src="{{ Storage::url(Auth::user()->profile_picture) }}" alt="Profile" class="w-full h-full object-cover">
-                        
+                    @if (Auth::check())
+                        @if (Auth::user()->profile_picture)
+                            <img src="{{ Storage::url(Auth::user()->profile_picture) }}" alt="Profile" class="w-full h-full object-cover">
+                        @else
+                            <img src="{{ asset('images/default-profile.png') }}" alt="Profile" class="w-full h-full object-cover">
+                        @endif
                     @else
                         <img src="{{ asset('images/default-profile.png') }}" alt="Profile" class="w-full h-full object-cover">
-                        
                     @endif
                 </div>
                 <span class="text-lg font-semibold">@if (Auth::check())
@@ -113,7 +115,7 @@
                                 <h2 class="text-lg sm:text-xl mt-4 sm:mt-6 mb-2 sm:mb-3">Événements créés</h2>
                                 <div class="border-b border-orange-500/20"></div>
                                 <div class="flex items-center mt-2 sm:mt-3 text-xs sm:text-sm hover:text-orange-500 transition-colors duration-200 cursor-pointer">
-                                    <a href="{{ route('organizer.events.index') }}">Voir tous les événements</a>
+                                    <a href="">Voir tous les événements</a>
                                     <i class="fas fa-arrow-right ml-2 text-orange-500"></i>
                                 </div>
                             </div>
@@ -138,7 +140,7 @@
                                 <h2 class="text-lg sm:text-xl mt-4 sm:mt-6 mb-2 sm:mb-3">Participants par événement</h2>
                                 <div class="border-b border-orange-500/20"></div>
                                 <div class="flex items-center mt-2 sm:mt-3 text-xs sm:text-sm hover:text-orange-500 transition-colors duration-200 cursor-pointer">
-                                    <a href="{{ route('organizer.participants') }}">Gérer les participants</a>
+                                    <a href="">Gérer les participants</a>
                                     <i class="fas fa-arrow-right ml-2 text-orange-500"></i>
                                 </div>
                             </div>

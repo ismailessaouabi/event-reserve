@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\LoginRequest;
+use Illuminate\Support\Facades\Log;
 
 
 
@@ -22,7 +23,6 @@ class AuthController extends Controller
     public function showformlogin(){
         return view('pages.login');
     }
-
     public function register(RegisterRequest $request){   
       
         // Validate the request data
@@ -40,7 +40,7 @@ class AuthController extends Controller
                 'city' => $validatedData['city'],
             ]);
          
-            return redirect()->route('register.form')->with('success', 'success');
+            return redirect()->route('login.form')->with('success', 'success');
 
        } catch (\Throwable $th) {
 
@@ -55,21 +55,21 @@ class AuthController extends Controller
             // Récupérer l'utilisateur
             $user = User::where('email', $validatedData['email'])->first();
     
-            // Vérifier existence + rôle + mot de passe
-            if (!$user || $user->role !== 'organizer' || !Hash::check($validatedData['password'], $user->password)) {
-                return redirect()->route('login.form')->with('error', 'Identifiants incorrects');
+            // attempter to login
+            if (! $user || ! Hash::check($validatedData['password'], $user->password)) {
+                return back()->with('error', 'Identifiants incorrects');
             }
-    
-            // Authentifier l'utilisateur
-            Auth::login($user);
-            $request->session()->regenerate();
-    
-            return redirect()->intended('dashboard');
-    
-        } catch (\Throwable $th) {
             
+    
+           
+
+    
+            return redirect()->intended(route('les_events_organizer'))
+            ->with('success1', 'Login successful');    
+        } catch (\Throwable $th) {
+
             Log::error('Erreur login: ' . $th->getMessage());
-            return redirect()->route('login.form')->with('error', 'Une erreur est survenue');
+            return back()->with('error', 'Une erreur est survenue');
         }
     }
     public function logout(){

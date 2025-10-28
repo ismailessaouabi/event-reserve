@@ -11,7 +11,7 @@ class loginRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +23,21 @@ class loginRequest extends FormRequest
     {
         return [
             'email'=> 'required|exists:users,email',
-            'password' =>  'required|exists:users,email'
+            'password' =>  'required'
+        ];
+    }
+
+       /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'email.required' => 'L\'email est obligatoire.',
+            'email.exists' => 'Cet email n\'est pas enregistré.',
+            'password.required' => 'Le mot de passe est obligatoire.',
         ];
     }
 }

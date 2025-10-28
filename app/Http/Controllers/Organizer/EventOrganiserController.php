@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Organizer;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\Event;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -13,12 +14,12 @@ use App\models\Tecket;
 
 
 
-class EventController extends Controller
+class EventOrganiserController extends Controller
 {
     
 
-    public function list_events_organizer(){
-        $events = Event::With('place','teckets')->where('organizer_id', auth()->user()->id)->get();
+    public function list_events(){
+        $events = Event::With('place','teckets')->get();
         return view('dashboard.organizer.events.mesevents', compact('events'));
         
     }

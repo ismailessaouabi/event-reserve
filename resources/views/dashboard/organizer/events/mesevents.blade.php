@@ -26,7 +26,7 @@
             </div>
             
             <div class="w-full sm:w-auto">
-                <a href="{{route('organizer.events.create') }}" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-200 flex items-center justify-center gap-2">
+                <a href="" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-200 flex items-center justify-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
                     </svg>
@@ -71,7 +71,7 @@
                     
                     <!-- Actions -->
                     <div class="flex gap-2 justify-between items-center pt-4 border-t border-gray-100">
-                        <form action="{{ route('organizer.events.destroy', $event->id) }}" method="POST">
+                        <form action="" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="text-red-600 hover:text-red-800 font-medium text-sm flex items-center">
@@ -79,11 +79,11 @@
                                 
                             </button>
                         </form>
-                        <a href="{{ route('organizer.events.edit', $event->id) }}" class="text-yellow-600 hover:text-yellow-800 font-medium text-sm flex items-center">
+                        <a href="" class="text-yellow-600 hover:text-yellow-800 font-medium text-sm flex items-center">
                             Modifier
                             
                         
-                        <a href="{{ route('organizer.events.show', $event->id) }}" class="text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center">
+                        <a href="" class="text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center">
                             Voir détails
                             
                         </a>
