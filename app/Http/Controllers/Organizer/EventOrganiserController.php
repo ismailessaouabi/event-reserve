@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Organizer;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
+use App\Http\Requests\Organiser\StoreEventRequest;
 use App\Models\Event;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -11,6 +13,7 @@ use App\Models\Category;
 use App\Models\Place;
 use App\Models\User;
 use App\models\Tecket;
+
 
 
 
@@ -24,36 +27,51 @@ class EventOrganiserController extends Controller
         
     }
     
-    public function create_event_organizer(){
+    public function create_event(){
         $categories = Category::all();
         return view('dashboard.organizer.events.ajoutevent', compact('categories'));
     }
     
-    public function store_event_organizer(Request $request){
-        $path = $request->file('image')->store('images', 'public');
-        $place = Place::create([
-            'name' => $request->location,
-            'capacity' => $request->capacity,
-            'city' => $request->city
-        ]);
-        
-        $event = Event::create([
-            'name' => $request->title,
-            'image_path' => $path,
-            'start_time' => $request->start_date,
-            'end_time' => $request->end_date,
-            'category_id' => $request->category_id,
-            'organizer_id' => auth()->user()->id,
-            'location_id' => $place->id,
-        ]);
-        $tecket = Tecket::create([
-            'price'=> $request->ticket_price,
-            'event_id' => $event->id ,
-            'user_id' => auth()->user()->id,
+    public function store_event(StoreEventRequest $request){
+        $validatedData = $request->validated();
 
-            
-        ]);
-        return redirect()->route('organizer.events.index')->with('success', 'Event created successfully.');
+        try {
+
+            DB::beginTransaction();
+                // Create Place
+                $place = Place::create([
+                    'location' => $validatedData['location'],
+                    'capacity' => $validatedData['capacity'],
+                    'city' => $validatedData['city'],
+                ]);
+                // Create Event
+                $event = Event::create([
+                    'title' => $validatedData['title'],
+                    'image' => $validatedData['image']->store('events', 'public'),
+                    'start_date' => Carbon::parse($validatedData['start_date']),
+                    'end_date' => Carbon::parse($validatedData['end_date']),
+                    'category_id' => $validatedData['category_id'],
+                    'organizer_id' => auth()->user()->id,
+                    'place_id' => $place->id,
+                ]);
+                // Create Ticket
+                Tecket::create([
+                    'event_id' => $event->id,
+                    'ticket_price' => $validatedData['ticket_price'],
+                ]);
+            DB::commit();
+
+            // Return success response
+            return redirect()->route('organizer.events.index')->with('success', 'Event created successfully.');
+
+        } catch (\Throwable $th) {
+            Log::error('Error creating event: ' . $th->getMessage());
+            DB::rollBack();
+            return redirect()->back()->withErrors($th->getMessage())->withInput();
+        }
+        
+     
+      
     }
     /*
     public function show_event_organizer($id){

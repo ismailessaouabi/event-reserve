@@ -12,9 +12,13 @@ Route::prefix('auth')->group(function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-Route::prefix('organizer')->middlewire('auth')->group(function () {
+Route::prefix('organizer')->group(function () {
     Route::get('les_events', [EventOrganiserController::class, 'list_events'])
         ->name('les_events_organizer');
+    Route::get('ajouter_event', [EventOrganiserController::class, 'create_event'])
+        ->name('ajouter_event_organizer');
+    Route::post('store_event', [EventOrganiserController::class, 'store_event'])
+        ->name('store_event');
 });
  
 

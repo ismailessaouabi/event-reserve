@@ -54,22 +54,26 @@ class AuthController extends Controller
         try {
             // Récupérer l'utilisateur
             $user = User::where('email', $validatedData['email'])->first();
-    
-            // attempter to login
-            if (! $user || ! Hash::check($validatedData['password'], $user->password)) {
+            if (!$user) {
                 return back()->with('error', 'Identifiants incorrects');
             }
+            if (!Auth::attempt($validatedData) || $user->role !== 'organizer') {
+                return back()->with('error', 'Identifiants incorrects');
+            }           
             
-    
-           
+            // Authentifier l'utilisateur
+            $request->session()->regenerate();
+            Auth::login($user);
 
-    
+            // Rediriger vers la page souhaitée
             return redirect()->intended(route('les_events_organizer'))
-            ->with('success1', 'Login successful');    
+            ->with('success1', 'Login successful');  
+
         } catch (\Throwable $th) {
 
+            //log the error message
             Log::error('Erreur login: ' . $th->getMessage());
-            return back()->with('error', 'Une erreur est survenue');
+            return back()->with('error', $th->getMessage());
         }
     }
     public function logout(){

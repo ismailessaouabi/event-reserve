@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Tecket;
+use App\Models\Event;
+use App\Models\Socialmedia;
 
-class User extends Model
+class User extends Authenticatable
 {
     protected $table = 'users';
     protected $fillable = [
