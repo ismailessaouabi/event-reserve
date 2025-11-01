@@ -58,6 +58,9 @@
                     <a href="{{ route('register.form') }}" class="bg-blue-600 text-white text-center py-2 rounded-full text-sm">S'inscrire</a>
                 </div>
             </div>
+
+            <!-- les categories -->
+            
             
            
         </div>

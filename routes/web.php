@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Organizer\EventOrganiserController;
 use App\Http\Controllers\Organizer\OrganiserInfoController;
+use App\Http\Controllers\Pages\GetEventController;
+
+Route::get('/', [GetEventController::class, 'list_events'])->name('home');
 
 Route::prefix('auth')->group(function () {
     Route::get('login', [AuthController::class, 'showformlogin'])->name('login.form');
@@ -37,7 +40,11 @@ Route::prefix('organizer')->group(function () {
     Route::get('billets_vendus', function () { return view('dashboard.organizer.billets-vendus');})
         ->name('billets_vendus_organizer');
 });
- 
+
+
+    
+       
+
 
 
 

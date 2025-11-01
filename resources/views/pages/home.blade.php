@@ -2,6 +2,18 @@
     @extends('pages.layouts')
 
     @section('content')
+    <!-- categories bar -->
+    <section class="bg-gray-900 ">
+        <div class="container mx-auto pb-4">
+            <div class="flex space-x-4 overflow-x-auto">
+                @foreach ($categories as $category)
+                    <a href="{{-- route('accueil.category.show', $category->id) --}}" class="bg-gray-800 text-white px-4 py-2 rounded-full whitespace-nowrap hover:bg-gray-700 transition">
+                        {{ $category->name }}
+                    </a>
+                @endforeach
+            </div>
+        </div>
+    </section>
     <!-- Featured Events Banner Section -->
     <section class="container mx-auto px-4 py-6">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -12,7 +24,7 @@
             @for($i = 0; $i < 3; $i++)
                 
             <!-- Featured Event 1 -->
-            <a href="{{ route('accueil.event.show', $events[$i]->id) }}" class="relative rounded-lg overflow-hidden ">
+            <a href="{{-- route('accueil.event.show', $events[$i]->id) --}}" class="relative rounded-lg overflow-hidden ">
                 <img src="{{ Storage::url($events[$i]->image_path) }}" alt="Festival" class="w-full h-full object-cover">
                 <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
                     <span class="bg-yellow-500 text-black px-2 py-1 rounded text-xs font-bold">{{ $events[$i]->category->name }}</span>
@@ -40,12 +52,12 @@
         
         <!-- Events Grid -->
         <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">           
-            @if($events_aujourd_hui->isEmpty())
+            @if($events->isEmpty())
                 <p class="text-white text-sm font-semibold pl-3 pt-5">Aucun événement aujourd'hui.</p>
             @else
 
-                @foreach ($events_aujourd_hui as $event)
-                <a href="{{ route('accueil.event.show', $event->id) }}" class="bg-gray-900 rounded-lg border border-gray-700 overflow-hidden event-card">
+                @foreach ($events as $event)
+                <a href="{{-- route('accueil.event.show', $event->id) --}}" class="bg-gray-900 rounded-lg border border-gray-700 overflow-hidden event-card">
                     <div class="relative">
                         <img src="{{ Storage::url($event->image_path) }}" alt="Comedy Festival" class="w-full h-60 object-cover">
                         <span class="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded text-xs">{{ $event->category->name }}</span>
@@ -100,7 +112,7 @@
             
         @else
         @foreach ($events as $event)
-        <a href="{{ route('accueil.event.show', $event->id) }}" class="bg-gray-900 rounded-lg overflow-hidden event-card hover:border border-gray-700">
+        <a href="{{-- route('accueil.event.show', $event->id) --}}" class="bg-gray-900 rounded-lg overflow-hidden event-card hover:border border-gray-700">
             <div class="relative">
                 <img src="{{ Storage::url($event->image_path) }}" alt="Comedy Festival" class="w-full h-60 object-cover">
                 <span class="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded text-xs">{{ $event->category->name }}</span>
@@ -140,7 +152,7 @@
         
     </section>
     <div class="text-center ">
-        <a href="{{ route('tout.events') }}" class="bg-gray-800 text-white px-6 py-2 rounded-full hover:bg-gray-700 transition">Plus d'événements</a>
+        <a href="{{-- route('tout.events') --}}" class="bg-gray-800 text-white px-6 py-2 rounded-full hover:bg-gray-700 transition">Plus d'événements</a>
     </div>
 
     <!-- Newsletter Section -->
