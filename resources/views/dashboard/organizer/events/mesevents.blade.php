@@ -3,16 +3,13 @@
 @section('content')
 <section class="py-5 bg-gray-800">
     <div class="container mx-auto px-4">
+
         @if (session('success'))
             <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
                 <span class="block sm:inline">{{ session('success') }}</span>
             </div>  
         @endif
-        <!-- Titre de la section -->
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-gray-800 mb-4">Mes Événements</h2>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Retrouvez tous les événements que vous avez créés ou auxquels vous participez.</p>
-        </div>
+        
 
         <!-- Filtres -->
         <div class="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
@@ -71,7 +68,7 @@
                     
                     <!-- Actions -->
                     <div class="flex gap-2 justify-between items-center pt-4 border-t border-gray-100">
-                        <form action="" method="POST">
+                        <form action="{{route('destroy_event_organizer', $event->id)}}" class="formDelete" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="text-red-600 hover:text-red-800 font-medium text-sm flex items-center">
@@ -79,11 +76,11 @@
                                 
                             </button>
                         </form>
-                        <a href="" class="text-yellow-600 hover:text-yellow-800 font-medium text-sm flex items-center">
+                        <a href="{{ route('edit_event_organizer', $event->id)}}" class="text-yellow-600 hover:text-yellow-800 font-medium text-sm flex items-center">
                             Modifier
                             
                         
-                        <a href="" class="text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center">
+                        <a href="{{ route('show_event_organizer',$event->id)}}" class="text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center">
                             Voir détails
                             
                         </a>
@@ -113,4 +110,18 @@
         @endif
     </div>
 </section>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteForms = document.querySelectorAll('.formDelete');
+
+        deleteForms.forEach(form => {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                if (confirm('Êtes-vous sûr de vouloir supprimer cet événement ? Cette action est irréversible.')) {
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>
 @endsection

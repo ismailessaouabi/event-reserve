@@ -11,8 +11,9 @@
 
         <!-- Formulaire de création d'événement -->
         <div class="max-w-4xl mx-auto bg-gray-800 rounded-xl shadow-lg p-8">
-            <form action="{{route('organizer.events.store')}}" method="POST" enctype="multipart/form-data" class="space-y-6">
+            <form action="{{route('update_event_organizer',$event->id)}}" method="POST" enctype="multipart/form-data" class="space-y-6">
                 @csrf
+                @method('PUT')
                 
                 <!-- Affichage des erreurs -->
                 @if ($errors->any())

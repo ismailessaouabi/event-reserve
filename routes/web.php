@@ -13,12 +13,21 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::prefix('organizer')->group(function () {
+
     Route::get('les_events', [EventOrganiserController::class, 'list_events'])
         ->name('les_events_organizer');
     Route::get('ajouter_event', [EventOrganiserController::class, 'create_event'])
         ->name('ajouter_event_organizer');
     Route::post('store_event', [EventOrganiserController::class, 'store_event'])
         ->name('store_event');
+    Route::delete('destroy_event/{id}', [EventOrganiserController::class, 'destroy_event'])
+        ->name('destroy_event_organizer');
+    Route::get('show_event/{id}', [EventOrganiserController::class, 'show_event'])
+        ->name('show_event_organizer');
+    Route::get('edit_event/{id}', [EventOrganiserController::class, 'edit_event'])
+        ->name('edit_event_organizer');
+    Route::put('update_event/{id}', [EventOrganiserController::class, 'update_event'])
+        ->name('update_event_organizer');
 });
  
 
