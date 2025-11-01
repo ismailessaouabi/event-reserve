@@ -23,7 +23,9 @@ class EventOrganiserController extends Controller
     
 
     public function list_events(){
-        $events = Event::With('place','teckets')->get();
+        $events = Event::With('place','teckets')->orderBy('created_at', 'desc')
+                    ->where('organizer_id', auth()->user()->id)
+                    ->get();
         return view('dashboard.organizer.events.mesevents', compact('events'));
         
     }
@@ -74,20 +76,6 @@ class EventOrganiserController extends Controller
         
      
       
-    }
-    
-    public function destroy_event($id){
-        try {
-            
-            $event = Event::findOrFail($id);
-            $event->delete();
-            return redirect()->route('les_events_organizer')->with('success', 'Event deleted successfully.');
-
-        } catch (\Throwable $th) {
-
-            Log::error('Error deleting event: ' . $th->getMessage());
-            return redirect()->back()->withErrors($th->getMessage());
-        }
     }
 
     public function show_event($id){
@@ -151,5 +139,21 @@ class EventOrganiserController extends Controller
         }
 
     }
+
+    public function destroy_event($id){
+        try {
+            
+            $event = Event::findOrFail($id);
+            $event->delete();
+            return redirect()->route('les_events_organizer')->with('success', 'Event deleted successfully.');
+
+        } catch (\Throwable $th) {
+
+            Log::error('Error deleting event: ' . $th->getMessage());
+            return redirect()->back()->withErrors($th->getMessage());
+        }
+    }
+
+    
 
 }

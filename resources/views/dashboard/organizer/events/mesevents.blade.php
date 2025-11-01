@@ -14,11 +14,10 @@
         <!-- Filtres -->
         <div class="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
             <div class="w-full sm:w-auto">
-                <select class="w-full px-4 bg-gray-800 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select class="filter-events w-full px-4 bg-gray-800 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option>Tous les événements</option>
                     <option>Événements à venir</option>
                     <option>Événements passés</option>
-                    <option>Événements créés</option>
                 </select>
             </div>
             
@@ -36,7 +35,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
            @if ($events->isNotEmpty())
             @foreach($events as $event)
-            <div class="bg-gray-900 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <div class="events bg-gray-900 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
                 <!-- Image de l'événement -->
                 <div class="h-48 overflow-hidden">
                     <img src="{{ Storage::url($event->image_path) }}" alt="{{ $event->title }}" class="w-full h-full object-cover">
@@ -46,8 +45,8 @@
                 <div class="p-6">
                     <!-- Date et statut -->
                     <div class="flex justify-between items-center mb-3">
-                        <span class="text-sm font-medium px-3 py-1 bg-blue-100 text-blue-800 rounded-full">
-                            {{ \Carbon\Carbon::parse($event->date)->format('d M Y') }}
+                        <span class="start-date text-sm font-medium px-3 py-1 bg-blue-100 text-blue-800 rounded-full">
+                            {{ \Carbon\Carbon::parse($event->start_time)->format('d M Y') }}
                         </span>
                         <span class="text-sm font-medium px-3 py-1 bg-green-100 text-green-800 rounded-full">
                             {{ $event->teckets->first()->price ?? 'N/A' }}
@@ -122,6 +121,34 @@
                 }
             });
         });
+
+        //filter events based on selection
+        const filterSelect = document.querySelector('.filter-events');
+        const events = document.querySelectorAll('.events');
+        filterSelect.addEventListener('change', function () {
+            const selectedValue = this.value;
+            events.forEach(event => {
+                const eventDate = new Date(event.querySelector('.start-date').textContent);
+                const currentDate = new Date();
+                if (selectedValue === 'Événements à venir') {
+                    if (eventDate >= currentDate) {
+                        event.style.display = 'block';
+                    } else {
+                        event.style.display = 'none';
+                    }
+                } else if (selectedValue === 'Événements passés') {
+                    if (eventDate < currentDate) {
+                        event.style.display = 'block';
+                    } else {
+                        event.style.display = 'none';
+                    }
+                } else {
+                    event.style.display = 'block';
+                }
+            });
+            
+        });
+
     });
 </script>
 @endsection

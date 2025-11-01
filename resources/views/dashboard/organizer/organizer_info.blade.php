@@ -19,7 +19,7 @@
             
             <!-- Form -->
             <div class="flex-1">
-                <form action="{{-- route('organizer.update' , auth()->user()->id)  --}}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('update_organiser_info')  }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -48,7 +48,7 @@
                         <div>
                             <label for="first_name" class="block text-sm font-medium mb-1">Prénom</label>
                             <input type="text" id="first_name" name="name" 
-                                   value="{{-- old('name', auth()->user()->name) --}}"
+                                   value="{{ old('name', auth()->user()->name) }}"
                                    class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
                             @error('first_name')
                                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
@@ -59,7 +59,7 @@
                         <div class="md:col-span-2">
                             <label for="email" class="block text-sm font-medium mb-1">Email</label>
                             <input type="email" id="email" name="email" 
-                                   value="{{-- old('email', auth()->user()->email) --}}"
+                                   value="{{ old('email', auth()->user()->email) }}"
                                    class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
                             @error('email')
                                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
@@ -70,7 +70,7 @@
                         <div>
                             <label for="phone" class="block text-sm font-medium mb-1">Téléphone</label>
                             <input type="tel" id="phone" name="phone" 
-                                   value="{{-- old('phone', auth()->user()->phone) --}}"
+                                   value="{{ old('phone', auth()->user()->phone) }}"
                                    class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
                             @error('phone')
                                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
@@ -80,8 +80,8 @@
                         <!-- Société -->
                         <div>
                             <label for="company" class="block text-sm font-medium mb-1">Société (optionnel)</label>
-                            <input type="text" id="company" name="company" 
-                                   value="{{-- old('company', auth()->user()->nom_entreprise) --}}"
+                            <input type="text" id="company" name="societe" 
+                                   value="{{ old('company', auth()->user()->societe) }}"
                                    class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
                             @error('company')
                                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
@@ -92,7 +92,7 @@
                         <div class="md:col-span-2">
                             <label for="address" class="block text-sm font-medium mb-1">Adresse</label>
                             <input type="text" id="address" name="address" 
-                                   value="{{-- auth()->user()->address --}}"
+                                   value="{{auth()->user()->address }}"
                                    class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
                             @error('address')
                                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
@@ -103,7 +103,7 @@
                         <div>
                             <label for="city" class="block text-sm font-medium mb-1">Ville</label>
                             <input type="text" id="city" name="city" 
-                                   value="{{-- auth()->user()->city --}}"
+                                   value="{{ auth()->user()->city }}"
                                    class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
                             @error('city')
                                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
@@ -113,40 +113,14 @@
                         <div>
                             <label for="postal_code" class="block text-sm font-medium mb-1">Code postal</label>
                             <input type="text" id="postal_code" name="postal_code" 
-                                   value="{{--  auth()->user()->postal_code --}}"
+                                   value="{{  auth()->user()->postal_code }}"
                                    class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
                             @error('zip_code')
                                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <!-- Pays -->
-                        <div class="md:col-span-2">
-                            <label for="country" class="block text-sm font-medium mb-1">Pays</label>
-                            <select id="country" name="country" 
-                                    class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
-                                <option value="">Sélectionnez un pays</option>
-                                    <option value=" {{-- old('country', auth()->user()->country) --}}">
-                                        {{-- old('country', auth()->user()->country)--}}
-                                    </option>
-                                    <option value="Afghanistan">Afghanistan</option>
-                                    <option value="Africana">Africana</option>
-                                    <option value="Albania">Albania</option>
-                                    <option value="Algeria">Algeria</option>
-                                    <option value="American Samoa">American Samoa</option>
-                                    <option value="Andorra">Andorra</option>
-                                    <option value="Angola">Angola</option>
-                                    <option value="Anguilla">Anguilla</option>
-                                    <option value="Antigua and Barbuda">Antigua and Barbuda</option>
-                                    <option value="Argentina">Argentina</option>
-                                    <option value="Armenia">Armenia</option>
-                                    <option value="Australia">Australia</option>
-                                
-                            </select>
-                            @error('country')
-                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
-                            @enderror
-                        </div>
+            
 
                         
                     </div>
@@ -163,103 +137,7 @@
         </div>
     </div>
 
-    <!-- Social Media Section -->
-    <div class="bg-gray-800 rounded-lg p-6">
-        <h2 class="text-xl font-semibold mb-4 flex items-center">
-            <i class="fas fa-share-alt text-orange-500 mr-2"></i>
-            Réseaux sociaux
-        </h2>
-
-        <form action="" method="POST">
-            @csrf
-           
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="facebook" class="block text-sm font-medium mb-1">
-                            <i class="fab fa-facebook mr-1"></i>
-                        </label>
-                        <div class="flex">
-                            <span class="inline-flex items-center px-3 rounded-l-lg bg-gray-700 border border-r-0 border-gray-600 text-gray-300">
-                                https://
-                            </span>
-                            <input type="text" id="facebook" name="facebook" 
-                                    value="{{ $socialmedia ? $socialmedia->facebook : '' }}"
-                                   placeholder="votre-lien.com"
-                                   class="flex-1 bg-gray-700 border border-gray-600 rounded-r-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
-                        </div>
-                        
-                    </div>  
-                    <div>
-                        <label for="facebook" class="block text-sm font-medium mb-1">
-                            <i class="fab fa-instagram mr-1"></i>
-                        </label>
-                        <div class="flex">
-                            <span class="inline-flex items-center px-3 rounded-l-lg bg-gray-700 border border-r-0 border-gray-600 text-gray-300">
-                                https://
-                            </span>
-                            <input type="text" id="facebook" name="facebook" 
-                                    value="{{ $socialmedia ? $socialmedia->instagram : '' }}"
-                                   placeholder="votre-lien.com"
-                                   class="flex-1 bg-gray-700 border border-gray-600 rounded-r-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
-                        </div>
-                        
-                    </div>
-                    <div>
-                        <label for="facebook" class="block text-sm font-medium mb-1">
-                            <i class="fab fa-twitter mr-1"></i>
-                        </label>
-                        <div class="flex">
-                            <span class="inline-flex items-center px-3 rounded-l-lg bg-gray-700 border border-r-0 border-gray-600 text-gray-300">
-                                https://
-                            </span>
-                            <input type="text" id="facebook" name="facebook" 
-                                    value="{{ $socialmedia ? $socialmedia->twitter : '' }}"
-                                   placeholder="votre-lien.com"
-                                   class="flex-1 bg-gray-700 border border-gray-600 rounded-r-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
-                        </div>
-                        
-                    </div>
-                    <div>
-                        <label for="facebook" class="block text-sm font-medium mb-1">
-                            <i class="fab fa-linkedin mr-1"></i>
-                        </label>
-                        <div class="flex">
-                            <span class="inline-flex items-center px-3 rounded-l-lg bg-gray-700 border border-r-0 border-gray-600 text-gray-300">
-                                https://
-                            </span>
-                            <input type="text" id="facebook" name="facebook" 
-                                    value="{{ $socialmedia ? $socialmedia->linkedin : '' }}"
-                                   placeholder="votre-lien.com"
-                                   class="flex-1 bg-gray-700 border border-gray-600 rounded-r-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
-                        </div>
-                        
-                    </div>
-                    <div>
-                        <label for="facebook" class="block text-sm font-medium mb-1">
-                            <i class="fab fa-site-web mr-1"></i>
-                        </label>
-                        <div class="flex">
-                            <span class="inline-flex items-center px-3 rounded-l-lg bg-gray-700 border border-r-0 border-gray-600 text-gray-300">
-                                https://
-                            </span>
-                            <input type="text" id="facebook" name="facebook" 
-                                    value="{{ $socialmedia ? $socialmedia->website : '' }}"
-                                   placeholder="votre-lien.com"
-                                   class="flex-1 bg-gray-700 border border-gray-600 rounded-r-lg px-4 py-2 focus:border-orange-500 focus:ring-orange-500">
-                        </div>
-                        
-                    </div>            
-            </div>
-
-            <div class="mt-6 flex justify-end">
-                <button type="submit" 
-                        class="bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-6 rounded-lg transition-colors">
-                    Enregistrer les liens
-                </button>
-            </div>
-        </form>
-    </div>
+   
 
     <!-- Delete Account Section -->
     <div class="bg-gray-800 rounded-lg p-6 border border-red-500/30">

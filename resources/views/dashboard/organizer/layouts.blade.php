@@ -42,7 +42,7 @@
             <!-- User Profile -->
             <div class="flex items-center mb-8 p-2">
                 <div class="w-12 h-12 bg-gray-300 rounded-full mr-3 overflow-hidden">
-                    <img src="{{-- Storage::url(Auth::user()->profile_picture) --}}" alt="Profile" class="w-full h-full object-cover">
+                    <img src="{{Storage::url(Auth::user()->profile_picture) }}" alt="Profile" class="w-full h-full object-cover">
                 </div>
                 <span class="text-lg font-semibold">
                     @if (Auth::check())
@@ -55,26 +55,21 @@
             
             <!-- Navigation -->
             <nav class="flex flex-col gap-1">
-                <a href="{{-- route('organizer') --}}" class="flex items-center p-3 rounded-lg bg-gray-700 text-orange-500">
-                    <i class="fas fa-chart-line w-6 text-center mr-3"></i>
-                    <span>Mes evenement</span>
-                </a>
-                <a href="{{-- route('organizer.information') --}}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
+                <a href="{{route('info_organiser') }}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200 @if (Request::routeIs('info_organiser')) bg-gray-700 @endif">
                     <i class="fas fa-user w-6 text-center mr-3"></i>
                     <span>Mes informations</span>
-                </a>
-                <a href="{{-- route('organizer.events.index') --}}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
+                </a>               
+                <a href="{{ route('les_events_organizer') }}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200 @if (Request::routeIs('les_events_organizer')) bg-gray-700 @endif">
                     <i class="fas fa-calendar-check w-6 text-center mr-3"></i>
                     <span>Mes événements</span>
                 </a>
-                <a href="{{-- route('organizer.billets') --}}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
+                <a href="{{ route('billets_vendus_organizer') }}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200 @if (Request::routeIs('billets_vendus_organizer')) bg-gray-700
+                    
+                @endif">
                     <i class="fas fa-ticket-alt w-6 text-center mr-3"></i>
                     <span>Billets vendus</span>
                 </a>
-                <a href="{{-- route('organizer.statistiques') --}}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
-                    <i class="fas fa-chart-pie w-6 text-center mr-3"></i>
-                    <span>Statistiques</span>
-                </a>
+                
                 <a href="{{-- route('organizer.payements') --}}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
                     <i class="fas fa-wallet w-6 text-center mr-3"></i>
                     <span>Paiements</span>
@@ -83,8 +78,11 @@
                     <i class="fas fa-users w-6 text-center mr-3"></i>
                     <span>Participants</span>
                 </a>
-                
-                <a href="{{-- route('logout') --}}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
+                <a href="{{-- route('organizer.statistiques') --}}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
+                    <i class="fas fa-chart-pie w-6 text-center mr-3"></i>
+                    <span>Statistiques</span>
+                </a>
+                <a href="{{ route('logout') }}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
                     <i class="fas fa-sign-out-alt w-6 text-center mr-3"></i>
                     <span>Se déconnecter</span>
                 </a>

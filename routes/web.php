@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Organizer\EventOrganiserController;
+use App\Http\Controllers\Organizer\OrganiserInfoController;
 
 Route::prefix('auth')->group(function () {
     Route::get('login', [AuthController::class, 'showformlogin'])->name('login.form');
@@ -28,6 +29,13 @@ Route::prefix('organizer')->group(function () {
         ->name('edit_event_organizer');
     Route::put('update_event/{id}', [EventOrganiserController::class, 'update_event'])
         ->name('update_event_organizer');
+
+    Route::get('info_organiser', function () { return view('dashboard.organizer.organizer_info');})
+        ->name('info_organiser');
+    Route::put('update_organiser_info', [OrganiserInfoController::class, 'update_organiser_info'])
+        ->name('update_organiser_info');
+    Route::get('billets_vendus', function () { return view('dashboard.organizer.billets-vendus');})
+        ->name('billets_vendus_organizer');
 });
  
 
