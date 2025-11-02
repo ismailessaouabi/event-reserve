@@ -10,7 +10,7 @@
     
     <!-- Header Navigation -->
     <div class="flex  items-center justify-between p-6 relative z-10">
-        <a href="{{ route('events.home') }}" 
+        <a href="/" 
            class="group flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300 rounded-full p-3">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:-translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -68,7 +68,7 @@
                 <!-- Event Details Cards -->
                 <div class="space-y-4">
                     <!-- Location -->
-                    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300">
+                    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-2 hover:bg-white/10 transition-all duration-300">
                         <div class="flex items-center gap-4">
                             <div class="bg-blue-500/20 p-3 rounded-xl">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -84,7 +84,7 @@
                     </div>
                     
                     <!-- Start Time -->
-                    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300">
+                    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-2 hover:bg-white/10 transition-all duration-300">
                         <div class="flex items-center gap-4">
                             <div class="bg-green-500/20 p-3 rounded-xl">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -99,7 +99,7 @@
                     </div>
                     
                     <!-- End Time -->
-                    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300">
+                    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-2 hover:bg-white/10 transition-all duration-300">
                         <div class="flex items-center gap-4">
                             <div class="bg-red-500/20 p-3 rounded-xl">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -115,7 +115,7 @@
                 </div>
                 
                 <!-- Description -->
-                <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
+                <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-2">
                     <h3 class="text-xl font-semibold mb-4 text-white">Description</h3>
                     <p class="text-gray-300 leading-relaxed">
                         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum animi blanditiis, nihil beatae sapiente iusto eligendi nobis impedit delectus est? Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa distinctio quasi perspiciatis, sed accusamus, mollitia nemo veritatis harum est, adipisci ex atque optio nam et nisi molestias dolore fugiat. Amet similique facere velit, eligendi ad cupiditate doloremque sunt rerum omnis cumque molestias ab fugit corrupti reprehenderit non magnam ipsam expedita.
@@ -137,7 +137,7 @@
                             </div>
                         </div>
                         
-                        <a href="{{ route('payement.checkout', $event->id) }}" 
+                        <a href="{{-- route('payement.checkout', $event->id) --}}" 
                            class="group bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center gap-3">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:rotate-12 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />

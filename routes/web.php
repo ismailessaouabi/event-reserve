@@ -41,6 +41,10 @@ Route::prefix('organizer')->group(function () {
         ->name('statistiques_organizer');
 });
 
+Route::prefix('page')->group(function () {
+    Route::get('event_details/{id}', [GetEventController::class, 'lister_event_details'])
+        ->name('event_details');
+});
 
     
        

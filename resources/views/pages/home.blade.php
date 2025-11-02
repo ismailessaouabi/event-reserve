@@ -7,39 +7,42 @@
         <div class="container mx-auto pb-4">
             <div class="flex space-x-4 overflow-x-auto">
                 @foreach ($categories as $category)
-                    <a href="{{-- route('accueil.category.show', $category->id) --}}" class="bg-gray-800 text-white px-4 py-2 rounded-full whitespace-nowrap hover:bg-gray-700 transition">
+                    <a href="{{-- route('accueil.category.show', $category->id) --}}" class="bg-gray-800 text-white px-4 py-2 rounded-2xl whitespace-nowrap hover:bg-gray-700 transition">
                         {{ $category->name }}
                     </a>
                 @endforeach
             </div>
         </div>
     </section>
+    <!-- swiper section -->
+
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide bg-red-300  rounded-lg"><img src="{{ Storage::url($events[0]->image_path) }}"  class="rounded-2xl overflow-hidden"  alt=""></div>
+            <div class="swiper-slide bg-blue-300  rounded-lg"><img src="{{ Storage::url($events[1]->image_path) }}"  class="rounded-2xl overflow-hidden" alt=""></div>
+            <div class="swiper-slide bg-green-300  rounded-lg"><img src="{{ Storage::url($events[2]->image_path) }}"  class="rounded-2xl overflow-hidden" alt=""></div>
+            <div class="swiper-slide bg-red-300 rounded-lg"><img src="{{ Storage::url($events[0]->image_path) }}"  class="rounded-2xl overflow-hidden" alt=""></div>
+            <div class="swiper-slide bg-blue-300  rounded-lg"><img src="{{ Storage::url($events[1]->image_path) }}" class="rounded-2xl overflow-hidden"  alt=""></div>
+            <div class="swiper-slide bg-green-300  rounded-lg"><img src="{{ Storage::url($events[2]->image_path) }}" class="rounded-2xl overflow-hidden"  alt=""></div>
+        </div>
+    
+        <!-- Pagination -->
+        <div class="swiper-pagination"></div>
+    
+        <!-- Navigation -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+    
     <!-- Featured Events Banner Section -->
     <section class="container mx-auto px-4 py-6">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            @if ($events->isEmpty())
-                <p class="text-white text-sm font-semibold pl-3 pt-5">Aucun événement à venir.</p>
-                
-            @else
-            @for($i = 0; $i < 3; $i++)
-                
-            <!-- Featured Event 1 -->
-            <a href="{{-- route('accueil.event.show', $events[$i]->id) --}}" class="relative rounded-lg overflow-hidden ">
-                <img src="{{ Storage::url($events[$i]->image_path) }}" alt="Festival" class="w-full h-full object-cover">
-                <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
-                    <span class="bg-yellow-500 text-black px-2 py-1 rounded text-xs font-bold">{{ $events[$i]->category->name }}</span>
-                    <h3 class="text-white font-bold mt-2">{{ $events[$i]->name }}</h3>
-                    <p class="text-gray-200 text-sm">0000</p>
-                </div>
-            </a>
-            @endfor
-            @endif
-            
+           
             
         </div>
     </section>
 
-    <!-- Categories Section -->
+    <!-- Dates Section -->
     <section class="container mx-auto px-4 py-4">
         <div class="flex justify-between items-center mb-4">
             <div class="flex space-x-2">
@@ -57,7 +60,7 @@
             @else
 
                 @foreach ($events as $event)
-                <a href="{{-- route('accueil.event.show', $event->id) --}}" class="bg-gray-900 rounded-lg border border-gray-700 overflow-hidden event-card">
+                <a href="{{ route('event_details', $event->id) }}" class="bg-gray-900 rounded-lg border border-gray-700 overflow-hidden event-card">
                     <div class="relative">
                         <img src="{{ Storage::url($event->image_path) }}" alt="Comedy Festival" class="w-full h-60 object-cover">
                         <span class="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded text-xs">{{ $event->category->name }}</span>
@@ -112,7 +115,7 @@
             
         @else
         @foreach ($events as $event)
-        <a href="{{-- route('accueil.event.show', $event->id) --}}" class="bg-gray-900 rounded-lg overflow-hidden event-card hover:border border-gray-700">
+        <a href="{{ route('event_details', $event->id) }}" class="bg-gray-900 rounded-lg overflow-hidden event-card hover:border border-gray-700">
             <div class="relative">
                 <img src="{{ Storage::url($event->image_path) }}" alt="Comedy Festival" class="w-full h-60 object-cover">
                 <span class="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded text-xs">{{ $event->category->name }}</span>
@@ -121,7 +124,7 @@
                 <h3 class="text-white font-medium text-sm truncate-2-lines">{{ $event->name }}</h3>
                 <div class="flex items-center mt-2">
                 <i class="fas fa-clock text-gray-400 text-xs"></i>
-                    <span class="text-gray-400 text-xs ml-1">début :0000</span>
+                    <span class="text-gray-400 text-xs ml-1">début :{{ $event->start_time }}/span>
                 </div>
                 <div class="flex items-center mt-2">
                 <i class="fas fa-clock text-gray-400 text-xs"></i>
@@ -132,15 +135,12 @@
                     <i class="fas fa-map-marker-alt text-gray-400 text-xs"></i>
                     <span class="text-gray-400 text-xs ml-1">Lieu : {{ $event->place->name }}</span>
                 </div>
-                @if ($event->teckets->count() > 0)
+                
                 <div class="mt-3 flex justify-between items-center">
-                    <span class="text-white bg-gray-700 px-2 py-1 rounded font-bold text-sm">{{ $event->teckets->first()->prix }} MAD</span>
+                    <span class="text-white bg-gray-700 px-2 py-1 rounded font-bold text-sm">{{ $event->teckets->first()->price }} MAD</span>
                 </div>
-                @else
-                <div class="mt-3 flex justify-between items-center">
-                    <span class="text-white bg-gray-700 px-2 py-1 rounded font-bold text-sm">300 MAD</span>
-                </div>
-                @endif
+                
+            
             </div>
         </a>
         
