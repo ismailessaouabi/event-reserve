@@ -63,11 +63,9 @@
                     <i class="fas fa-calendar-check w-6 text-center mr-3"></i>
                     <span>Mes événements</span>
                 </a>
-                <a href="{{ route('billets_vendus_organizer') }}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200 @if (Request::routeIs('billets_vendus_organizer')) bg-gray-700
-                    
-                @endif">
-                    <i class="fas fa-ticket-alt w-6 text-center mr-3"></i>
-                    <span>Billets vendus</span>
+                <a href="{{ route('statistiques_organizer') }}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200 @if (Request::routeIs('statistiques_organizer')) bg-gray-700 @endif">
+                    <i class="fas fa-chart-pie w-6 text-center mr-3"></i>
+                    <span>Statistiques</span>
                 </a>
                 
                 <a href="{{-- route('organizer.payements') --}}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
@@ -78,14 +76,13 @@
                     <i class="fas fa-users w-6 text-center mr-3"></i>
                     <span>Participants</span>
                 </a>
-                <a href="{{-- route('organizer.statistiques') --}}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
-                    <i class="fas fa-chart-pie w-6 text-center mr-3"></i>
-                    <span>Statistiques</span>
-                </a>
-                <a href="{{ route('logout') }}" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
+                
+                <form action="{{ route('logout') }}" method="POST" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
                     <i class="fas fa-sign-out-alt w-6 text-center mr-3"></i>
-                    <span>Se déconnecter</span>
-                </a>
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">Se déconnecter</button>
+                </form>
             </nav>
         </div>
         

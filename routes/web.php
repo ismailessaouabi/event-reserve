@@ -13,7 +13,7 @@ Route::prefix('auth')->group(function () {
     Route::get('register', [AuthController::class, 'showformregister'])->name('register.form');
     Route::post('login', [AuthController::class, 'login'])->name('login');
     Route::post('register', [AuthController::class, 'register'])->name('register');
-    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+    Route::delete('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 Route::prefix('organizer')->group(function () {
@@ -37,8 +37,8 @@ Route::prefix('organizer')->group(function () {
         ->name('info_organiser');
     Route::put('update_organiser_info', [OrganiserInfoController::class, 'update_organiser_info'])
         ->name('update_organiser_info');
-    Route::get('billets_vendus', function () { return view('dashboard.organizer.billets-vendus');})
-        ->name('billets_vendus_organizer');
+    Route::get('statistiques', function () { return view('dashboard.organizer.statistiques');})
+        ->name('statistiques_organizer');
 });
 
 
