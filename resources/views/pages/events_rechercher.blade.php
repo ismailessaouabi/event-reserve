@@ -3,7 +3,7 @@
 @section('content')
 <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
         @foreach ($events_rechercher as $event)
-            <a href="{{ route('accueil.event.show', $event->id) }}" class="bg-gray-900 rounded-lg overflow-hidden event-card">
+            <a href="{{-- route('accueil.event.show', $event->id) --}}" class="bg-gray-900 rounded-lg overflow-hidden event-card">
                 <div class="relative">
                     <img src="{{ Storage::url($event->image_path) }}" alt="Comedy Festival" class="w-full h-60 object-cover">
                     <span class="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded text-xs">{{ $event->category->name }}</span>

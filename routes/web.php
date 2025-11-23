@@ -44,6 +44,13 @@ Route::prefix('organizer')->group(function () {
 Route::prefix('page')->group(function () {
     Route::get('event_details/{id}', [GetEventController::class, 'lister_event_details'])
         ->name('event_details');
+    Route::get('events_by_category/{category_id}', [GetEventController::class, 'lister_event_by_category'])
+        ->name('events_by_category');
+    Route::get('search_events', [GetEventController::class, 'search_events'])
+        ->name('search_events');
+    Route::get('filter_events', [GetEventController::class, 'filter_events'])
+        ->name('filter_events');
+        
 });
 
     

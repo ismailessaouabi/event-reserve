@@ -13,7 +13,7 @@ use Carbon\Carbon;
 use App\Models\Category;
 use App\Models\Place;
 use App\Models\User;
-use App\models\Tecket;
+use App\Models\Tecket;
 
 
 

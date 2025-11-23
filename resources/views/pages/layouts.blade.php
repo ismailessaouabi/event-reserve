@@ -26,7 +26,7 @@
                     </button>
                 </div>
                 
-                <form action="" method="GET" class="hidden md:flex space-x-4 mx-auto order-3 md:order-none w-full md:w-auto mt-4 md:mt-0">
+                <form action="{{ route('search_events')}}" method="GET" class="hidden md:flex space-x-4 mx-auto order-3 md:order-none w-full md:w-auto mt-4 md:mt-0">
                     <div class="relative w-[200px] md:w-[300px] input_rechercher">
                         <input type="text" placeholder="Rechercher" name="name_event" class="bg-gray-800 w-full text-white rounded-full p-2 text-sm md:p-2.5 pr-8">
                         <i class="fas fa-search absolute right-3 top-2.5 md:top-3 text-gray-400"></i>

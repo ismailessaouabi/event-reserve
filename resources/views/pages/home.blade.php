@@ -7,33 +7,14 @@
         <div class="container mx-auto pb-4">
             <div class="flex space-x-4 overflow-x-auto">
                 @foreach ($categories as $category)
-                    <a href="{{-- route('accueil.category.show', $category->id) --}}" class="bg-gray-800 text-white px-4 py-2 rounded-2xl whitespace-nowrap hover:bg-gray-700 transition">
+                    <a href="{{ route('events_by_category', $category->id) }}" class="bg-gray-800 text-white px-4 py-2 rounded-2xl whitespace-nowrap hover:bg-gray-700 transition">
                         {{ $category->name }}
                     </a>
                 @endforeach
             </div>
         </div>
     </section>
-    <!-- swiper section -->
-
-    <div class="swiper mySwiper">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide bg-red-300  rounded-lg"><img src="{{ Storage::url($events[0]->image_path) }}"  class="rounded-2xl overflow-hidden"  alt=""></div>
-            <div class="swiper-slide bg-blue-300  rounded-lg"><img src="{{ Storage::url($events[1]->image_path) }}"  class="rounded-2xl overflow-hidden" alt=""></div>
-            <div class="swiper-slide bg-green-300  rounded-lg"><img src="{{ Storage::url($events[2]->image_path) }}"  class="rounded-2xl overflow-hidden" alt=""></div>
-            <div class="swiper-slide bg-red-300 rounded-lg"><img src="{{ Storage::url($events[0]->image_path) }}"  class="rounded-2xl overflow-hidden" alt=""></div>
-            <div class="swiper-slide bg-blue-300  rounded-lg"><img src="{{ Storage::url($events[1]->image_path) }}" class="rounded-2xl overflow-hidden"  alt=""></div>
-            <div class="swiper-slide bg-green-300  rounded-lg"><img src="{{ Storage::url($events[2]->image_path) }}" class="rounded-2xl overflow-hidden"  alt=""></div>
-        </div>
-    
-        <!-- Pagination -->
-        <div class="swiper-pagination"></div>
-    
-        <!-- Navigation -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-    </div>
-    
+   
     <!-- Featured Events Banner Section -->
     <section class="container mx-auto px-4 py-6">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
