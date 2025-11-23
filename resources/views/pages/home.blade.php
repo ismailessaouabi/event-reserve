@@ -35,7 +35,7 @@
         </div>
         
         <!-- Events Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">           
+        <div class="  grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">           
             @if($events->isEmpty())
                 <p class="text-white text-sm font-semibold pl-3 pt-5">Aucun événement aujourd'hui.</p>
             @else
