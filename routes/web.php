@@ -13,7 +13,7 @@ Route::prefix('auth')->group(function () {
     Route::get('register', [AuthController::class, 'showformregister'])->name('register.form');
     Route::post('login', [AuthController::class, 'login'])->name('login');
     Route::post('register', [AuthController::class, 'register'])->name('register');
-    Route::delete('logout', [AuthController::class, 'logout'])->name('logout');
+    Route::delete('logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 });
 
 Route::prefix('organizer')->group(function () {
@@ -39,7 +39,7 @@ Route::prefix('organizer')->group(function () {
         ->name('update_organiser_info');
     Route::get('statistiques', function () { return view('dashboard.organizer.statistiques');})
         ->name('statistiques_organizer');
-});
+})->middleware('auth');
 
 Route::prefix('page')->group(function () {
     Route::get('event_details/{id}', [GetEventController::class, 'lister_event_details'])
